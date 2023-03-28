@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/button_style.uss?fileID=7433441132597879392&amp;guid=5e941dae56bf744e3814e7ef5a353d91&amp;type=3#button_style" />
-    <ui:Button text="Next" display-tooltip-when-elided="true" name="next_button" enable-rich-text="false" class="button_style" style="position: absolute; right: 30px; bottom: 75px;" />
-    <ui:Button text="Back" display-tooltip-when-elided="true" name="back_button" class="button_style" style="bottom: 75px; right: auto; position: absolute; left: 30px;" />
+    <ui:Button text="Next" display-tooltip-when-elided="true" name="next_button" enable-rich-text="false" class="button_style" style="position: absolute; right: 30px; bottom: 50px;" />
+    <ui:Button text="Back" display-tooltip-when-elided="true" name="back_button" class="button_style" style="bottom: 50px; right: auto; position: absolute; left: 30px;" />
 </ui:UXML>
