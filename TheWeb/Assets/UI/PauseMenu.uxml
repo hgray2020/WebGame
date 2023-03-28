@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/button_style.uss?fileID=7433441132597879392&amp;guid=5e941dae56bf744e3814e7ef5a353d91&amp;type=3#button_style" />
+    <ui:VisualElement style="flex-grow: 1; justify-content: center; align-items: center;">
+        <ui:VisualElement style="height: 229px; width: 249px; background-color: rgba(255, 255, 255, 255); border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; align-items: center; justify-content: flex-start;">
+            <ui:Label text="Pause Menu" display-tooltip-when-elided="true" name="pause_menu_text" style="-unity-font-style: bold; color: rgba(0, 0, 0, 255); height: 40px; width: 186px; font-size: 30px; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;" />
+            <ui:Button text="Resume" display-tooltip-when-elided="true" name="resume_button" class="button_style" />
+            <ui:Button text="Controls" display-tooltip-when-elided="true" name="controls_button" class="button_style" />
+            <ui:Button text="Exit" display-tooltip-when-elided="true" name="exit_button" class="button_style" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
