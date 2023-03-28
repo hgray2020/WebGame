@@ -27,14 +27,14 @@ public class UI_Controller : MonoBehaviour
     // Update is called once per frame
     void StartButtonPressed()
     {
-        SceneManager.LoadScene("MaxScene");
+        SceneManager.LoadScene("Controls");
     }
 
     void CreditButtonPressed() {
-        SceneManager.LoadScene("");
+        SceneManager.LoadScene("Credits");
     }
 
     void ExitButtonPressed() {
-
+        Application.Quit();
     }
 }
