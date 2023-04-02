@@ -38,7 +38,9 @@ public class Pause_Controller : MonoBehaviour {
 
         void ExitButtonPressed() {
                 Time.timeScale = 1f;
-                GameManager.GameisPaused = false;
+                game_handler.GetComponent<GameHandler>().SetPause(false);
                 SceneManager.LoadScene("MainMenu");
         }
+
+
 }

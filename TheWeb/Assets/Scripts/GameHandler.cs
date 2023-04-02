@@ -37,4 +37,8 @@ public class GameHandler : MonoBehaviour {
                 Time.timeScale = 1f;
                 GameisPaused = false;
         }
+
+        public void SetPause(bool val) {
+                GameisPaused = val;
+        }
 }

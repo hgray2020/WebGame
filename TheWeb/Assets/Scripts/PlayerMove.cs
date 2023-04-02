@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerMove : NetworkBehaviour
 {
     public float moveSpeed;
     public Rigidbody2D rb;
@@ -20,13 +21,45 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        ProcessInputs();   
+        if (!IsOwner) {
+            return;
+        }
+        
+        if (IsHost) {
+            SpiderUpdate();
+        } else {
+            AntUpdate();
+        }
     }
     
     void FixedUpdate()
     {
+        if (!IsOwner) {
+            return;
+        }
+
+        if (IsHost) {
+            SpiderFixedUpdate();
+        } else {
+            AntFixedUpdate();
+        }
+    }
+
+    void AntFixedUpdate() {
+
+    }
+
+    void SpiderFixedUpdate() {
         Move();
         Rotate();
+    }
+
+    void AntUpdate() {
+        ProcessInputs();   
+    }
+
+    void SpiderUpdate() {
+        ProcessInputs();   
     }
     
     void ProcessInputs()

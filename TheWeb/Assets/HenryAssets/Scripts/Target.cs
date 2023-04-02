@@ -20,6 +20,7 @@ public class Target : MonoBehaviour
         Debug.Log(other.gameObject.tag);
         if (other.tag == "projectile") {
             Destroy(this.gameObject);
+            Destroy(other.gameObject);
         }
     }
 }

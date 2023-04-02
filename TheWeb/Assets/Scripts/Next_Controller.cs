@@ -24,7 +24,7 @@ public class Next_Controller : MonoBehaviour
     // Update is called once per frame
     void NextButtonPressed()
     {
-        SceneManager.LoadScene("FinishedPlay");
+        SceneManager.LoadScene("MaxScene");
     }
 
     void BackButtonPressed() {
