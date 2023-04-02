@@ -1,9 +1,9 @@
 .button_style {
-    height: 50px;
-    width: 200px;
+    height: 60px;
+    width: 150px;
     background-color: rgb(22, 5, 5);
-    -unity-font-style: bold;
-    font-size: 25px;
+    -unity-font-style: normal;
+    font-size: 22px;
     border-left-width: 0;
     border-right-width: 0;
     border-top-width: 0;
@@ -19,14 +19,16 @@
     bottom: auto;
     left: auto;
     color: rgb(255, 255, 255);
+    -unity-font: url('project://database/Assets/UI/PixeloidSans-JR6qo.ttf?fileID=12800000&guid=c0e0be61b6eb84c5d90b5471b473ac82&type=3#PixeloidSans-JR6qo');
+    -unity-font-definition: none;
 }
 
 .button_style:hover {
-    height: 50px;
-    width: 200px;
+    height: 65px;
+    width: 155px;
     background-color: rgb(94, 90, 90);
-    -unity-font-style: bold;
-    font-size: 25px;
+    -unity-font-style: normal;
+    font-size: 24px;
     border-left-width: 0;
     border-right-width: 0;
     border-top-width: 0;
@@ -42,14 +44,16 @@
     bottom: auto;
     left: auto;
     color: rgb(0, 0, 0);
+    -unity-font: url('project://database/Assets/UI/PixeloidSans-JR6qo.ttf?fileID=12800000&guid=c0e0be61b6eb84c5d90b5471b473ac82&type=3#PixeloidSans-JR6qo');
+    -unity-font-definition: none;
 }
 
 .button_style:active {
-    height: 50px;
-    width: 200px;
+    height: 60px;
+    width: 150px;
     background-color: rgb(156, 156, 156);
-    -unity-font-style: bold;
-    font-size: 25px;
+    -unity-font-style: normal;
+    font-size: 22px;
     border-left-width: 0;
     border-right-width: 0;
     border-top-width: 0;
@@ -65,4 +69,6 @@
     bottom: auto;
     left: auto;
     color: rgb(0, 0, 0);
+    -unity-font: url('project://database/Assets/UI/PixeloidSans-JR6qo.ttf?fileID=12800000&guid=c0e0be61b6eb84c5d90b5471b473ac82&type=3#PixeloidSans-JR6qo');
+    -unity-font-definition: none;
 }

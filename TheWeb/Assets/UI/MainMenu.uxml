@@ -1,11 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/button_style.uss?fileID=7433441132597879392&amp;guid=5e941dae56bf744e3814e7ef5a353d91&amp;type=3#button_style" />
     <ui:VisualElement name="background" style="flex-grow: 1; align-items: center; justify-content: center;">
-        <ui:VisualElement name="menu" style="height: 225px; width: 540px; align-items: flex-start; justify-content: flex-end; position: relative; left: auto; background-color: rgb(255, 255, 255); border-top-left-radius: 30px; border-bottom-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px;">
-            <ui:Button text="Start Game" display-tooltip-when-elided="true" enable-rich-text="false" name="start_button" class="button_style" style="position: relative; left: 30px; bottom: auto; top: 50px; height: 60px; width: 150px;" />
-            <ui:Label text="The Web" display-tooltip-when-elided="true" name="main_menu_text" style="height: 82px; width: 300px; font-size: 60px; color: rgb(0, 0, 0); -unity-font-style: bold; position: absolute; top: 25px; left: 125px; -unity-text-align: upper-center;" />
-            <ui:Button text="Credits" display-tooltip-when-elided="true" name="credit_button" class="button_style" style="left: 190px; position: absolute; bottom: 12px; height: 60px; width: 150px;" />
-            <ui:Button text="Exit" display-tooltip-when-elided="true" name="exit_button" class="button_style" style="left: 350px; right: auto; bottom: 14px; height: 60px; width: 150px;" />
+        <ui:VisualElement name="menu" style="height: 225px; width: 540px; align-items: flex-start; justify-content: flex-end; position: relative; left: auto; background-color: rgba(255, 255, 255, 0); border-top-left-radius: 30px; border-bottom-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px;">
+            <ui:Button text="Start Game" display-tooltip-when-elided="true" enable-rich-text="false" name="start_button" class="button_style" style="position: absolute; left: 30px; bottom: 12px; top: auto; right: auto;" />
+            <ui:Label text="The Web" display-tooltip-when-elided="true" name="main_menu_text" style="height: 82px; width: 300px; font-size: 60px; color: rgb(0, 0, 0); -unity-font-style: normal; position: absolute; top: 25px; left: 125px; -unity-text-align: upper-center; -unity-font: url(&apos;project://database/Assets/UI/PixeloidSansBold-GOjpP.ttf?fileID=12800000&amp;guid=ee71406a29bb5463898e8cc9d253c4da&amp;type=3#PixeloidSansBold-GOjpP&apos;); -unity-font-definition: none;" />
+            <ui:Button text="Credits" display-tooltip-when-elided="true" name="credit_button" class="button_style" style="left: 190px; position: absolute; bottom: 12px;" />
+            <ui:Button text="Exit" display-tooltip-when-elided="true" name="exit_button" class="button_style" style="left: 350px; right: auto; bottom: 14px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
