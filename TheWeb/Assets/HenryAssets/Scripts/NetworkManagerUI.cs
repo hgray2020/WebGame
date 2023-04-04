@@ -52,6 +52,10 @@ public class NetworkManagerUI : NetworkBehaviour
             RelayServerData serverDat = new RelayServerData(allocation, "dtls");
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(serverDat);
             NetworkManager.Singleton.StartHost();
+            
+            hostButton.gameObject.SetActive(false);
+            clientButton.gameObject.SetActive(false);
+            joinField.gameObject.SetActive(false);
         } catch(RelayServiceException e) {
             Debug.Log(e);
         }
@@ -60,9 +64,14 @@ public class NetworkManagerUI : NetworkBehaviour
     private async void JoinRelay() {
         try {
             JoinAllocation joinAlloc = await RelayService.Instance.JoinAllocationAsync(clientCode);
+
             RelayServerData serverDat = new RelayServerData(joinAlloc, "dtls");
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(serverDat);
             NetworkManager.Singleton.StartClient();
+
+            hostButton.gameObject.SetActive(false);
+            clientButton.gameObject.SetActive(false);
+            joinField.gameObject.SetActive(false);
         } catch (RelayServiceException e) {
             Debug.Log(e);
         }
