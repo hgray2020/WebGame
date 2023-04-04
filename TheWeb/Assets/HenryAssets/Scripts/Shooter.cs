@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class Shooter : MonoBehaviour
+public class Shooter : NetworkBehaviour
 {
     // Start is called before the first frame update
     public int reloadCD = 300;
@@ -19,6 +20,9 @@ public class Shooter : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!IsHost) {
+            return;
+        }
         if (Input.GetKey(shootKey) && reload == 0) {
             reload = reloadCD;
             ShootBullet();
@@ -30,6 +34,7 @@ public class Shooter : MonoBehaviour
 
     void ShootBullet() {
         GameObject bullet = (GameObject)Instantiate(projectile, spawnPos.position, transform.rotation);
+        bullet.GetComponent<NetworkObject>().Spawn(true);
         bullet.GetComponent<Rigidbody2D>().AddForce(transform.up * projVel);
         Debug.Log(transform.up);
     }

@@ -14,6 +14,7 @@ public class PlayerMove : NetworkBehaviour
     private Vector2 moveX, moveY;
     private Vector2 rotatedMove;
     float mouseAng;
+    private float rot;
 
     void Start(){
         var anim = GetComponentInChildren<Animator>();
@@ -46,7 +47,7 @@ public class PlayerMove : NetworkBehaviour
     }
 
     void AntFixedUpdate() {
-
+        Move();
     }
 
     void SpiderFixedUpdate() {
@@ -55,26 +56,40 @@ public class PlayerMove : NetworkBehaviour
     }
 
     void AntUpdate() {
-        ProcessInputs();   
+        AntProcessInputs();   
     }
 
     void SpiderUpdate() {
-        ProcessInputs();   
+        SpiderProcessInputs();   
     }
     
-    void ProcessInputs()
+    void SpiderProcessInputs()
+    {
+        rot = Input.GetAxisRaw("Horizontal");
+        float move = Input.GetAxisRaw("Vertical");
+        
+        moveDirection = new Vector3(0, move, 0);
+        
+        if (moveDirection.magnitude > 1) {
+            moveDirection = moveDirection.normalized;
+        }
+    }
+
+    void AntProcessInputs()
     {
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
         
-        moveDirection = new Vector3(moveX, moveY, 0).normalized;
+        moveDirection = new Vector2(moveX, moveY);
+        if (moveDirection.magnitude > 1 ) {
+            moveDirection = moveDirection.normalized;
+        }
     }
     
     void Move()
     {
-        
         rotatedMove = transform.TransformDirection(moveDirection);
-        rb.velocity = rotatedMove;
+        rb.velocity = rotatedMove * moveSpeed;
         
     }
 

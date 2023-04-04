@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 3913995390978783460}
   - component: {fileID: -5367978265654942371}
   - component: {fileID: 5655443796377345800}
+  - component: {fileID: 1708970165401725238}
   m_Layer: 0
   m_Name: Spider
   m_TagString: Untagged
@@ -247,7 +248,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  rb: {fileID: 0}
   rotSpeed: 210
 --- !u!114 &5655443796377345800
 MonoBehaviour:
@@ -275,3 +275,15 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
+--- !u!114 &1708970165401725238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4098215359170885199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

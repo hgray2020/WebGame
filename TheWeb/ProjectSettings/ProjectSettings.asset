@@ -654,11 +654,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 
+  cloudProjectId: 4b729131-6922-400b-94c4-32b05871fd3d
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: WebGame
+  organizationId: hgray2020
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

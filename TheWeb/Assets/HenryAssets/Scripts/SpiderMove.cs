@@ -5,8 +5,8 @@ using Unity.Netcode;
 
 public class SpiderMove : NetworkBehaviour
 {
-    public float moveSpeed;
-    public Rigidbody2D rb;
+    [SerializeField]private float moveSpeed;
+    private Rigidbody2D rb;
     private Vector3 moveDirection;
     private Vector3 mouseScreenPos;
     private Vector3 mouseWorldPos;
@@ -15,7 +15,7 @@ public class SpiderMove : NetworkBehaviour
     private Vector2 rotatedMove;
     private float mouseAng;
     private float rot;
-    public float rotSpeed = 100;
+    [SerializeField] private float rotSpeed = 100;
 
     void Start(){
         var anim = GetComponentInChildren<Animator>();
@@ -39,7 +39,7 @@ public class SpiderMove : NetworkBehaviour
         Rotate();
     }
 
-
+    
     
     void ProcessInputs()
     {
@@ -71,6 +71,6 @@ public class SpiderMove : NetworkBehaviour
     }
 
     bool IsSpider() {
-        return IsOwner;// && IsHost;
+        return IsOwner && IsHost;
     }
 }

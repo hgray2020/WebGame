@@ -5,8 +5,8 @@ using Unity.Netcode;
 
 public class AntMove : NetworkBehaviour
 {
-    public float moveSpeed;
-    public Rigidbody2D rb;
+    public float moveSpeed = 5;
+    private Rigidbody2D rb;
     private Vector3 moveDirection;
     private Vector3 mouseScreenPos;
     private Vector3 mouseWorldPos;
@@ -17,6 +17,7 @@ public class AntMove : NetworkBehaviour
 
     void Start(){
         var anim = GetComponentInChildren<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -35,22 +36,7 @@ public class AntMove : NetworkBehaviour
         Move();
     }
 
-    void AntFixedUpdate() {
-
-    }
-
-    void SpiderFixedUpdate() {
-        Move();
-        Rotate();
-    }
-
-    void AntUpdate() {
-        ProcessInputs();   
-    }
-
-    void SpiderUpdate() {
-        ProcessInputs();   
-    }
+       
     
     void ProcessInputs()
     {
@@ -65,23 +51,17 @@ public class AntMove : NetworkBehaviour
     
     void Move()
     {
-        
-        
+        // MoveServerRpc(moveDirection * moveSpeed);
         rb.velocity = moveDirection * moveSpeed;
-        
-    }
-
-    void Rotate() 
-    {
-        mouseScreenPos = Input.mousePosition;
-        mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
-        relPos = mouseWorldPos - transform.position;
-        mouseAng = Mathf.Atan2(relPos.y, relPos.x) * (180 / Mathf.PI) - 90;
-        transform.rotation = Quaternion.Euler(0, 0, mouseAng);
-
     }
 
     bool IsAnt() {
-        return IsOwner && !IsHost;
+        return !IsHost;
     }
+
+    // [ServerRpc(RequireOwnership = false)]
+    // public void MoveServerRpc(Vector2 move) {
+    //     Debug.Log(move);
+    //     rb.velocity = move;
+    // }
 }
