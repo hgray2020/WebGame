@@ -18,6 +18,7 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private InputField joinField;
     [SerializeField]private GameObject spider;
     [SerializeField]private GameObject ant;
+    [SerializeField]private Text joinCodeText;
     private string clientCode;
 
     public async void Start() {
@@ -52,10 +53,12 @@ public class NetworkManagerUI : NetworkBehaviour
             RelayServerData serverDat = new RelayServerData(allocation, "dtls");
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(serverDat);
             NetworkManager.Singleton.StartHost();
-            
+
             hostButton.gameObject.SetActive(false);
             clientButton.gameObject.SetActive(false);
             joinField.gameObject.SetActive(false);
+
+            joinCodeText.GetComponent<Text>().text = joinCode;
         } catch(RelayServiceException e) {
             Debug.Log(e);
         }

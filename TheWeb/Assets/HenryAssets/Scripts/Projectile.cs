@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class Projectile : MonoBehaviour
+public class Projectile : NetworkBehaviour
 {
     // Start is called before the first frame update
     void Start()
