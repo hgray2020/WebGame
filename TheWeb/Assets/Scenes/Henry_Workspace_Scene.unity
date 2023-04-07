@@ -2122,7 +2122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1216733917
 Transform:
   m_ObjectHideFlags: 0
@@ -4017,7 +4017,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hostButton: {fileID: 1809742405}
   clientButton: {fileID: 2037778043}
+  pauseButton: {fileID: 92402384}
+  backButton: {fileID: 2132243843}
+  playButton: {fileID: 1639560662}
+  creditsButton: {fileID: 293356151}
+  exitButton: {fileID: 1583948969}
+  backCreditsButton: {fileID: 429050372}
+  resumeButton: {fileID: 1510818123}
+  exitPauseButton: {fileID: 1813409708}
   joinField: {fileID: 2068201791}
+  hostCode: {fileID: 431094266}
+  mainMenu: {fileID: 1216733916}
+  pauseMenu: {fileID: 1657302432}
+  creditsMenu: {fileID: 2122943531}
   spider: {fileID: 4098215359170885199, guid: 6b2f316a8331d46caba8472ba0b4c316, type: 3}
   ant: {fileID: 8445977487070642808, guid: f0481e11836aaa84ebab36ba493ee15b, type: 3}
   joinCodeText: {fileID: 586669090}
