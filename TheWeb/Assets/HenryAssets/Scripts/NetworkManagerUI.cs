@@ -23,17 +23,28 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private Button backCreditsButton;
     [SerializeField]private Button resumeButton;
     [SerializeField]private Button exitPauseButton;
+    [SerializeField]private Button controlsButton;
+    [SerializeField]private Button backControlsButton;
     [SerializeField]private InputField joinField;
     [SerializeField]private GameObject hostCode;
     [SerializeField]private GameObject mainMenu;
     [SerializeField]private GameObject pauseMenu;
     [SerializeField]private GameObject creditsMenu;
+    [SerializeField]private GameObject controlsMenu;
+    [SerializeField]private GameObject networkMenu;
     [SerializeField]private GameObject spider;
     [SerializeField]private GameObject ant;
     [SerializeField]private Text joinCodeText;
     private string clientCode;
 
     public static bool GameisPaused = false;
+
+    private Vector3 mainMenu_startScale;
+    private Vector3 credits_startScale;
+    private Vector3 networkMenu_startScale;
+    private Vector3 pauseMenu_startScale;
+    public float tweenTime = 1f;
+
 
     public async void Start() {
         await UnityServices.InitializeAsync();
@@ -56,18 +67,29 @@ public class NetworkManagerUI : NetworkBehaviour
         pauseButton.onClick.AddListener(Pause);
         resumeButton.onClick.AddListener(Resume);
         exitPauseButton.onClick.AddListener(MainMenu);
+        controlsButton.onClick.AddListener(Controls);
+        backControlsButton.onClick.AddListener(Pause);
 
-        hostButton.gameObject.SetActive(false);
-        clientButton.gameObject.SetActive(false);
-        joinField.gameObject.SetActive(false);
-        backButton.gameObject.SetActive(false);
+        networkMenu.gameObject.SetActive(false);
         hostCode.gameObject.SetActive(false);
         pauseButton.gameObject.SetActive(false);
-        mainMenu.gameObject.SetActive(true);
         pauseMenu.gameObject.SetActive(false);
         creditsMenu.gameObject.SetActive(false);
+        mainMenu.gameObject.SetActive(true);
 
         GameisPaused = false;
+
+        mainMenu_startScale = mainMenu.transform.localScale;
+        credits_startScale = creditsMenu.transform.localScale;
+        networkMenu_startScale = networkMenu.transform.localScale;
+        pauseMenu_startScale = pauseMenu.transform.localScale;
+
+        creditsMenu.transform.localScale = Vector2.zero;
+        mainMenu.transform.localScale = Vector2.zero;
+        networkMenu.transform.localScale = Vector2.zero;
+        pauseMenu.transform.localScale = Vector2.zero;
+
+        LeanTween.scale(mainMenu, mainMenu_startScale, tweenTime).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
     }
 
     public void Update() {
@@ -84,33 +106,36 @@ public class NetworkManagerUI : NetworkBehaviour
     }
 
     public void MainMenu() {
-        hostButton.gameObject.SetActive(false);
-        clientButton.gameObject.SetActive(false);
-        joinField.gameObject.SetActive(false);
-        backButton.gameObject.SetActive(false);
+        networkMenu.gameObject.SetActive(false);
+        networkMenu.transform.localScale = Vector2.zero;
         hostCode.gameObject.SetActive(false);
         pauseButton.gameObject.SetActive(false);
         creditsMenu.gameObject.SetActive(false);
+        creditsMenu.transform.localScale = Vector2.zero;
         pauseMenu.gameObject.SetActive(false);
+        pauseMenu.transform.localScale = Vector2.zero;
 
         mainMenu.gameObject.SetActive(true);
+        LeanTween.scale(mainMenu, mainMenu_startScale, tweenTime).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
         Time.timeScale = 1f;
         GameisPaused = false;
     }
     
     public void StartGame() {
         mainMenu.gameObject.SetActive(false);
+        mainMenu.transform.localScale = Vector2.zero;
 
-        hostButton.gameObject.SetActive(true);
-        clientButton.gameObject.SetActive(true);
-        joinField.gameObject.SetActive(true);
-        backButton.gameObject.SetActive(true);
         hostCode.gameObject.SetActive(true);
+        networkMenu.gameObject.SetActive(true);
+        LeanTween.scale(networkMenu, networkMenu_startScale, tweenTime).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
     }
 
     public void Credits() {
         mainMenu.gameObject.SetActive(false);
+        mainMenu.transform.localScale = Vector2.zero;
         creditsMenu.gameObject.SetActive(true);
+
+        LeanTween.scale(creditsMenu, credits_startScale, tweenTime).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
     }
 
     public void QuitGame() {
@@ -123,16 +148,25 @@ public class NetworkManagerUI : NetworkBehaviour
 
     void Pause(){
         pauseMenu.gameObject.SetActive(true);
+        LeanTween.scale(pauseMenu, pauseMenu_startScale, tweenTime).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
         pauseButton.gameObject.SetActive(false);
+        controlsMenu.gameObject.SetActive(false);
         Time.timeScale = 0f;
         GameisPaused = true;
     }
 
     public void Resume(){
         pauseMenu.gameObject.SetActive(false);
+        pauseMenu.transform.localScale = Vector2.zero;
         pauseButton.gameObject.SetActive(true);
         Time.timeScale = 1f;
         GameisPaused = false;
+    }
+
+    public void Controls() {
+        controlsMenu.gameObject.SetActive(true);
+        pauseMenu.gameObject.SetActive(false);
+        pauseMenu.transform.localScale = Vector2.zero;
     }
 
     private async void CreateRelay() {
@@ -146,10 +180,8 @@ public class NetworkManagerUI : NetworkBehaviour
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(serverDat);
             NetworkManager.Singleton.StartHost();
 
-            hostButton.gameObject.SetActive(false);
-            clientButton.gameObject.SetActive(false);
-            joinField.gameObject.SetActive(false);
-            backButton.gameObject.SetActive(false);
+            networkMenu.gameObject.SetActive(false);
+            networkMenu.transform.localScale = Vector2.zero;
             pauseButton.gameObject.SetActive(true);
 
             joinCodeText.GetComponent<Text>().text = joinCode;
@@ -166,10 +198,8 @@ public class NetworkManagerUI : NetworkBehaviour
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(serverDat);
             NetworkManager.Singleton.StartClient();
 
-            hostButton.gameObject.SetActive(false);
-            clientButton.gameObject.SetActive(false);
-            joinField.gameObject.SetActive(false);
-            backButton.gameObject.SetActive(false);
+            networkMenu.gameObject.SetActive(false);
+            networkMenu.transform.localScale = Vector2.zero;
             pauseButton.gameObject.SetActive(true);
         } catch (RelayServiceException e) {
             Debug.Log(e);
