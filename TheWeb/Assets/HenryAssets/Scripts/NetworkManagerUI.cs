@@ -32,6 +32,7 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private GameObject creditsMenu;
     [SerializeField]private GameObject controlsMenu;
     [SerializeField]private GameObject networkMenu;
+    [SerializeField]private GameObject spiderUI;
     [SerializeField]private GameObject spider;
     [SerializeField]private GameObject ant;
     [SerializeField]private Text joinCodeText;
@@ -75,6 +76,7 @@ public class NetworkManagerUI : NetworkBehaviour
         pauseButton.gameObject.SetActive(false);
         pauseMenu.gameObject.SetActive(false);
         creditsMenu.gameObject.SetActive(false);
+        spiderUI.gameObject.SetActive(false);
         mainMenu.gameObject.SetActive(true);
 
         GameisPaused = false;
@@ -189,6 +191,7 @@ public class NetworkManagerUI : NetworkBehaviour
             networkMenu.gameObject.SetActive(false);
             networkMenu.transform.localScale = Vector2.zero;
             pauseButton.gameObject.SetActive(true);
+            spiderUI.gameObject.SetActive(true);
 
             joinCodeText.GetComponent<Text>().text = joinCode;
         } catch(RelayServiceException e) {
