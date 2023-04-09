@@ -103,6 +103,7 @@ public class NetworkManagerUI : NetworkBehaviour
                     Pause();
             }
         }
+        
     }
 
     public void MainMenu() {
@@ -119,6 +120,11 @@ public class NetworkManagerUI : NetworkBehaviour
         LeanTween.scale(mainMenu, mainMenu_startScale, tweenTime).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
         Time.timeScale = 1f;
         GameisPaused = false;
+        
+        NetworkManager.Singleton.Shutdown();
+        if (IsHost) {
+            ServerShutdownClientRpc();
+        }
     }
     
     public void StartGame() {
@@ -204,5 +210,10 @@ public class NetworkManagerUI : NetworkBehaviour
         } catch (RelayServiceException e) {
             Debug.Log(e);
         }
+    }
+
+    [ClientRpc]
+    void ServerShutdownClientRpc(){
+        MainMenu();
     }
 }
