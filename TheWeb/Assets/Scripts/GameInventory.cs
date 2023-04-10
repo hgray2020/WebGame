@@ -29,6 +29,12 @@ public class GameInventory : MonoBehaviour {
       public GameObject item5image;
       public GameObject coinText;
 
+      public GameObject item1bg;
+      public GameObject item2bg;
+      public GameObject item3bg;
+      public GameObject item4bg;
+      public GameObject item5bg;
+
       // Item number text variables. Comment out if each item is unique (1/2).
       [Header("Add item number Text objects here")]
       public Text item1Text;
@@ -36,10 +42,43 @@ public class GameInventory : MonoBehaviour {
       public Text item3Text;
       public Text item4Text;
       public Text item5Text;
+
+      public string coin;
+      string selected;
  
       void Start(){
             InventoryMenu.SetActive(true);
             InventoryDisplay();
+            item1bg.GetComponent<Image>().color = new Color (0, 0, 0, 1);
+      }
+
+      void Update(){
+            if (Input.GetKeyDown("1")) { 
+                  item1bg.GetComponent<Image>().color = new Color (0, 0, 0, 1);
+                  selected = "item1";
+                  ChangeAllColor(selected);
+            }
+            if (Input.GetKeyDown("2")) { 
+                  item2bg.GetComponent<Image>().color = new Color (0, 0, 0, 1);
+                  selected = "item2";
+                  ChangeAllColor(selected);
+            }
+            if (Input.GetKeyDown("3")) { 
+                  item3bg.GetComponent<Image>().color = new Color (0, 0, 0, 1);
+                  selected = "item3";
+                  ChangeAllColor(selected);
+            }
+            if (Input.GetKeyDown("4")) { 
+                  item4bg.GetComponent<Image>().color = new Color (0, 0, 0, 1);
+                  selected = "item4";
+                  ChangeAllColor(selected);
+            }
+            if (Input.GetKeyDown("5")) { 
+                  item5bg.GetComponent<Image>().color = new Color (0, 0, 0, 1);
+                  selected = "item5";
+                  ChangeAllColor(selected);
+            }
+            Debug.Log(selected);
       }
 
       void InventoryDisplay(){
@@ -50,7 +89,7 @@ public class GameInventory : MonoBehaviour {
             if (item5bool == true) {item5image.SetActive(true);} else {item5image.SetActive(false);}
 
             Text coinTextB = coinText.GetComponent<Text>();
-            coinTextB.text = ("SILK: " + coins);
+            coinTextB.text = (coin + coins);
 
             // Item number updates. Comment out if each item is unique (2/2).
             Text item1TextB = item1Text.GetComponent<Text>();
@@ -118,7 +157,9 @@ public class GameInventory : MonoBehaviour {
       }
 
       public void CoinChange(int amount){
-            coins +=amount;
+            if ((coins > 0) || (amount > 0)) {
+                coins +=amount;
+            }
             InventoryDisplay();
       }
 
@@ -142,6 +183,24 @@ public class GameInventory : MonoBehaviour {
             item3num = 0; // object name
             item4num = 0; // object name
             item5num = 0; // object name
+      }
+
+      void ChangeAllColor(string item) {
+            if (item != "item1") {
+                  item1bg.GetComponent<Image>().color = new Color (1, 1, 1, 1);
+            }
+            if (item != "item2") {
+                  item2bg.GetComponent<Image>().color = new Color (1, 1, 1, 1);
+            }
+            if (item != "item3") {
+                  item3bg.GetComponent<Image>().color = new Color (1, 1, 1, 1);
+            }
+            if (item != "item4") {
+                  item4bg.GetComponent<Image>().color = new Color (1, 1, 1, 1);
+            }
+            if (item != "item5") {
+                  item5bg.GetComponent<Image>().color = new Color (1, 1, 1, 1);
+            }
       }
 
 }

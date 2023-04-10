@@ -33,6 +33,7 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private GameObject controlsMenu;
     [SerializeField]private GameObject networkMenu;
     [SerializeField]private GameObject spiderUI;
+    [SerializeField]private GameObject antUI;
     [SerializeField]private GameObject spider;
     [SerializeField]private GameObject ant;
     [SerializeField]private Text joinCodeText;
@@ -77,6 +78,7 @@ public class NetworkManagerUI : NetworkBehaviour
         pauseMenu.gameObject.SetActive(false);
         creditsMenu.gameObject.SetActive(false);
         spiderUI.gameObject.SetActive(false);
+        antUI.gameObject.SetActive(false);
         mainMenu.gameObject.SetActive(true);
 
         GameisPaused = false;
@@ -117,6 +119,8 @@ public class NetworkManagerUI : NetworkBehaviour
         creditsMenu.transform.localScale = Vector2.zero;
         pauseMenu.gameObject.SetActive(false);
         pauseMenu.transform.localScale = Vector2.zero;
+        spiderUI.gameObject.SetActive(false);
+        antUI.gameObject.SetActive(false);
 
         mainMenu.gameObject.SetActive(true);
         LeanTween.scale(mainMenu, mainMenu_startScale, tweenTime).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
@@ -159,6 +163,8 @@ public class NetworkManagerUI : NetworkBehaviour
         LeanTween.scale(pauseMenu, pauseMenu_startScale, tweenTime).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
         pauseButton.gameObject.SetActive(false);
         controlsMenu.gameObject.SetActive(false);
+        spiderUI.gameObject.SetActive(false);
+        antUI.gameObject.SetActive(false);
         Time.timeScale = 0f;
         GameisPaused = true;
     }
@@ -167,6 +173,12 @@ public class NetworkManagerUI : NetworkBehaviour
         pauseMenu.gameObject.SetActive(false);
         pauseMenu.transform.localScale = Vector2.zero;
         pauseButton.gameObject.SetActive(true);
+        if (IsHost) {
+            spiderUI.gameObject.SetActive(true);
+        }
+        if (!IsHost) {
+            antUI.gameObject.SetActive(true);
+        }
         Time.timeScale = 1f;
         GameisPaused = false;
     }
@@ -210,6 +222,7 @@ public class NetworkManagerUI : NetworkBehaviour
             networkMenu.gameObject.SetActive(false);
             networkMenu.transform.localScale = Vector2.zero;
             pauseButton.gameObject.SetActive(true);
+            antUI.gameObject.SetActive(true);
         } catch (RelayServiceException e) {
             Debug.Log(e);
         }
