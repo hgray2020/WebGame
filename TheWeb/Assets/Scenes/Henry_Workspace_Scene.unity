@@ -4683,6 +4683,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryMenu: {fileID: 453814025}
   InvIsOpen: 0
+  item1price: 1
+  item2price: 1
+  item3price: 1
+  item4price: 1
   item1image: {fileID: 2094763324}
   item2image: {fileID: 179274951}
   item3image: {fileID: 353008585}
@@ -6171,6 +6175,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryMenu: {fileID: 1948391628}
   InvIsOpen: 0
+  item1price: 1
+  item2price: 2
+  item3price: 3
+  item4price: 5
   item1image: {fileID: 1978861298}
   item2image: {fileID: 1596392277}
   item3image: {fileID: 324498167}
