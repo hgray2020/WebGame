@@ -98,6 +98,7 @@ public class NetworkManagerUI : NetworkBehaviour
 
     public void Update() {
         clientCode = joinField.text;
+        Debug.Log("!" + clientCode + "!");
 
         if (Input.GetKeyDown(KeyCode.Escape)){
             if (GameisPaused){
@@ -206,6 +207,8 @@ public class NetworkManagerUI : NetworkBehaviour
             spiderUI.gameObject.SetActive(true);
 
             joinCodeText.GetComponent<Text>().text = joinCode;
+            joinCodeText.gameObject.SetActive(true);
+
         } catch(RelayServiceException e) {
             Debug.Log(e);
         }
