@@ -19,6 +19,11 @@ public class GameInventory : MonoBehaviour {
       public static int item4num = 0;
       public static int coins = 50;
 
+      public static int item1price = 1;
+      public static int item2price = 2;
+      public static int item3price = 3;
+      public static int item4price = 5;
+
       [Header("Add item image objects here")]
       public GameObject item1image;
       public GameObject item2image;
@@ -37,6 +42,11 @@ public class GameInventory : MonoBehaviour {
       public Text item2Text;
       public Text item3Text;
       public Text item4Text;
+
+      public Text item1Text_price;
+      public Text item2Text_price;
+      public Text item3Text_price;
+      public Text item4Text_price;
 
       public string coin;
       string selected;
@@ -71,10 +81,10 @@ public class GameInventory : MonoBehaviour {
       }
 
       void InventoryDisplay(){
-            if (item1bool == true) {item1image.SetActive(true);} else {item1image.SetActive(false);}
-            if (item2bool == true) {item2image.SetActive(true);} else {item2image.SetActive(false);}
-            if (item3bool == true) {item3image.SetActive(true);} else {item3image.SetActive(false);}
-            if (item4bool == true) {item4image.SetActive(true);} else {item4image.SetActive(false);}
+            item1image.SetActive(true);
+            item2image.SetActive(true);
+            item3image.SetActive(true);
+            item4image.SetActive(true);
 
             Text coinTextB = coinText.GetComponent<Text>();
             coinTextB.text = (coin + coins);
@@ -91,21 +101,47 @@ public class GameInventory : MonoBehaviour {
 
             Text item4TextB = item4Text.GetComponent<Text>();
             item4TextB.text = ("" + item4num);
+
+            Text item1Text_priceB = item1Text_price.GetComponent<Text>();
+            item1Text_priceB.text = ("" + item1price);
+
+            Text item2Text_priceB = item2Text_price.GetComponent<Text>();
+            item2Text_priceB.text = ("" + item2price);
+
+            Text item3Text_priceB = item3Text_price.GetComponent<Text>();
+            item3Text_priceB.text = ("" + item3price);
+
+            Text item4Text_priceB = item4Text_price.GetComponent<Text>();
+            item4Text_priceB.text = ("" + item4price);
       }
 
       public void InventoryAdd(string item){
             string foundItemName = item;
-            if (coins > 0) {
-                  if (foundItemName == "item1") {item1bool = true; item1num ++;}
-                  else if (foundItemName == "item2") {item2bool = true; item2num ++;}
-                  else if (foundItemName == "item3") {item3bool = true; item3num ++;}
-                  else if (foundItemName == "item4") {item4bool = true; item4num ++;}
-                  else { Debug.Log("This item does not exist to be added"); }
-                  InventoryDisplay();
+            if ((foundItemName == "item1") && (coins >= item1price)) {
+                  item1bool = true; 
+                  item1num ++;
+                  CoinChange(0 - item1price);
+            }
+            else if ((foundItemName == "item2") && (coins >= item2price)) {
+                  item2bool = true; 
+                  item2num ++;
+                  CoinChange(0 - item2price);
+            }
+            else if ((foundItemName == "item3") && (coins >= item3price)) {
+                  item3bool = true; 
+                  item3num ++;
+                  CoinChange(0 - item3price);
+            }
+            else if ((foundItemName == "item4") && (coins >= item4price)) {
+                  item4bool = true; 
+                  item4num ++;
+                  CoinChange(0 - item4price);
+            }
+            else { Debug.Log("This item does not exist to be added"); }
+            InventoryDisplay();
 
-                  if (!InvIsOpen){
-                        OpenCloseInventory();
-                  }
+            if (!InvIsOpen){
+                  OpenCloseInventory();
             }
       }
 
@@ -136,9 +172,7 @@ public class GameInventory : MonoBehaviour {
       }
 
       public void CoinChange(int amount){
-            if ((coins > 0) || (amount > 0)) {
-                coins +=amount;
-            }
+            coins +=amount;
             InventoryDisplay();
       }
 
