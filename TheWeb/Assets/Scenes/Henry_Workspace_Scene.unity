@@ -4683,6 +4683,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryMenu: {fileID: 453814025}
   InvIsOpen: 0
+  item1price: 1
+  item2price: 1
+  item3price: 1
+  item4price: 1
   item1image: {fileID: 2094763324}
   item2image: {fileID: 179274951}
   item3image: {fileID: 353008585}
@@ -5893,6 +5897,11 @@ MonoBehaviour:
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 4743439023123050300, guid: 61823149b862a40c9839c239e4420d07, type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
     TickRate: 30
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 0
@@ -6171,6 +6180,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryMenu: {fileID: 1948391628}
   InvIsOpen: 0
+  item1price: 1
+  item2price: 2
+  item3price: 3
+  item4price: 5
   item1image: {fileID: 1978861298}
   item2image: {fileID: 1596392277}
   item3image: {fileID: 324498167}

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameInventory : MonoBehaviour {
       public GameObject InventoryMenu;
-      public bool InvIsOpen = false;
+      public bool InvIsOpen = true;
 
       //5 Inventory Items:
       public static bool item1bool = false;
@@ -19,10 +19,10 @@ public class GameInventory : MonoBehaviour {
       public static int item4num = 0;
       public static int coins = 50;
 
-      public static int item1price = 1;
-      public static int item2price = 2;
-      public static int item3price = 3;
-      public static int item4price = 5;
+      public int item1price = 1;
+      public int item2price = 2;
+      public int item3price = 3;
+      public int item4price = 5;
 
       [Header("Add item image objects here")]
       public GameObject item1image;
