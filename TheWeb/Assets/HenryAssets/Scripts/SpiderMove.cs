@@ -6,6 +6,7 @@ using Unity.Netcode;
 public class SpiderMove : NetworkBehaviour
 {
     [SerializeField]private float moveSpeed;
+    [SerializeField]private bool onNetwork;
     private Rigidbody2D rb;
     private Vector3 moveDirection;
     private Vector3 mouseScreenPos;
@@ -71,6 +72,9 @@ public class SpiderMove : NetworkBehaviour
     }
 
     bool IsSpider() {
+        if (!onNetwork) {
+            return true;
+        }
         return IsOwner && IsHost;
     }
 }
