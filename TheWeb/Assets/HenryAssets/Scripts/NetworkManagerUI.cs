@@ -40,6 +40,7 @@ public class NetworkManagerUI : NetworkBehaviour
     private string clientCode;
 
     public static bool GameisPaused = false;
+    public static bool pauseActive = false;
 
     private Vector3 mainMenu_startScale;
     private Vector3 credits_startScale;
@@ -100,7 +101,7 @@ public class NetworkManagerUI : NetworkBehaviour
         clientCode = joinField.text;
         Debug.Log("!" + clientCode + "!");
 
-        if (Input.GetKeyDown(KeyCode.Escape)){
+        if (Input.GetKeyDown(KeyCode.Escape) && (pauseActive)){
             if (GameisPaused){
                     Resume();
             }
@@ -122,6 +123,7 @@ public class NetworkManagerUI : NetworkBehaviour
         pauseMenu.transform.localScale = Vector2.zero;
         spiderUI.gameObject.SetActive(false);
         antUI.gameObject.SetActive(false);
+        pauseActive = false;
 
         mainMenu.gameObject.SetActive(true);
         LeanTween.scale(mainMenu, mainMenu_startScale, tweenTime).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
@@ -205,6 +207,7 @@ public class NetworkManagerUI : NetworkBehaviour
             networkMenu.transform.localScale = Vector2.zero;
             pauseButton.gameObject.SetActive(true);
             spiderUI.gameObject.SetActive(true);
+            pauseActive = true;
 
             joinCodeText.GetComponent<Text>().text = joinCode;
             joinCodeText.gameObject.SetActive(true);
