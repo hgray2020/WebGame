@@ -12,28 +12,24 @@ public class GameInventory : MonoBehaviour {
       public static bool item2bool = false;
       public static bool item3bool = false;
       public static bool item4bool = false;
-      public static bool item5bool = false;
 
       public static int item1num = 0;
       public static int item2num = 0;
       public static int item3num = 0;
       public static int item4num = 0;
-      public static int item5num = 0;
-      public static int coins = 10;
+      public static int coins = 50;
 
       [Header("Add item image objects here")]
       public GameObject item1image;
       public GameObject item2image;
       public GameObject item3image;
       public GameObject item4image;
-      public GameObject item5image;
       public GameObject coinText;
 
       public GameObject item1bg;
       public GameObject item2bg;
       public GameObject item3bg;
       public GameObject item4bg;
-      public GameObject item5bg;
 
       // Item number text variables. Comment out if each item is unique (1/2).
       [Header("Add item number Text objects here")]
@@ -41,7 +37,6 @@ public class GameInventory : MonoBehaviour {
       public Text item2Text;
       public Text item3Text;
       public Text item4Text;
-      public Text item5Text;
 
       public string coin;
       string selected;
@@ -73,12 +68,6 @@ public class GameInventory : MonoBehaviour {
                   selected = "item4";
                   ChangeAllColor(selected);
             }
-            if (Input.GetKeyDown("5")) { 
-                  item5bg.GetComponent<Image>().color = new Color (0, 0, 0, 1);
-                  selected = "item5";
-                  ChangeAllColor(selected);
-            }
-            Debug.Log(selected);
       }
 
       void InventoryDisplay(){
@@ -86,7 +75,6 @@ public class GameInventory : MonoBehaviour {
             if (item2bool == true) {item2image.SetActive(true);} else {item2image.SetActive(false);}
             if (item3bool == true) {item3image.SetActive(true);} else {item3image.SetActive(false);}
             if (item4bool == true) {item4image.SetActive(true);} else {item4image.SetActive(false);}
-            if (item5bool == true) {item5image.SetActive(true);} else {item5image.SetActive(false);}
 
             Text coinTextB = coinText.GetComponent<Text>();
             coinTextB.text = (coin + coins);
@@ -103,9 +91,6 @@ public class GameInventory : MonoBehaviour {
 
             Text item4TextB = item4Text.GetComponent<Text>();
             item4TextB.text = ("" + item4num);
-
-            Text item5TextB = item5Text.GetComponent<Text>();
-            item5TextB.text = ("" + item5num);
       }
 
       public void InventoryAdd(string item){
@@ -115,7 +100,6 @@ public class GameInventory : MonoBehaviour {
                   else if (foundItemName == "item2") {item2bool = true; item2num ++;}
                   else if (foundItemName == "item3") {item3bool = true; item3num ++;}
                   else if (foundItemName == "item4") {item4bool = true; item4num ++;}
-                  else if (foundItemName == "item5") {item5bool = true; item5num ++;}
                   else { Debug.Log("This item does not exist to be added"); }
                   InventoryDisplay();
 
@@ -147,11 +131,6 @@ public class GameInventory : MonoBehaviour {
                   if (item4num <= 0) { item4bool =false; }
                     // Add any other intended effects
             }
-            else if (itemRemove == "item5") {
-                  item5num -= num;
-                  if (item5num <= 0) { item5bool =false; }
-                    // Add any other intended effects
-            }
             else { Debug.Log("This item does not exist to be removed"); }
             InventoryDisplay();
       }
@@ -176,13 +155,11 @@ public class GameInventory : MonoBehaviour {
             item2bool = false;
             item3bool = false;
             item4bool = false;
-            item5bool = false;
 
             item1num = 0; // object name
             item2num = 0; // object name
             item3num = 0; // object name
             item4num = 0; // object name
-            item5num = 0; // object name
       }
 
       void ChangeAllColor(string item) {
@@ -197,9 +174,6 @@ public class GameInventory : MonoBehaviour {
             }
             if (item != "item4") {
                   item4bg.GetComponent<Image>().color = new Color (1, 1, 1, 1);
-            }
-            if (item != "item5") {
-                  item5bg.GetComponent<Image>().color = new Color (1, 1, 1, 1);
             }
       }
 
