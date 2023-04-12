@@ -27,6 +27,10 @@ public class Graph
         return true;
     }
 
+    public bool IsEmpty() {
+        return AdjacencyList.Count == 0;
+    }
+
     /// <summary>
     /// Adds a new edge between two given vertices in the graph
     /// </summary>
@@ -210,14 +214,72 @@ public class WebSpawn : MonoBehaviour
 {
     // Start is called before the first frame update
     private Graph webGraph;
+    private int cooldownMax = 30;
+    private int cooldown = 0;
+    [SerializeField]private GameObject node;
+    [SerializeField]private GameObject spider;
+    [SerializeField]private GameObject webEdge;
+    private SpiderMove sm;
+    private bool building = false;
+    private GameObject buildFrom;
     void Start()
     {
-        
+        webGraph = new Graph();
+        sm = spider.GetComponent<SpiderMove>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.B) && cooldown == 0) {
+            cooldown = cooldownMax;
+            if (webGraph.IsEmpty()) {
+                GameObject newNode = (GameObject)Instantiate(node, spider.transform.position, Quaternion.identity);
+                webGraph.AddVertex(newNode);
+                
+            } else {
+                if (!building) {
+                    if (sm.isOnWebNode()) {
+                        building = true;
+                        buildFrom = sm.currWebNode();
+                        Debug.Log("building");
+                        Debug.Log(buildFrom);
+                    }
+                } else {
+                    Debug.Log("hmm");
+                    GameObject newNode = (GameObject)Instantiate(node, spider.transform.position, Quaternion.identity);
+                    
+                    Vector2 n1 = new Vector2(newNode.transform.position.x, newNode.transform.position.y);
+                    Vector2 n2 = new Vector2(buildFrom.transform.position.x, buildFrom.transform.position.y);
+                    float z = newNode.transform.position.z;
+                    Vector2 midpoint = (n1 + n2) / 2;
+                    float length = Vector2.Distance(n1, n2);
+                
+                    float angle = Mathf.Atan2(n1.y - n2.y, n1.x - n2.x) * (180 / Mathf.PI) ;
+                    // Debug.Log(length);
+                    // Debug.Log(angle);
+                    Debug.Log(midpoint);
+                    
+                    
+                    GameObject edge = (GameObject)Instantiate(webEdge, new Vector3(midpoint.x, midpoint.y, z), Quaternion.Euler(0, 0, angle));
+                    edge.transform.localScale = new Vector3(length, 0.1f, 1);
+
+                    webGraph.AddVertex(newNode);
+                    webGraph.AddAnEdge(newNode, buildFrom);
+                    building = false;
+                }
+                
+            }
+            
+        }
         
     }
+
+    void FixedUpdate() {
+        if (cooldown > 0) {
+            cooldown--;
+        }
+    }
+
+    
 }

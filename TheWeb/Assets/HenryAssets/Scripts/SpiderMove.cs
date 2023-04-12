@@ -16,6 +16,8 @@ public class SpiderMove : NetworkBehaviour
     private Vector2 rotatedMove;
     private float mouseAng;
     private float rot;
+    private bool onNode = false;
+    private GameObject webNode;
     [SerializeField] private float rotSpeed = 100;
 
     void Start(){
@@ -76,5 +78,31 @@ public class SpiderMove : NetworkBehaviour
             return true;
         }
         return IsOwner && IsHost;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.tag == "web_node") {
+            onNode = true;
+            webNode = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if (other.gameObject.tag == "web_node") {
+            onNode = false;
+            
+        }
+    }
+
+    public bool isOnWebNode() {
+        return onNode;
+    }
+
+    public GameObject currWebNode(){
+        if (!isOnWebNode()) {
+            return null;
+        } else {
+            return webNode;
+        }
     }
 }

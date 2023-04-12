@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - projectile
+  - web_node
   layers:
   - Default
   - TransparentFX
