@@ -200,6 +200,7 @@ public class NetworkManagerUI : NetworkBehaviour
         antUI.gameObject.SetActive(false);
         spider_movementUI.gameObject.SetActive(false);
         spider_rotationUI.gameObject.SetActive(false);
+        spider_shootUI.gameObject.SetActive(false);
         spider_buildUI.gameObject.SetActive(false);
         spider_inventoryUI.gameObject.SetActive(false);
         spider_inventoryLayoutUI.gameObject.SetActive(false);
