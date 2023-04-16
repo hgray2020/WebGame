@@ -28,6 +28,8 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private Button nextMovementButton;
     [SerializeField]private Button nextRotationButton;
     [SerializeField]private Button backRotationButton;
+    [SerializeField]private Button nextShootButton;
+    [SerializeField]private Button backShootButton;
     [SerializeField]private Button nextBuildButton;
     [SerializeField]private Button backBuildButton;
     [SerializeField]private Button nextInventoryButton;
@@ -43,6 +45,7 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private GameObject antUI;
     [SerializeField]private GameObject spider_movementUI;
     [SerializeField]private GameObject spider_rotationUI;
+    [SerializeField]private GameObject spider_shootUI;
     [SerializeField]private GameObject spider_buildUI;
     [SerializeField]private GameObject spider_inventoryUI;
     [SerializeField]private GameObject spider_inventoryLayoutUI;
@@ -85,10 +88,12 @@ public class NetworkManagerUI : NetworkBehaviour
         controlsButton.onClick.AddListener(Controls);
         exitControlsButton.onClick.AddListener(Pause);
         nextMovementButton.onClick.AddListener(Rotation);
-        nextRotationButton.onClick.AddListener(Build);
+        nextRotationButton.onClick.AddListener(Shoot);
         backRotationButton.onClick.AddListener(Controls);
+        nextShootButton.onClick.AddListener(Build);
+        backShootButton.onClick.AddListener(Rotation);
         nextBuildButton.onClick.AddListener(Inventory_Spider);
-        backBuildButton.onClick.AddListener(Rotation);
+        backBuildButton.onClick.AddListener(Shoot);
         nextInventoryButton.onClick.AddListener(InventoryLayout_Spider);
         backInventoryButton.onClick.AddListener(Build);
         backInventoryLayoutButton.onClick.AddListener(Inventory_Spider);
@@ -102,6 +107,7 @@ public class NetworkManagerUI : NetworkBehaviour
         antUI.gameObject.SetActive(false);
         spider_movementUI.gameObject.SetActive(false);
         spider_rotationUI.gameObject.SetActive(false);
+        spider_shootUI.gameObject.SetActive(false);
         spider_buildUI.gameObject.SetActive(false);
         spider_inventoryUI.gameObject.SetActive(false);
         spider_inventoryLayoutUI.gameObject.SetActive(false);
@@ -230,13 +236,19 @@ public class NetworkManagerUI : NetworkBehaviour
     public void Rotation() {
         spider_movementUI.gameObject.SetActive(false);
         spider_rotationUI.gameObject.SetActive(true);
-        spider_buildUI.gameObject.SetActive(false);
+        spider_shootUI.gameObject.SetActive(false);
+    }
+
+    public void Shoot() {
+        spider_rotationUI.gameObject.SetActive(false);
+        spider_shootUI.gameObject.SetActive(true);
+        spider_buildUI.SetActive(false);
     }
 
     public void Build() {
-        spider_rotationUI.gameObject.SetActive(false);
-        spider_inventoryUI.gameObject.SetActive(false);
+        spider_shootUI.gameObject.SetActive(false);
         spider_buildUI.gameObject.SetActive(true);
+        spider_inventoryUI.gameObject.SetActive(false);
     }
 
     public void Inventory_Spider() {
