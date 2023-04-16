@@ -53,6 +53,7 @@ public class GameInventory : MonoBehaviour {
  
       void Start(){
             InventoryMenu.SetActive(true);
+            InvIsOpen = true;
             InventoryDisplay();
             item1bg.GetComponent<Image>().color = new Color (0, 0, 0, 1);
       }
