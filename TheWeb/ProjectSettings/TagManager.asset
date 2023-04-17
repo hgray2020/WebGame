@@ -6,6 +6,7 @@ TagManager:
   tags:
   - projectile
   - web_node
+  - web_edge
   layers:
   - Default
   - TransparentFX

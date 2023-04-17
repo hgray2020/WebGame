@@ -17,7 +17,10 @@ public class SpiderMove : NetworkBehaviour
     private float mouseAng;
     private float rot;
     private bool onNode = false;
+    private bool onEdge = false;
     private GameObject webNode;
+    private GameObject webEdge;
+    private Vector2 closestPosOnEdge;
     [SerializeField] private float rotSpeed = 100;
 
     void Start(){
@@ -81,28 +84,46 @@ public class SpiderMove : NetworkBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.tag == "web_edge") {
+            Debug.Log("edge");
+            webEdge = other.gameObject;
+            onEdge = true;
+            closestPosOnEdge = other.ClosestPoint(new Vector2(transform.GetChild(2).position.x, transform.GetChild(2).position.y));
+            Debug.Log(transform.GetChild(2).position);
+        }
         if (other.gameObject.tag == "web_node") {
             onNode = true;
             webNode = other.gameObject;
         }
+        
     }
 
     private void OnTriggerExit2D(Collider2D other) {
         if (other.gameObject.tag == "web_node") {
             onNode = false;
-            
+        } 
+        if (other.gameObject.tag == "web_edge") {
+            onEdge = false;
         }
     }
 
     public bool isOnWebNode() {
         return onNode;
     }
+    
+    public bool isOnWebEdge() {
+        return onEdge;
+    }
 
-    public GameObject currWebNode(){
-        if (!isOnWebNode()) {
-            return null;
-        } else {
-            return webNode;
-        }
+    public Vector2 closestPos() {
+        return closestPosOnEdge;
+    }
+
+    public GameObject currWebNode() {
+        return webNode;
+    }
+    
+    public GameObject currWebEdge() {
+        return webEdge;
     }
 }

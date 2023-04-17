@@ -200,11 +200,13 @@ public class Vertex
     /// All the edges connected to the given vertex
     /// </summary>
     public List<GameObject> Edges { get; set; }
+    public IDictionary<GameObject, float> Costs { get; set; }
 
     public Vertex(GameObject node)
     {
         this.Name = node;
         this.Edges = new List<GameObject>();
+        this.Costs = new Dictionary<GameObject, float>();
     }
 }
 
@@ -219,9 +221,13 @@ public class WebSpawn : MonoBehaviour
     [SerializeField]private GameObject node;
     [SerializeField]private GameObject spider;
     [SerializeField]private GameObject webEdge;
+    [SerializeField]private GameObject buildEdge;
+    [SerializeField]private Transform webSpawnPoint;
+    private Vector3 closestPoint;
     private SpiderMove sm;
     private bool building = false;
     private GameObject buildFrom;
+    private bool buildFromEdge = true;
     void Start()
     {
         webGraph = new Graph();
@@ -231,23 +237,63 @@ public class WebSpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        
         if (Input.GetKey(KeyCode.B) && cooldown == 0) {
             cooldown = cooldownMax;
             if (webGraph.IsEmpty()) {
                 GameObject newNode = (GameObject)Instantiate(node, spider.transform.position, Quaternion.identity);
                 webGraph.AddVertex(newNode);
-                
+                newNode.transform.parent = transform;
             } else {
                 if (!building) {
-                    if (sm.isOnWebNode()) {
+                    if (sm.isOnWebNode() || sm.isOnWebEdge()) {
                         building = true;
-                        buildFrom = sm.currWebNode();
+                        if (sm.isOnWebNode()) {
+                            buildFrom = sm.currWebNode();
+                        }
                         Debug.Log("building");
                         Debug.Log(buildFrom);
+                        if (sm.isOnWebEdge() && !sm.isOnWebNode()) {
+                            buildFrom = sm.currWebEdge();
+                            buildFromEdge = true;
+                            closestPoint = new Vector3(sm.closestPos().x, sm.closestPos().y, transform.position.z);
+                            GameObject newNode = (GameObject)Instantiate(node, closestPoint, Quaternion.identity);
+                            newNode.transform.parent = transform;
+                            webGraph.AddVertex(newNode);
+                            buildFrom = newNode;
+                            (GameObject node1, GameObject node2) = sm.currWebEdge().GetComponent<WebEdge>().nodes();
+                            webGraph.RemoveAnEdge(node1, node2);
+                            webGraph.AddVertex(newNode);
+                            webGraph.AddAnEdge(node1, newNode);
+                            webGraph.AddAnEdge(node2, newNode);
+                        }
                     }
+                    
                 } else {
+                    
                     Debug.Log("hmm");
-                    GameObject newNode = (GameObject)Instantiate(node, spider.transform.position, Quaternion.identity);
+                    GameObject newNode = null;
+                    if (!sm.isOnWebNode()) {
+                        newNode = (GameObject)Instantiate(node, webSpawnPoint.position, Quaternion.identity);
+                        newNode.transform.parent = transform;
+                        webGraph.AddVertex(newNode);
+                        if (sm.isOnWebEdge()) {
+                            closestPoint = new Vector3(sm.closestPos().x, sm.closestPos().y, transform.position.z);
+                            newNode.transform.position = closestPoint;
+                            (GameObject node1, GameObject node2) = sm.currWebEdge().GetComponent<WebEdge>().nodes();
+                            webGraph.RemoveAnEdge(node1, node2);
+                            webGraph.AddVertex(newNode);
+                            webGraph.AddAnEdge(node1, newNode);
+                            webGraph.AddAnEdge(node2, newNode);
+                        }
+                    } else {
+                        newNode = sm.currWebNode();
+                    }
+                    if (newNode == buildFrom) {
+                        Debug.Log("building to same node");
+                        return;
+                    }
                     
                     Vector2 n1 = new Vector2(newNode.transform.position.x, newNode.transform.position.y);
                     Vector2 n2 = new Vector2(buildFrom.transform.position.x, buildFrom.transform.position.y);
@@ -262,11 +308,15 @@ public class WebSpawn : MonoBehaviour
                     
                     
                     GameObject edge = (GameObject)Instantiate(webEdge, new Vector3(midpoint.x, midpoint.y, z), Quaternion.Euler(0, 0, angle));
+                    
                     edge.transform.localScale = new Vector3(length, 0.1f, 1);
+                    edge.transform.parent = transform;
 
-                    webGraph.AddVertex(newNode);
+                    
                     webGraph.AddAnEdge(newNode, buildFrom);
                     building = false;
+                    edge.GetComponent<WebEdge>().SetNodes(newNode, buildFrom);
+                    buildFromEdge = false;
                 }
                 
             }
@@ -278,6 +328,21 @@ public class WebSpawn : MonoBehaviour
     void FixedUpdate() {
         if (cooldown > 0) {
             cooldown--;
+        }
+        if (building) {
+            buildEdge.SetActive(true);
+            Vector2 n1 = new Vector2(webSpawnPoint.position.x, webSpawnPoint.position.y);
+            Vector2 n2 = new Vector2(buildFrom.transform.position.x, buildFrom.transform.position.y);
+            float z = buildFrom.transform.position.z;
+            Vector2 midpoint = (n1 + n2) / 2;
+            float length = Vector2.Distance(n1, n2);
+        
+            float angle = Mathf.Atan2(n1.y - n2.y, n1.x - n2.x) * (180 / Mathf.PI);
+            buildEdge.transform.position = new Vector3(midpoint.x, midpoint.y, z);
+            buildEdge.transform.localScale = new Vector3(length, 0.1f, 1);
+            buildEdge.transform.rotation = Quaternion.Euler(0, 0, angle);
+        } else {
+            buildEdge.SetActive(false);
         }
     }
 
