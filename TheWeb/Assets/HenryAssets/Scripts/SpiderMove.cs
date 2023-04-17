@@ -30,6 +30,7 @@ public class SpiderMove : NetworkBehaviour
 
     void Update()
     {
+        Debug.Log(transform.GetChild(2).gameObject.tag);
         if (!IsSpider()) {
             return;
         }
@@ -89,7 +90,7 @@ public class SpiderMove : NetworkBehaviour
             webEdge = other.gameObject;
             onEdge = true;
             closestPosOnEdge = other.ClosestPoint(new Vector2(transform.GetChild(2).position.x, transform.GetChild(2).position.y));
-            Debug.Log(transform.GetChild(2).position);
+            
         }
         if (other.gameObject.tag == "web_node") {
             onNode = true;

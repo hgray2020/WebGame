@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 
 public class Graph
@@ -219,30 +220,35 @@ public class WebSpawn : MonoBehaviour
     private int cooldownMax = 30;
     private int cooldown = 0;
     [SerializeField]private GameObject node;
-    [SerializeField]private GameObject spider;
+    public GameObject spider;
     [SerializeField]private GameObject webEdge;
-    [SerializeField]private GameObject buildEdge;
-    [SerializeField]private Transform webSpawnPoint;
+    [SerializeField]private GameObject buildEdgeFab;
+    private GameObject buildEdge;
+    public Transform webSpawnPoint;
+    public bool initialized = false;
     private Vector3 closestPoint;
-    private SpiderMove sm;
+    public SpiderMove sm;
     private bool building = false;
     private GameObject buildFrom;
     private bool buildFromEdge = true;
     void Start()
     {
         webGraph = new Graph();
-        sm = spider.GetComponent<SpiderMove>();
+        buildEdge = (GameObject)Instantiate(buildEdgeFab, transform.position, Quaternion.identity);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (!initialized) {
+            return;
+        }
         
         if (Input.GetKey(KeyCode.B) && cooldown == 0) {
             cooldown = cooldownMax;
             if (webGraph.IsEmpty()) {
                 GameObject newNode = (GameObject)Instantiate(node, spider.transform.position, Quaternion.identity);
+                newNode.GetComponent<NetworkObject>().Spawn(true);
                 webGraph.AddVertex(newNode);
                 newNode.transform.parent = transform;
             } else {
@@ -259,6 +265,7 @@ public class WebSpawn : MonoBehaviour
                             buildFromEdge = true;
                             closestPoint = new Vector3(sm.closestPos().x, sm.closestPos().y, transform.position.z);
                             GameObject newNode = (GameObject)Instantiate(node, closestPoint, Quaternion.identity);
+                            newNode.GetComponent<NetworkObject>().Spawn(true);
                             newNode.transform.parent = transform;
                             webGraph.AddVertex(newNode);
                             buildFrom = newNode;
@@ -276,6 +283,7 @@ public class WebSpawn : MonoBehaviour
                     GameObject newNode = null;
                     if (!sm.isOnWebNode()) {
                         newNode = (GameObject)Instantiate(node, webSpawnPoint.position, Quaternion.identity);
+                        newNode.GetComponent<NetworkObject>().Spawn(true);
                         newNode.transform.parent = transform;
                         webGraph.AddVertex(newNode);
                         if (sm.isOnWebEdge()) {
@@ -308,7 +316,7 @@ public class WebSpawn : MonoBehaviour
                     
                     
                     GameObject edge = (GameObject)Instantiate(webEdge, new Vector3(midpoint.x, midpoint.y, z), Quaternion.Euler(0, 0, angle));
-                    
+                    edge.GetComponent<NetworkObject>().Spawn(true);
                     edge.transform.localScale = new Vector3(length, 0.1f, 1);
                     edge.transform.parent = transform;
 
@@ -326,6 +334,9 @@ public class WebSpawn : MonoBehaviour
     }
 
     void FixedUpdate() {
+        if (!initialized) {
+            return;
+        }
         if (cooldown > 0) {
             cooldown--;
         }
