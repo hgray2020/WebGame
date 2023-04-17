@@ -24,6 +24,8 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private Button exitMainControlsButton;
     [SerializeField]private Button exitButton;
     [SerializeField]private Button backCreditsButton;
+    [SerializeField]private Button joinButton;
+    [SerializeField]private Button joinBackButton;
     [SerializeField]private Button resumeButton;
     [SerializeField]private Button exitPauseButton;
     [SerializeField]private Button controlsButton;
@@ -40,6 +42,7 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private Button backInventoryLayoutButton;
     [SerializeField]private InputField joinField;
     [SerializeField]private GameObject hostCode;
+    [SerializeField]private GameObject clientUI;
     [SerializeField]private GameObject mainMenu;
     [SerializeField]private GameObject pauseMenu;
     [SerializeField]private GameObject creditsMenu;
@@ -104,6 +107,8 @@ public class NetworkManagerUI : NetworkBehaviour
         nextInventoryButton.onClick.AddListener(InventoryLayout_Spider);
         backInventoryButton.onClick.AddListener(Build);
         backInventoryLayoutButton.onClick.AddListener(Inventory_Spider);
+        joinButton.onClick.AddListener(Client);
+        joinBackButton.onClick.AddListener(StartGame);
 
         networkMenu.gameObject.SetActive(false);
         hostCode.gameObject.SetActive(false);
@@ -171,6 +176,7 @@ public class NetworkManagerUI : NetworkBehaviour
         spider_inventoryUI.gameObject.SetActive(false);
         spider_inventoryLayoutUI.gameObject.SetActive(false);
         exitMainControlsButton.gameObject.SetActive(false);
+        clientUI.gameObject.SetActive(false);
 
         pauseActive = false;
 
@@ -188,10 +194,17 @@ public class NetworkManagerUI : NetworkBehaviour
     public void StartGame() {
         mainMenu.gameObject.SetActive(false);
         mainMenu.transform.localScale = Vector2.zero;
+        clientUI.gameObject.SetActive(false);
 
         hostCode.gameObject.SetActive(true);
         networkMenu.gameObject.SetActive(true);
         LeanTween.scale(networkMenu, networkMenu_startScale, tweenTime).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
+    }
+
+    public void Client() {
+        hostCode.gameObject.SetActive(false);
+        networkMenu.gameObject.SetActive(false);
+        clientUI.gameObject.SetActive(true);
     }
 
     public void MainControls() {
