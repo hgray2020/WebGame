@@ -19,6 +19,9 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private Button backButton;
     [SerializeField]private Button playButton;
     [SerializeField]private Button creditsButton;
+    [SerializeField]private Button mainControlsButton;
+    [SerializeField]private Button spiderControlsButton;
+    [SerializeField]private Button exitMainControlsButton;
     [SerializeField]private Button exitButton;
     [SerializeField]private Button backCreditsButton;
     [SerializeField]private Button resumeButton;
@@ -43,6 +46,7 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private GameObject networkMenu;
     [SerializeField]private GameObject spiderUI;
     [SerializeField]private GameObject antUI;
+    [SerializeField]private GameObject controlsMenu;
     [SerializeField]private GameObject spider_movementUI;
     [SerializeField]private GameObject spider_rotationUI;
     [SerializeField]private GameObject spider_shootUI;
@@ -79,6 +83,9 @@ public class NetworkManagerUI : NetworkBehaviour
         clientButton.onClick.AddListener(JoinRelay);
         backButton.onClick.AddListener(MainMenu);
         playButton.onClick.AddListener(StartGame);
+        mainControlsButton.onClick.AddListener(Controls);
+        spiderControlsButton.onClick.AddListener(Movement);
+        exitMainControlsButton.onClick.AddListener(MainMenu);
         creditsButton.onClick.AddListener(Credits);
         backCreditsButton.onClick.AddListener(MainMenu);
         exitButton.onClick.AddListener(QuitGame);
@@ -89,7 +96,7 @@ public class NetworkManagerUI : NetworkBehaviour
         exitControlsButton.onClick.AddListener(Pause);
         nextMovementButton.onClick.AddListener(Rotation);
         nextRotationButton.onClick.AddListener(Shoot);
-        backRotationButton.onClick.AddListener(Controls);
+        backRotationButton.onClick.AddListener(Movement);
         nextShootButton.onClick.AddListener(Build);
         backShootButton.onClick.AddListener(Rotation);
         nextBuildButton.onClick.AddListener(Inventory_Spider);
@@ -111,6 +118,8 @@ public class NetworkManagerUI : NetworkBehaviour
         spider_buildUI.gameObject.SetActive(false);
         spider_inventoryUI.gameObject.SetActive(false);
         spider_inventoryLayoutUI.gameObject.SetActive(false);
+        controlsMenu.gameObject.SetActive(false);
+        exitMainControlsButton.gameObject.SetActive(false);
         mainMenu.gameObject.SetActive(true);
 
         GameisPaused = false;
@@ -154,6 +163,15 @@ public class NetworkManagerUI : NetworkBehaviour
         pauseMenu.transform.localScale = Vector2.zero;
         spiderUI.gameObject.SetActive(false);
         antUI.gameObject.SetActive(false);
+        controlsMenu.gameObject.SetActive(false);
+        spider_movementUI.gameObject.SetActive(false);
+        spider_rotationUI.gameObject.SetActive(false);
+        spider_shootUI.gameObject.SetActive(false);
+        spider_buildUI.gameObject.SetActive(false);
+        spider_inventoryUI.gameObject.SetActive(false);
+        spider_inventoryLayoutUI.gameObject.SetActive(false);
+        exitMainControlsButton.gameObject.SetActive(false);
+
         pauseActive = false;
 
         mainMenu.gameObject.SetActive(true);
@@ -174,6 +192,14 @@ public class NetworkManagerUI : NetworkBehaviour
         hostCode.gameObject.SetActive(true);
         networkMenu.gameObject.SetActive(true);
         LeanTween.scale(networkMenu, networkMenu_startScale, tweenTime).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
+    }
+
+    public void MainControls() {
+        mainMenu.gameObject.SetActive(false);
+        mainMenu.transform.localScale = Vector2.zero;
+
+        controlsMenu.gameObject.SetActive(true);
+        exitMainControlsButton.gameObject.SetActive(true);
     }
 
     public void Credits() {
@@ -225,13 +251,23 @@ public class NetworkManagerUI : NetworkBehaviour
     }
 
     public void Controls() {
-        if (IsHost) {
-            spider_movementUI.gameObject.SetActive(true);
-            exitControlsButton.gameObject.SetActive(true);
-            spider_rotationUI.gameObject.SetActive(false);
-        }
         pauseMenu.gameObject.SetActive(false);
         pauseMenu.transform.localScale = Vector2.zero;
+
+        if (IsHost) {
+            Movement();
+        } else {
+            MainControls();
+        }
+    }
+
+    public void Movement() {
+        controlsMenu.gameObject.SetActive(false);
+        spider_movementUI.gameObject.SetActive(true);
+        if (GameisPaused) {
+            exitControlsButton.gameObject.SetActive(true);
+        }
+        spider_rotationUI.gameObject.SetActive(false);
     }
 
     public void Rotation() {
