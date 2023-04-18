@@ -9,6 +9,7 @@ public class GameHandler : MonoBehaviour {
 
         public static bool GameisPaused = false;
         public GameObject pauseMenuUI;
+        public GameObject antSpawn;
 
         void Start (){
                 pauseMenuUI.SetActive(false);
@@ -23,6 +24,11 @@ public class GameHandler : MonoBehaviour {
                         else{
                                 Pause();
                         }
+                }
+                if(Input.GetMouseButtonDown(0)) {
+                        Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                        Vector3 offset = new Vector3(0, 0, 10);
+                        Instantiate(antSpawn, position + offset, Quaternion.identity);
                 }
         }
 

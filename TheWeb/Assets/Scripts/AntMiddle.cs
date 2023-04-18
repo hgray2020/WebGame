@@ -8,7 +8,7 @@ public class AntMiddle : MonoBehaviour {
        public Transform[] moveSpots;
        public Transform antNPC;
        private int randomSpot;
-       private string detectionTag = "player";
+//        private string detectionTag = "player";
        
         void Start(){
                 randomSpot = Random.Range(0, moveSpots.Length);
@@ -23,11 +23,11 @@ public class AntMiddle : MonoBehaviour {
         
         }
 
-        private void OnTriggerEnter2D(Collider2D collision) {
-                if (collision.CompareTag(detectionTag))
-                {
-                        //do something in our game
-                }
-        }
+        // private void OnTriggerEnter2D(Collider2D collision) {
+        //         if (collision.CompareTag(detectionTag))
+        //         {
+        //                 //do something in our game
+        //         }
+        // }
      
 }
