@@ -7534,7 +7534,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Spawing:
 
-    Select spawn placement with cursor'
+    Select spawn placement with cursor on a tree hole'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bdef2d5318ea94ddd97f6d9613cfd41c, type: 2}
   m_sharedMaterial: {fileID: -6102284582795134672, guid: bdef2d5318ea94ddd97f6d9613cfd41c, type: 2}

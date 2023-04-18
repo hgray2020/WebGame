@@ -21,6 +21,7 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private Button creditsButton;
     [SerializeField]private Button mainControlsButton;
     [SerializeField]private Button spiderControlsButton;
+    [SerializeField]private Button antControlsButton;
     [SerializeField]private Button exitMainControlsButton;
     [SerializeField]private Button exitButton;
     [SerializeField]private Button backCreditsButton;
@@ -30,6 +31,8 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private Button exitPauseButton;
     [SerializeField]private Button controlsButton;
     [SerializeField]private Button exitControlsButton;
+
+    // Spider UI
     [SerializeField]private Button nextMovementButton;
     [SerializeField]private Button nextRotationButton;
     [SerializeField]private Button backRotationButton;
@@ -44,6 +47,26 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private Button nextInventoryButton;
     [SerializeField]private Button backInventoryButton;
     [SerializeField]private Button backInventoryLayoutButton;
+
+    [SerializeField]private GameObject spider_movementUI;
+    [SerializeField]private GameObject spider_rotationUI;
+    [SerializeField]private GameObject spider_shootUI;
+    [SerializeField]private GameObject spider_InitializeBuildUI;
+    [SerializeField]private GameObject spider_buildUI;
+    [SerializeField]private GameObject spider_ConnectBuildUI;
+    [SerializeField]private GameObject spider_inventoryUI;
+    [SerializeField]private GameObject spider_inventoryLayoutUI;
+
+    // Ant UI
+    [SerializeField]private Button nextSpawnerButton;
+    [SerializeField]private Button nextInventoryAntButton;
+    [SerializeField]private Button backInventoryAntButton;
+    [SerializeField]private Button backInventoryAntLayoutButton;
+
+    [SerializeField]private GameObject ant_spawnerUI;
+    [SerializeField]private GameObject ant_inventoryUI;
+    [SerializeField]private GameObject ant_inventoryLayoutUI;
+
     [SerializeField]private InputField joinField;
     [SerializeField]private GameObject hostCode;
     [SerializeField]private GameObject clientUI;
@@ -54,14 +77,6 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private GameObject spiderUI;
     [SerializeField]private GameObject antUI;
     [SerializeField]private GameObject controlsMenu;
-    [SerializeField]private GameObject spider_movementUI;
-    [SerializeField]private GameObject spider_rotationUI;
-    [SerializeField]private GameObject spider_shootUI;
-    [SerializeField]private GameObject spider_InitializeBuildUI;
-    [SerializeField]private GameObject spider_buildUI;
-    [SerializeField]private GameObject spider_ConnectBuildUI;
-    [SerializeField]private GameObject spider_inventoryUI;
-    [SerializeField]private GameObject spider_inventoryLayoutUI;
     [SerializeField]private GameObject spider;
     [SerializeField]private GameObject ant;
     [SerializeField]private Text joinCodeText;
@@ -94,6 +109,7 @@ public class NetworkManagerUI : NetworkBehaviour
         playButton.onClick.AddListener(StartGame);
         mainControlsButton.onClick.AddListener(Controls);
         spiderControlsButton.onClick.AddListener(Movement);
+        antControlsButton.onClick.AddListener(Spawner);
         exitMainControlsButton.onClick.AddListener(MainMenu);
         creditsButton.onClick.AddListener(Credits);
         backCreditsButton.onClick.AddListener(MainMenu);
@@ -122,6 +138,12 @@ public class NetworkManagerUI : NetworkBehaviour
         joinButton.onClick.AddListener(Client);
         joinBackButton.onClick.AddListener(StartGame);
 
+        // Ant Control Scenes
+        nextSpawnerButton.onClick.AddListener(Inventory_Ant);
+        nextInventoryAntButton.onClick.AddListener(InventoryLayout_Ant);
+        backInventoryAntButton.onClick.AddListener(Spawner);
+        backInventoryAntLayoutButton.onClick.AddListener(Inventory_Ant);
+
         networkMenu.gameObject.SetActive(false);
         hostCode.gameObject.SetActive(false);
         pauseButton.gameObject.SetActive(false);
@@ -139,6 +161,11 @@ public class NetworkManagerUI : NetworkBehaviour
         spider_ConnectBuildUI.gameObject.SetActive(false);
         spider_inventoryUI.gameObject.SetActive(false);
         spider_inventoryLayoutUI.gameObject.SetActive(false);
+
+        // Ant UI
+        ant_spawnerUI.gameObject.SetActive(false);
+        ant_inventoryUI.gameObject.SetActive(false);
+        ant_inventoryLayoutUI.gameObject.SetActive(false);
 
         controlsMenu.gameObject.SetActive(false);
         exitMainControlsButton.gameObject.SetActive(false);
@@ -198,6 +225,11 @@ public class NetworkManagerUI : NetworkBehaviour
         spider_inventoryLayoutUI.gameObject.SetActive(false);
         exitMainControlsButton.gameObject.SetActive(false);
         clientUI.gameObject.SetActive(false);
+
+        // Ant UI
+        ant_spawnerUI.gameObject.SetActive(false);
+        ant_inventoryUI.gameObject.SetActive(false);
+        ant_inventoryLayoutUI.gameObject.SetActive(false);
 
         pauseActive = false;
 
@@ -270,6 +302,11 @@ public class NetworkManagerUI : NetworkBehaviour
         spider_inventoryLayoutUI.gameObject.SetActive(false);
         exitControlsButton.gameObject.SetActive(false);
 
+        //Ant UI
+        ant_spawnerUI.gameObject.SetActive(false);
+        ant_inventoryUI.gameObject.SetActive(false);
+        ant_inventoryLayoutUI.gameObject.SetActive(false);
+
         Time.timeScale = 0f;
         GameisPaused = true;
     }
@@ -294,8 +331,10 @@ public class NetworkManagerUI : NetworkBehaviour
 
         if (IsHost) {
             Movement();
-        } else {
+        } else if (!GameisPaused) {
             MainControls();
+        } else {
+            Spawner();
         }
     }
 
@@ -349,6 +388,26 @@ public class NetworkManagerUI : NetworkBehaviour
         spider_inventoryLayoutUI.gameObject.SetActive(true);
     }
 
+    public void Spawner() {
+        controlsMenu.gameObject.SetActive(false);
+        ant_spawnerUI.gameObject.SetActive(true);
+        if (GameisPaused) {
+            exitControlsButton.gameObject.SetActive(true);
+        }
+        ant_inventoryUI.gameObject.SetActive(false);
+    }
+
+    public void Inventory_Ant() {
+        ant_spawnerUI.gameObject.SetActive(false);
+        ant_inventoryUI.gameObject.SetActive(true);
+        ant_inventoryLayoutUI.gameObject.SetActive(false);
+    }
+
+    public void InventoryLayout_Ant() {
+        ant_inventoryUI.gameObject.SetActive(false);
+        ant_inventoryLayoutUI.gameObject.SetActive(true);
+    }
+
     private async void CreateRelay() {
         try {
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(1);
@@ -384,6 +443,7 @@ public class NetworkManagerUI : NetworkBehaviour
 
             networkMenu.gameObject.SetActive(false);
             networkMenu.transform.localScale = Vector2.zero;
+            clientUI.gameObject.SetActive(false);
             pauseButton.gameObject.SetActive(true);
             antUI.gameObject.SetActive(true);
         } catch (RelayServiceException e) {
