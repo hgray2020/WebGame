@@ -8,6 +8,8 @@ TagManager:
   - web_node
   - web_edge
   - webby
+  - egg
+  - ant
   layers:
   - Default
   - TransparentFX
