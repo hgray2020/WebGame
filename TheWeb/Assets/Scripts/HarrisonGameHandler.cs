@@ -8,6 +8,11 @@ public class HarrisonGameHandler : MonoBehaviour
 
     public GameObject [] eggs;
 
+    public GameObject CameraShaker;
+
+    public float durationTime = 0.15f;
+    public float magnitude = 0.3f;
+
     void Start(){
         foreach(GameObject egg in eggs) {
             egg.SetActive(false);
@@ -40,9 +45,9 @@ public class HarrisonGameHandler : MonoBehaviour
             // playerDies();
         }
 
-        // if (damage > 0){
-        // player.GetComponent<PlayerHurt>().playerHit();       //play GetHit animation
-        // }
+        if (damage > 0){
+            CameraShaker.GetComponent<CameraShake>().ShakeCamera(durationTime, magnitude);
+        }
     }
 
     // public void playerDies(){
