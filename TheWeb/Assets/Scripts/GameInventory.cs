@@ -3,9 +3,23 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
+// public class InventoryItem {
+//       public GameObject image { get; set; }
+//       public int amount { get; set; }
+//       public int price { get; set; }
+//       public GameObject bg { get; set; }
+
+//       public InventoryItem() {
+            
+//       }
+
+// }
+
 public class GameInventory : MonoBehaviour {
       public GameObject InventoryMenu;
       public bool InvIsOpen = true;
+      
+      // private InventoryItem[] items; 
 
       //5 Inventory Items:
       public static bool item1bool = false;
@@ -49,7 +63,7 @@ public class GameInventory : MonoBehaviour {
       public Text item4Text_price;
 
       public string coin;
-      string selected;
+      int selected;
  
       void Start(){
             InventoryMenu.SetActive(true);
@@ -61,22 +75,22 @@ public class GameInventory : MonoBehaviour {
       void Update(){
             if (Input.GetKeyDown("1")) { 
                   item1bg.GetComponent<Image>().color = new Color (0, 0, 0, 1);
-                  selected = "item1";
+                  selected = 0;
                   ChangeAllColor(selected);
             }
             if (Input.GetKeyDown("2")) { 
                   item2bg.GetComponent<Image>().color = new Color (0, 0, 0, 1);
-                  selected = "item2";
+                  selected = 1;
                   ChangeAllColor(selected);
             }
             if (Input.GetKeyDown("3")) { 
                   item3bg.GetComponent<Image>().color = new Color (0, 0, 0, 1);
-                  selected = "item3";
+                  selected = 2;
                   ChangeAllColor(selected);
             }
             if (Input.GetKeyDown("4")) { 
                   item4bg.GetComponent<Image>().color = new Color (0, 0, 0, 1);
-                  selected = "item4";
+                  selected = 3;
                   ChangeAllColor(selected);
             }
       }
@@ -116,24 +130,24 @@ public class GameInventory : MonoBehaviour {
             item4Text_priceB.text = ("" + item4price);
       }
 
-      public void InventoryAdd(string item){
-            string foundItemName = item;
-            if ((foundItemName == "item1") && (coins >= item1price)) {
+      public void InventoryAdd(int item){
+            
+            if ((item == 0) && (coins >= item1price)) {
                   item1bool = true; 
                   item1num ++;
                   CoinChange(0 - item1price);
             }
-            else if ((foundItemName == "item2") && (coins >= item2price)) {
+            else if ((item == 1) && (coins >= item2price)) {
                   item2bool = true; 
                   item2num ++;
                   CoinChange(0 - item2price);
             }
-            else if ((foundItemName == "item3") && (coins >= item3price)) {
+            else if ((item == 2) && (coins >= item3price)) {
                   item3bool = true; 
                   item3num ++;
                   CoinChange(0 - item3price);
             }
-            else if ((foundItemName == "item4") && (coins >= item4price)) {
+            else if ((item == 3) && (coins >= item4price)) {
                   item4bool = true; 
                   item4num ++;
                   CoinChange(0 - item4price);
@@ -146,24 +160,23 @@ public class GameInventory : MonoBehaviour {
             }
       }
 
-      public void InventoryRemove(string item, int num){
-            string itemRemove = item;
-            if (itemRemove == "item1") {
+      public void InventoryRemove(int item, int num){
+            if (item == 0) {
                   item1num -= num;
                   if (item1num <= 0) { item1bool =false; }
                   // Add any other intended effects: new item crafted, speed boost, slow time, etc
              }
-            else if (itemRemove == "item2") {
+            else if (item == 1) {
                   item2num -= num;
                   if (item2num <= 0) { item2bool =false; }
                   // Add any other intended effects
              }
-            else if (itemRemove == "item3") {
+            else if (item == 2) {
                   item3num -= num;
                   if (item3num <= 0) { item3bool =false; }
                     // Add any other intended effects
             }
-            else if (itemRemove == "item4") {
+            else if (item == 3) {
                   item4num -= num;
                   if (item4num <= 0) { item4bool =false; }
                     // Add any other intended effects
@@ -197,19 +210,23 @@ public class GameInventory : MonoBehaviour {
             item4num = 0; // object name
       }
 
-      void ChangeAllColor(string item) {
-            if (item != "item1") {
+      void ChangeAllColor(int item) {
+            if (item != 0) {
                   item1bg.GetComponent<Image>().color = new Color (1, 1, 1, 1);
             }
-            if (item != "item2") {
+            if (item != 1) {
                   item2bg.GetComponent<Image>().color = new Color (1, 1, 1, 1);
             }
-            if (item != "item3") {
+            if (item != 2) {
                   item3bg.GetComponent<Image>().color = new Color (1, 1, 1, 1);
             }
-            if (item != "item4") {
+            if (item != 3) {
                   item4bg.GetComponent<Image>().color = new Color (1, 1, 1, 1);
             }
+      }
+      
+      public int GetSelected() {
+            return selected;
       }
 
 }

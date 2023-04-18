@@ -26,9 +26,7 @@ public class PlayerSpawner : NetworkBehaviour
             
 
         } else {
-            Debug.Log("Ant");
             SpawnServerRpc();
-            
         } 
         
         
@@ -40,7 +38,6 @@ public class PlayerSpawner : NetworkBehaviour
         Debug.Log("test");
         spawned = (GameObject)Instantiate(objs[1]);
         spawned.GetComponent<NetworkObject>().SpawnWithOwnership(1);
-       
 
     }
 

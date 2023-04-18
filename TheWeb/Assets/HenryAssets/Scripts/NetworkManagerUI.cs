@@ -188,7 +188,6 @@ public class NetworkManagerUI : NetworkBehaviour
 
     public void Update() {
         clientCode = joinField.text;
-        Debug.Log("!" + clientCode + "!");
 
         if (Input.GetKeyDown(KeyCode.Escape) && (pauseActive)){
             if (GameisPaused){

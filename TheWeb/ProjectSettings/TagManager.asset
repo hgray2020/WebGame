@@ -10,6 +10,8 @@ TagManager:
   - webby
   - egg
   - ant
+  - spawnbox
+  - ant_inv
   layers:
   - Default
   - TransparentFX

@@ -30,7 +30,6 @@ public class SpiderMove : NetworkBehaviour
 
     void Update()
     {
-        Debug.Log(transform.GetChild(2).gameObject.tag);
         if (!IsSpider()) {
             return;
         }
