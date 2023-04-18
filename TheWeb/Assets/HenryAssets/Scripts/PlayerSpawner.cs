@@ -15,6 +15,7 @@ public class PlayerSpawner : NetworkBehaviour
             Debug.Log("Spider");
             spawned = (GameObject)Instantiate(objs[0]);
             spawned.GetComponent<NetworkObject>().Spawn(true);
+            
             GameObject webspawned = (GameObject)Instantiate(objs[2]);
             WebSpawn ws = webspawned.GetComponent<WebSpawn>();
             ws.spider = spawned;
@@ -22,6 +23,9 @@ public class PlayerSpawner : NetworkBehaviour
             ws.webSpawnPoint = ws.spider.transform.GetChild(2);
             ws.initialized = true;
             webspawned.GetComponent<NetworkObject>().Spawn(true);
+            spawned = (GameObject)Instantiate(objs[3]);
+            spawned.GetComponent<NetworkObject>().Spawn(true);
+
 
             
 

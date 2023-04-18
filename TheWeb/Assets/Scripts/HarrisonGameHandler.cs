@@ -8,7 +8,7 @@ public class HarrisonGameHandler : MonoBehaviour
 
     public GameObject [] eggs;
 
-    public GameObject CameraShaker;
+    // public GameObject CameraShaker;
 
     public float durationTime = 0.15f;
     public float magnitude = 0.3f;
@@ -46,7 +46,7 @@ public class HarrisonGameHandler : MonoBehaviour
         }
 
         if (damage > 0){
-            CameraShaker.GetComponent<CameraShake>().ShakeCamera(durationTime, magnitude);
+            // CameraShaker.GetComponent<CameraShake>().ShakeCamera(durationTime, magnitude);
         }
     }
 

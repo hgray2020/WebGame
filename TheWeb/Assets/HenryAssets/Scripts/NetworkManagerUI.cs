@@ -80,6 +80,7 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private GameObject spider;
     [SerializeField]private GameObject ant;
     [SerializeField]private Text joinCodeText;
+    
     private string clientCode;
 
     public static bool GameisPaused = false;

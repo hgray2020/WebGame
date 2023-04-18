@@ -6,6 +6,7 @@ using Unity.Netcode;
 public class AntMove : NetworkBehaviour
 {
     public float moveSpeed = 5;
+    private float speed;
     private Rigidbody2D rb;
     private Vector3 moveDirection;
     private Vector3 mouseScreenPos;
@@ -13,11 +14,14 @@ public class AntMove : NetworkBehaviour
     private Vector3 relPos;
     private Vector2 moveX, moveY;
     private Vector2 rotatedMove;
+    private bool offNode = true;
+    private bool offEdge = true;
     float mouseAng;
 
     void Start(){
         var anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        speed = moveSpeed;
     }
 
     void Update()
@@ -25,35 +29,22 @@ public class AntMove : NetworkBehaviour
         if (!IsAnt()) {
             return;
         }
-        ProcessInputs();
-    }
-    
-    void FixedUpdate()
-    {
-        if (!IsAnt()) {
+        GameObject eggs = GameObject.FindWithTag("egg");
+        if (eggs == null) {
             return;
         }
-        Move();
+        transform.position = Vector2.MoveTowards(transform.position, eggs.transform.position, speed * Time.deltaTime);
+        Debug.Log(offEdge +", " + offNode);
+        if (offEdge && offNode) {
+            speed = moveSpeed;
+        }
     }
+    
+    
 
        
     
-    void ProcessInputs()
-    {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
-        
-        moveDirection = new Vector2(moveX, moveY);
-        if (moveDirection.magnitude > 1 ) {
-            moveDirection = moveDirection.normalized;
-        }
-    }
     
-    void Move()
-    {
-        // MoveServerRpc(moveDirection * moveSpeed);
-        rb.velocity = moveDirection * moveSpeed;
-    }
 
     bool IsAnt() {
         return !IsHost;
@@ -64,4 +55,30 @@ public class AntMove : NetworkBehaviour
     //     Debug.Log(move);
     //     rb.velocity = move;
     // }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.tag == "egg") {
+            other.gameObject.BroadcastMessage("eggsGetHit", 5);
+            Destroy(gameObject);
+        }
+        if (other.tag == "web_edge" || other.tag == "web_node") {
+            speed = moveSpeed * 0.5f;
+            if (other.tag == "web_edge") {
+                offEdge = false;
+            }
+            if (other.tag == "web_node") {
+                offNode = false;
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if (other.tag == "web_edge") {
+            offNode = true;
+        }
+        if (other.tag == "web_node") {
+            offNode = true;
+        }
+    }
+
 }
