@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 6300813738351079838}
   - component: {fileID: 8432408268649089780}
   - component: {fileID: 2917278279226615162}
+  - component: {fileID: 3851440953954992063}
   m_Layer: 0
   m_Name: AntDummy
   m_TagString: Untagged
@@ -239,3 +240,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3851440953954992063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8445977487070642808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aee7bee9547e4d14a2e00d2f9b4fc79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  currHealth: 0
