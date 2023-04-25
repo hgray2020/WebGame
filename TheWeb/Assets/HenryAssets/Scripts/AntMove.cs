@@ -60,6 +60,7 @@ public class AntMove : NetworkBehaviour
         if (other.tag == "egg") {
             other.gameObject.BroadcastMessage("eggsGetHit", 5);
             Destroy(gameObject);
+            this.GetComponent<NetworkObject>().Despawn();
         }
         if (other.tag == "web_edge" || other.tag == "web_node") {
             speed = moveSpeed * 0.5f;

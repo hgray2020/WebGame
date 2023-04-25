@@ -18,22 +18,19 @@ public class Projectile : NetworkBehaviour
         Debug.Log(screenPos);
         if (screenPos.x < -50 || screenPos.x > Screen.width + 50 || screenPos.y < -50 || screenPos.y > Screen.height + 50) {
             Destroy(this.gameObject);
+            this.GetComponent<NetworkObject>().Despawn();
         }
     }
 
-     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.tag != "projectile") {
+     private void OnColliderEnter2D(Collider2D collision) {
+        if (collision.gameObject.tag != "projectile") {
             gameObject.transform.parent = collision.gameObject.transform;
-            Destroy(GetComponent<Rigidbody>());
-            GetComponent<CircleCollider2D>().enabled = false;
+            Destroy(this.gameObject);
+            this.GetComponent<NetworkObject>().Despawn();
         }
 
-        if (collision.tag == "Ant_Player") {
-            var healthComponent = collision.GetComponent<AntHealth>();
-            if(healthComponent != null) {
-                healthComponent.TakeDamage(1);
-                print("took 1 ant health");
-            }
+        if (collision.gameObject.tag == "ant") {
+           collision.gameObject.BroadcastMessage("TakeDamage", 1);
         }
     }
 }

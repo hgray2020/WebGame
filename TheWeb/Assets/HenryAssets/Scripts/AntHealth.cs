@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class AntHealth : MonoBehaviour
+public class AntHealth : NetworkBehaviour
 {
     public int maxHealth = 5;
     public int currHealth;
@@ -15,10 +16,10 @@ public class AntHealth : MonoBehaviour
     public void TakeDamage(int amount)
     {
         currHealth -= amount;
-        print("health decrmented");
+        Debug.Log("health decremented");
         if (currHealth <= 0) {
-            print("health fully depleted");
             Destroy(gameObject);
+            this.GetComponent<NetworkObject>().Despawn();
         }
     }
 
