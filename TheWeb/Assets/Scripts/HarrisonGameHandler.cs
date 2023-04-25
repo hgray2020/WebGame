@@ -24,8 +24,9 @@ public class HarrisonGameHandler : NetworkBehaviour
         eggHealth.Value = maxHealth;
         foreach(GameObject egg in eggs) {
             egg.SetActive(false);
-            UIeggs.SetActive(true);
+            
         }
+        
         
         eggs[0].SetActive(true);
     }
@@ -43,7 +44,6 @@ public class HarrisonGameHandler : NetworkBehaviour
     }
 
     public void eggsGetHit(int damage){
-        
         EggHitServerRpc(damage);
        
         
@@ -68,7 +68,10 @@ public class HarrisonGameHandler : NetworkBehaviour
             egg.SetActive(false);
         }
         eggs[percentile].SetActive(true);
-        UIeggs[percentile].SetActive(false);
+        for (int i = numEggs - 1; i > numEggs - percentile - 1; i--) {
+            UIeggs[i].SetActive(false);
+        }
+        
         
     }
 

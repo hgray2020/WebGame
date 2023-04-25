@@ -18,14 +18,32 @@ public class AntMove : NetworkBehaviour
     private bool offEdge = true;
     public bool isFlying = false;
     public bool isFire = false;
+    public bool isSoldier = false;
+    public bool isNormal = false;
+    private int type;
+    public int[] damages = {1, 3, 8, 2};
+    public float[] moveSpeeds = {2, 0.8, 0.4, 1};
+    private int damage;
     float mouseAng;
+    private float baseScale;
 
     SpriteRenderer web;
 
     void Start(){
+        if (isFlying) {
+            type = 0;
+        } else if (isFire) {
+            type = 1;
+        } else if (isSoldier) {
+            type = 2;
+        } else if (isNormal) {
+            type = 3;
+        }
         var anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        speed = moveSpeed;
+        speed = moveSpeeds[type];
+        damage = damages[type];
+        baseScale = transform.localScale.x;
     }
 
     void Update()
@@ -33,14 +51,19 @@ public class AntMove : NetworkBehaviour
         if (!IsAnt()) {
             return;
         }
+        Debug.Log(offEdge + ", " + offNode);
         GameObject eggs = GameObject.FindWithTag("egg");
         if (eggs == null) {
             return;
         }
         transform.position = Vector2.MoveTowards(transform.position, eggs.transform.position, speed * Time.deltaTime);
         if (offEdge && offNode) {
-            speed = moveSpeed;
+            speed = moveSpeeds[type];
         }
+        float mag = transform.position.x -  eggs.transform.position.x;
+        float xdif = mag / Mathf.Abs(mag);
+
+        transform.localScale = new Vector3(baseScale * xdif, transform.localScale.y, transform.localScale.z);
     }
 
     bool IsAnt() {
@@ -55,12 +78,12 @@ public class AntMove : NetworkBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "egg") {
-            other.gameObject.BroadcastMessage("eggsGetHit", 5);
+            other.gameObject.BroadcastMessage("eggsGetHit", damage);
             DespawnServerRpc();
         }
         if (!isFlying) {
             if (other.tag == "web_edge" || other.tag == "web_node") {
-                speed = moveSpeed * 0.5f;
+                speed = moveSpeeds[type] * 0.5f;
                 if (other.tag == "web_edge") {
                     offEdge = false;
                 }
@@ -97,7 +120,7 @@ public class AntMove : NetworkBehaviour
             offNode = true;
         }
 
-        if (isFire) {
+        if (isFire && (other.tag == "web_edge" || other.tag == "web_node")) {
             Destroy(other.gameObject);
         }
     }
