@@ -19,8 +19,8 @@ public class AntHealth : NetworkBehaviour
         StartCoroutine("Hurt");
         Debug.Log("health decremented");
         if (currHealth <= 0) {
-            Destroy(gameObject);
-            this.GetComponent<NetworkObject>().Despawn();
+
+            gameObject.GetComponent<NetworkObject>().Despawn();
         }
     }
 

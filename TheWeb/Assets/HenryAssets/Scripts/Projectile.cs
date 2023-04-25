@@ -14,11 +14,11 @@ public class Projectile : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(IsHost);
         Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
-        Debug.Log(screenPos);
-        if (screenPos.x < -50 || screenPos.x > Screen.width + 50 || screenPos.y < -50 || screenPos.y > Screen.height + 50) {
+        if (screenPos.x < -150 || screenPos.x > Screen.width + 150 || screenPos.y < -150 || screenPos.y > Screen.height + 150) {
             Destroy(this.gameObject);
-            this.GetComponent<NetworkObject>().Despawn();
+            gameObject.GetComponent<NetworkObject>().Despawn();
         }
     }
 
@@ -26,7 +26,7 @@ public class Projectile : NetworkBehaviour
         if (collision.gameObject.tag != "projectile") {
             gameObject.transform.parent = collision.gameObject.transform;
             Destroy(this.gameObject);
-            this.GetComponent<NetworkObject>().Despawn();
+            gameObject.GetComponent<NetworkObject>().Despawn();
         }
 
         if (collision.gameObject.tag == "ant") {
