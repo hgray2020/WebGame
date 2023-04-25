@@ -16,6 +16,7 @@ public class AntMove : NetworkBehaviour
     private Vector2 rotatedMove;
     private bool offNode = true;
     private bool offEdge = true;
+    public bool isFlying = false;
     float mouseAng;
 
     void Start(){
@@ -34,17 +35,10 @@ public class AntMove : NetworkBehaviour
             return;
         }
         transform.position = Vector2.MoveTowards(transform.position, eggs.transform.position, speed * Time.deltaTime);
-        Debug.Log(offEdge +", " + offNode);
         if (offEdge && offNode) {
             speed = moveSpeed;
         }
     }
-    
-    
-
-       
-    
-    
 
     bool IsAnt() {
         return !IsHost;
@@ -61,15 +55,31 @@ public class AntMove : NetworkBehaviour
             other.gameObject.BroadcastMessage("eggsGetHit", 5);
             DespawnServerRpc();
         }
-        if (other.tag == "web_edge" || other.tag == "web_node") {
-            speed = moveSpeed * 0.5f;
-            if (other.tag == "web_edge") {
-                offEdge = false;
+        if (!isFlying) {
+            if (other.tag == "web_edge" || other.tag == "web_node") {
+                speed = moveSpeed * 0.5f;
+                if (other.tag == "web_edge") {
+                    offEdge = false;
+                }
+                if (other.tag == "web_node") {
+                    offNode = false;
+                }
             }
-            if (other.tag == "web_node") {
-                offNode = false;
+            if (other.tag == "spike") {
+                this.gameObject.BroadcastMessage("takeDamage", 2);
+            }
+            if (other.tag == "slime") {
+                StartCoroutine("Stuck");
             }
         }
+    }
+
+    IEnumerator Stuck() {
+        moveSpeed = 0;
+        transform.GetChild(3).gameObject.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        moveSpeed = 1;
+        transform.GetChild(3).gameObject.SetActive(false);
     }
 
     private void OnTriggerExit2D(Collider2D other) {

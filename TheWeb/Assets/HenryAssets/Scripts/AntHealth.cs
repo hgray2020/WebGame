@@ -13,14 +13,21 @@ public class AntHealth : NetworkBehaviour
         currHealth = maxHealth;
     }
 
-    public void TakeDamage(int amount)
+    public void takeDamage(int amount)
     {
         currHealth -= amount;
+        StartCoroutine("Hurt");
         Debug.Log("health decremented");
         if (currHealth <= 0) {
 
             gameObject.GetComponent<NetworkObject>().Despawn();
         }
+    }
+
+    IEnumerator Hurt() {
+        transform.GetChild(2).gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        transform.GetChild(2).gameObject.SetActive(false);
     }
 
 
