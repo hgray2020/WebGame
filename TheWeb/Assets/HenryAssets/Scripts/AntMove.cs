@@ -22,7 +22,7 @@ public class AntMove : NetworkBehaviour
     public bool isNormal = false;
     private int type;
     public int[] damages = {1, 3, 8, 2};
-    public float[] moveSpeeds = {2, 0.8, 0.4, 1};
+    public float[] moveSpeeds = {2, 0.8f, 0.4f, 1};
     private int damage;
     float mouseAng;
     private float baseScale;
