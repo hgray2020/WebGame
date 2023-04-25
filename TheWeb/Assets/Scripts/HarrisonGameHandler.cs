@@ -8,6 +8,7 @@ public class HarrisonGameHandler : NetworkBehaviour
     public NetworkVariable<int> eggHealth = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     public GameObject [] eggs;
+    public GameObject [] UIeggs;
 
     // public GameObject CameraShaker;
 
@@ -23,6 +24,7 @@ public class HarrisonGameHandler : NetworkBehaviour
         eggHealth.Value = maxHealth;
         foreach(GameObject egg in eggs) {
             egg.SetActive(false);
+            UIeggs.SetActive(true);
         }
         
         eggs[0].SetActive(true);
@@ -66,6 +68,7 @@ public class HarrisonGameHandler : NetworkBehaviour
             egg.SetActive(false);
         }
         eggs[percentile].SetActive(true);
+        UIeggs[percentile].SetActive(false);
         
     }
 

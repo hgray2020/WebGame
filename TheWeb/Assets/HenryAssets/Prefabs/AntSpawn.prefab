@@ -49,6 +49,8 @@ MonoBehaviour:
   init: 0
   ants:
   - {fileID: 8445977487070642808, guid: f0481e11836aaa84ebab36ba493ee15b, type: 3}
+  - {fileID: 1472820131554350292, guid: 8b61590a0b11b49dd925464f8595f005, type: 3}
+  - {fileID: 6416348411949659364, guid: 875fba0334b834e058bcc5bace3dc059, type: 3}
 --- !u!114 &439568236579272643
 MonoBehaviour:
   m_ObjectHideFlags: 0

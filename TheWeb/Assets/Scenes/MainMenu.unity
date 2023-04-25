@@ -26653,7 +26653,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 808ff2e73ab974ed49de01de7e3e4cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eggHealth: 100
+  eggHealth:
+    m_InternalValue: 0
   eggs:
   - {fileID: 741353763}
   - {fileID: 1163566154}
@@ -26663,6 +26664,7 @@ MonoBehaviour:
   - {fileID: 139413953}
   durationTime: 0.15
   magnitude: 0.3
+  maxHealth: 120
 --- !u!1 &2069312289
 GameObject:
   m_ObjectHideFlags: 0
