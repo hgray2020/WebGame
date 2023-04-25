@@ -31,7 +31,7 @@ public class GameInventory : MonoBehaviour {
       public static int item2num = 0;
       public static int item3num = 0;
       public static int item4num = 0;
-      public static int coins = 50;
+      public int coins = 50;
 
       public int item1price = 1;
       public int item2price = 2;

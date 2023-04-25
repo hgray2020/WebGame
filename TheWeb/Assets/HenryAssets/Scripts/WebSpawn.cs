@@ -231,6 +231,8 @@ public class WebSpawn : MonoBehaviour
     private bool building = false;
     private GameObject buildFrom;
     private bool buildFromEdge = true;
+    private GameInventory spiderInv;
+    private bool initInv = false;
     void Start()
     {
         webGraph = new Graph();
@@ -243,10 +245,22 @@ public class WebSpawn : MonoBehaviour
         if (!initialized) {
             return;
         }
+        if (!initInv) {
+            GameObject tmp = GameObject.FindWithTag("spider_inv");
+            if (tmp == null) {
+                return;
+            }
+            initInv = true;
+            spiderInv = tmp.GetComponent<GameInventory>();
+            
+        }
         
-        if (Input.GetKey(KeyCode.B) && cooldown == 0) {
+        if (Input.GetKey(KeyCode.B) && cooldown == 0 && spiderInv.coins > 0) {
+            
             cooldown = cooldownMax;
             if (webGraph.IsEmpty()) {
+                spiderInv.CoinChange(-1);
+                Debug.Log(spiderInv.coins);
                 GameObject newNode = (GameObject)Instantiate(node, spider.transform.position, Quaternion.identity);
                 newNode.GetComponent<NetworkObject>().Spawn(true);
                 webGraph.AddVertex(newNode);
@@ -254,6 +268,7 @@ public class WebSpawn : MonoBehaviour
             } else {
                 if (!building) {
                     if (sm.isOnWebNode() || sm.isOnWebEdge()) {
+                        
                         building = true;
                         if (sm.isOnWebNode()) {
                             buildFrom = sm.currWebNode();
@@ -325,6 +340,7 @@ public class WebSpawn : MonoBehaviour
                     building = false;
                     edge.GetComponent<WebEdge>().SetNodes(newNode, buildFrom);
                     buildFromEdge = false;
+                    spiderInv.CoinChange(-1);
                 }
                 
             }

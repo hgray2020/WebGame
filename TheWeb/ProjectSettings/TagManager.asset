@@ -12,6 +12,7 @@ TagManager:
   - ant
   - spawnbox
   - ant_inv
+  - spider_inv
   layers:
   - Default
   - TransparentFX
