@@ -21,7 +21,7 @@ public class Shooter : NetworkBehaviour
     void FixedUpdate()
     {
         if (!IsHost) {
-            return;
+            // return;
         }
         if (Input.GetKey(shootKey) && reload == 0) {
             reload = reloadCD;

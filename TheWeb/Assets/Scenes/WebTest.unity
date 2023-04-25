@@ -149,7 +149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4098215359170885199, guid: 6b2f316a8331d46caba8472ba0b4c316, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4098215359170885235, guid: 6b2f316a8331d46caba8472ba0b4c316, type: 3}
       propertyPath: m_RootOrder
@@ -549,6 +549,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildEdge
       objectReference: {fileID: 0}
+    - target: {fileID: 2209078523600094983, guid: e0c07f0443a35c648a3d551037f6b289, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0c07f0443a35c648a3d551037f6b289, type: 3}
 --- !u!1001 &5063179380004061183
@@ -620,7 +624,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5063179379495628727, guid: 0bd3c84b1bd66cd47871eda4f0473436, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bd3c84b1bd66cd47871eda4f0473436, type: 3}

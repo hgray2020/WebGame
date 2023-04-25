@@ -12,6 +12,8 @@ TagManager:
   - ant
   - spawnbox
   - ant_inv
+  - spike
+  - slime
   layers:
   - Default
   - TransparentFX
