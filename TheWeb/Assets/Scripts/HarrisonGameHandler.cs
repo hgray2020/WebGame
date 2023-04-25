@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class HarrisonGameHandler : MonoBehaviour
+public class HarrisonGameHandler : NetworkBehaviour
 {
-    public int eggHealth = 100;
+    public NetworkVariable<int> eggHealth = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     public GameObject [] eggs;
 
@@ -12,8 +13,14 @@ public class HarrisonGameHandler : MonoBehaviour
 
     public float durationTime = 0.15f;
     public float magnitude = 0.3f;
+    public int maxHealth = 120;
+    private int healthStep;
+    private int numEggs;
 
     void Start(){
+        numEggs = eggs.Length;
+        healthStep = maxHealth / (numEggs);
+        eggHealth.Value = maxHealth;
         foreach(GameObject egg in eggs) {
             egg.SetActive(false);
         }
@@ -21,34 +28,48 @@ public class HarrisonGameHandler : MonoBehaviour
         eggs[0].SetActive(true);
     }
 
-    public void eggsGetHit(int damage){
-        eggHealth -= damage;
+    [ServerRpc(RequireOwnership = false)]
+    public void DespawnServerRpc() {
+        Debug.Log("despawn rpc (eggs)");
+        transform.parent.gameObject.GetComponent<NetworkObject>().Despawn();
+    }
 
-        if ((eggHealth < 100) && (eggHealth > 80)) {
-            eggs[0].SetActive(false);
-            eggs[1].SetActive(true);
-        } else if ((eggHealth <= 80) && (eggHealth > 60)) {
-            eggs[1].SetActive(false);
-            eggs[2].SetActive(true);
-        } else if ((eggHealth <= 60) && (eggHealth > 40)) {
-            eggs[2].SetActive(false);
-            eggs[3].SetActive(true);                                   
-        } else if ((eggHealth <= 40) && (eggHealth > 20)) {
-            eggs[3].SetActive(false);
-            eggs[4].SetActive(true);
-        } else if ((eggHealth <= 20) && (eggHealth > 10)) {
-            eggs[4].SetActive(false);
-            eggs[5].SetActive(true);
-        } else {
-            eggHealth = 0;
-            eggs[5].SetActive(false);
-            // playerDies();
-        }
+    [ServerRpc(RequireOwnership = false)]
+    public void EggHitServerRpc(int damage) {
+        Debug.Log("hit rpc (eggs)");
+        eggHealth.Value -= damage;
+    }
+
+    public void eggsGetHit(int damage){
+        
+        EggHitServerRpc(damage);
+       
+        
+        
+        
+
+        
 
         if (damage > 0){
             // CameraShaker.GetComponent<CameraShake>().ShakeCamera(durationTime, magnitude);
         }
     }
+
+    public void FixedUpdate() {
+        if (eggHealth.Value <= 0) {
+            Debug.Log("rahh");
+            DespawnServerRpc();
+            return;
+        }
+        int percentile = (numEggs) - (eggHealth.Value / healthStep);
+        foreach(GameObject egg in eggs) {
+            egg.SetActive(false);
+        }
+        eggs[percentile].SetActive(true);
+        
+    }
+
+    
 
     // public void playerDies(){
     //         player.GetComponent<PlayerHurt>().playerDead();       //play Death animation

@@ -50,17 +50,16 @@ public class AntMove : NetworkBehaviour
         return !IsHost;
     }
 
-    // [ServerRpc(RequireOwnership = false)]
-    // public void MoveServerRpc(Vector2 move) {
-    //     Debug.Log(move);
-    //     rb.velocity = move;
-    // }
+    [ServerRpc(RequireOwnership = false)]
+    public void DespawnServerRpc() {
+        Debug.Log("despawn rpc");
+        gameObject.GetComponent<NetworkObject>().Despawn();
+    }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "egg") {
             other.gameObject.BroadcastMessage("eggsGetHit", 5);
-            Destroy(gameObject);
-            this.GetComponent<NetworkObject>().Despawn();
+            DespawnServerRpc();
         }
         if (other.tag == "web_edge" || other.tag == "web_node") {
             speed = moveSpeed * 0.5f;
