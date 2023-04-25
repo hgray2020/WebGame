@@ -31,6 +31,8 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private Button exitPauseButton;
     [SerializeField]private Button controlsButton;
     [SerializeField]private Button exitControlsButton;
+    [SerializeField]private Button startSpider;
+    [SerializeField]private Button startAnt;
 
     // Spider UI
     [SerializeField]private Button nextMovementButton;
@@ -79,6 +81,8 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private GameObject controlsMenu;
     [SerializeField]private GameObject spider;
     [SerializeField]private GameObject ant;
+    [SerializeField]private GameObject introSpider;
+    [SerializeField]private GameObject introAnt;
     [SerializeField]private Text joinCodeText;
     
     private string clientCode;
@@ -120,6 +124,8 @@ public class NetworkManagerUI : NetworkBehaviour
         exitPauseButton.onClick.AddListener(MainMenu);
         controlsButton.onClick.AddListener(Controls);
         exitControlsButton.onClick.AddListener(Pause);
+        startSpider.onClick.AddListener(StartSpider);
+        startAnt.onClick.AddListener(StartAnt);
 
         // Spider Control Scenes
         nextMovementButton.onClick.AddListener(Rotation);
@@ -170,6 +176,7 @@ public class NetworkManagerUI : NetworkBehaviour
 
         controlsMenu.gameObject.SetActive(false);
         exitMainControlsButton.gameObject.SetActive(false);
+        introSpider.gameObject.SetActive(false);
         mainMenu.gameObject.SetActive(true);
 
         GameisPaused = false;
@@ -408,6 +415,14 @@ public class NetworkManagerUI : NetworkBehaviour
         ant_inventoryLayoutUI.gameObject.SetActive(true);
     }
 
+    public void StartSpider() {
+        introSpider.gameObject.SetActive(false);
+    }
+
+    public void StartAnt() {
+        introAnt.gameObject.SetActive(false);
+    }
+
     private async void CreateRelay() {
         try {
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(1);
@@ -423,6 +438,7 @@ public class NetworkManagerUI : NetworkBehaviour
             networkMenu.transform.localScale = Vector2.zero;
             pauseButton.gameObject.SetActive(true);
             spiderUI.gameObject.SetActive(true);
+            introSpider.gameObject.SetActive(true);
             pauseActive = true;
 
             joinCodeText.GetComponent<Text>().text = joinCode;
@@ -445,6 +461,7 @@ public class NetworkManagerUI : NetworkBehaviour
             networkMenu.transform.localScale = Vector2.zero;
             clientUI.gameObject.SetActive(false);
             pauseButton.gameObject.SetActive(true);
+            introAnt.gameObject.SetActive(true);
             antUI.gameObject.SetActive(true);
         } catch (RelayServiceException e) {
             Debug.Log(e);
