@@ -17,7 +17,10 @@ public class AntMove : NetworkBehaviour
     private bool offNode = true;
     private bool offEdge = true;
     public bool isFlying = false;
+    public bool isFire = false;
     float mouseAng;
+
+    SpriteRenderer web;
 
     void Start(){
         var anim = GetComponentInChildren<Animator>();
@@ -71,6 +74,10 @@ public class AntMove : NetworkBehaviour
             if (other.tag == "slime") {
                 StartCoroutine("Stuck");
             }
+            if (isFire) {
+                web = other.gameObject.GetComponent<SpriteRenderer>();
+                web.color = Color.red;
+            }
         }
     }
 
@@ -89,6 +96,9 @@ public class AntMove : NetworkBehaviour
         if (other.tag == "web_node") {
             offNode = true;
         }
-    }
 
+        if (isFire) {
+            Destroy(other.gameObject);
+        }
+    }
 }
