@@ -26662,6 +26662,7 @@ MonoBehaviour:
   - {fileID: 295886576}
   - {fileID: 1869663852}
   - {fileID: 139413953}
+  UIeggs: []
   durationTime: 0.15
   magnitude: 0.3
   maxHealth: 120
