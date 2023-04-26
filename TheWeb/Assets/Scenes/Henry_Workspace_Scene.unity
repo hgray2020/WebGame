@@ -4872,7 +4872,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3c62bdf02df064480af0d1e4a2e74501, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 13f899caff6534f8b96ff68c0bc0961e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16808,10 +16808,7 @@ MonoBehaviour:
   InventoryMenu: {fileID: 453814025}
   InvIsOpen: 0
   coins: 50
-  item1price: 1
-  item2price: 1
-  item3price: 1
-  item4price: 1
+  prices: 01000000020000000300000005000000
   item1image: {fileID: 2094763324}
   item2image: {fileID: 179274951}
   item3image: {fileID: 353008585}
@@ -16829,6 +16826,7 @@ MonoBehaviour:
   item2Text_price: {fileID: 2010955601}
   item3Text_price: {fileID: 2010955601}
   item4Text_price: {fileID: 2010955601}
+  spiderInv: 0
   coin: 'ANTS: '
 --- !u!4 &1133826203
 Transform:
@@ -20835,6 +20833,16 @@ MonoBehaviour:
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 9061394376986330225, guid: 593b1e01beaa74d8283968bc4317407d, type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 6383477804888781686, guid: 7310ea38d99084122b47db3f22f0b29a, type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
     TickRate: 30
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 0
@@ -23064,7 +23072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1525640813
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23599,10 +23607,7 @@ MonoBehaviour:
   InventoryMenu: {fileID: 1948391628}
   InvIsOpen: 0
   coins: 50
-  item1price: 1
-  item2price: 2
-  item3price: 3
-  item4price: 5
+  prices: 01000000020000000300000005000000
   item1image: {fileID: 1978861298}
   item2image: {fileID: 1596392277}
   item3image: {fileID: 324498167}
@@ -23620,6 +23625,7 @@ MonoBehaviour:
   item2Text_price: {fileID: 1954790668}
   item3Text_price: {fileID: 1899150990}
   item4Text_price: {fileID: 466578255}
+  spiderInv: 1
   coin: 'SILK: '
 --- !u!1 &1571867154
 GameObject:
@@ -24332,7 +24338,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7a6bbbabdf43b40dd8693782c6ef7efe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9266a13806e2a40bdba069546e7ce9dc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -30688,7 +30694,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9266a13806e2a40bdba069546e7ce9dc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2b4752bce841cc74bb73820ce5212d34, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

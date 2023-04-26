@@ -610,7 +610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1472820131554350292, guid: 8b61590a0b11b49dd925464f8595f005, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1472820131554350303, guid: 8b61590a0b11b49dd925464f8595f005, type: 3}
       propertyPath: m_RootOrder
@@ -713,6 +713,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 6383477804888781686, guid: 7310ea38d99084122b47db3f22f0b29a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7310ea38d99084122b47db3f22f0b29a, type: 3}
 --- !u!1001 &6416348411876333742
@@ -729,6 +733,10 @@ PrefabInstance:
     - target: {fileID: 6416348411949659364, guid: 875fba0334b834e058bcc5bace3dc059, type: 3}
       propertyPath: m_Name
       value: FireAnt
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416348411949659364, guid: 875fba0334b834e058bcc5bace3dc059, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6416348411949659389, guid: 875fba0334b834e058bcc5bace3dc059, type: 3}
       propertyPath: m_RootOrder
@@ -834,6 +842,10 @@ PrefabInstance:
     - target: {fileID: 9061394376986330225, guid: 593b1e01beaa74d8283968bc4317407d, type: 3}
       propertyPath: m_Name
       value: Spike
+      objectReference: {fileID: 0}
+    - target: {fileID: 9061394376986330225, guid: 593b1e01beaa74d8283968bc4317407d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 593b1e01beaa74d8283968bc4317407d, type: 3}

@@ -51,6 +51,10 @@ MonoBehaviour:
   buildEdgeFab: {fileID: 2209078523600094983, guid: e0c07f0443a35c648a3d551037f6b289, type: 3}
   webSpawnPoint: {fileID: 0}
   initialized: 0
+  sm: {fileID: 0}
+  buildables:
+  - {fileID: 6383477804888781686, guid: 7310ea38d99084122b47db3f22f0b29a, type: 3}
+  - {fileID: 9061394376986330225, guid: 593b1e01beaa74d8283968bc4317407d, type: 3}
 --- !u!114 &7287024106222355479
 MonoBehaviour:
   m_ObjectHideFlags: 0

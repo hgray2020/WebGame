@@ -35,6 +35,7 @@ public class PlayerSpawner : NetworkBehaviour
         
         
         Destroy(gameObject);
+
     }
 
     [ServerRpc(RequireOwnership = false)]

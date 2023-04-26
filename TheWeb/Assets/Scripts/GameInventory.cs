@@ -33,10 +33,7 @@ public class GameInventory : MonoBehaviour {
       public static int item4num = 0;
       public int coins = 50;
 
-      public int item1price = 1;
-      public int item2price = 2;
-      public int item3price = 3;
-      public int item4price = 5;
+      public int[] prices = {1, 2, 3, 5};
 
       [Header("Add item image objects here")]
       public GameObject item1image;
@@ -61,7 +58,7 @@ public class GameInventory : MonoBehaviour {
       public Text item2Text_price;
       public Text item3Text_price;
       public Text item4Text_price;
-
+      public bool spiderInv = false;
       public string coin;
       int selected;
  
@@ -88,7 +85,7 @@ public class GameInventory : MonoBehaviour {
                   selected = 2;
                   ChangeAllColor(selected);
             }
-            if (Input.GetKeyDown("4")) { 
+            if (Input.GetKeyDown("4") && spiderInv) { 
                   item4bg.GetComponent<Image>().color = new Color (0, 0, 0, 1);
                   selected = 3;
                   ChangeAllColor(selected);
@@ -118,39 +115,39 @@ public class GameInventory : MonoBehaviour {
             item4TextB.text = ("" + item4num);
 
             Text item1Text_priceB = item1Text_price.GetComponent<Text>();
-            item1Text_priceB.text = ("" + item1price);
+            item1Text_priceB.text = ("" + prices[0]);
 
             Text item2Text_priceB = item2Text_price.GetComponent<Text>();
-            item2Text_priceB.text = ("" + item2price);
+            item2Text_priceB.text = ("" + prices[1]);
 
             Text item3Text_priceB = item3Text_price.GetComponent<Text>();
-            item3Text_priceB.text = ("" + item3price);
+            item3Text_priceB.text = ("" + prices[2]);
 
             Text item4Text_priceB = item4Text_price.GetComponent<Text>();
-            item4Text_priceB.text = ("" + item4price);
+            item4Text_priceB.text = ("" + prices[3]);
       }
 
       public void InventoryAdd(int item){
             
-            if ((item == 0) && (coins >= item1price)) {
+            if ((item == 0) && (coins >= prices[0])) {
                   item1bool = true; 
                   item1num ++;
-                  CoinChange(0 - item1price);
+                  CoinChange(0 - prices[0]);
             }
-            else if ((item == 1) && (coins >= item2price)) {
+            else if ((item == 1) && (coins >= prices[1])) {
                   item2bool = true; 
                   item2num ++;
-                  CoinChange(0 - item2price);
+                  CoinChange(0 - prices[1]);
             }
-            else if ((item == 2) && (coins >= item3price)) {
+            else if ((item == 2) && (coins >= prices[2])) {
                   item3bool = true; 
                   item3num ++;
-                  CoinChange(0 - item3price);
+                  CoinChange(0 - prices[2]);
             }
-            else if ((item == 3) && (coins >= item4price)) {
+            else if ((item == 3) && (coins >= prices[3])) {
                   item4bool = true; 
                   item4num ++;
-                  CoinChange(0 - item4price);
+                  CoinChange(0 - prices[3]);
             }
             else { Debug.Log("This item does not exist to be added"); }
             InventoryDisplay();
@@ -227,6 +224,14 @@ public class GameInventory : MonoBehaviour {
       
       public int GetSelected() {
             return selected;
+      }
+
+      public bool Purchase() {
+            if (prices[selected] > coins) {
+                  return false;
+            }
+            coins -= prices[selected];
+            return true;
       }
 
 }

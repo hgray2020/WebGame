@@ -48,7 +48,7 @@ public class AntSpawner : NetworkBehaviour
                 break;
             }
         }
-        Debug.Log(gameInventory.GetSelected());
+        // Debug.Log(gameInventory.GetSelected());
         if (Input.GetMouseButtonDown(0) && canSpawn && cd == 0) {
             cd = cooldown;
             SpawnAntServerRpc(gameInventory.GetSelected(), mouseCoords.x, mouseCoords.y);

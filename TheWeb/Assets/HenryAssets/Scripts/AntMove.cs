@@ -5,7 +5,7 @@ using Unity.Netcode;
 
 public class AntMove : NetworkBehaviour
 {
-    public float moveSpeed = 5;
+    
     private float speed;
     private Rigidbody2D rb;
     private Vector3 moveDirection;
@@ -22,7 +22,7 @@ public class AntMove : NetworkBehaviour
     public bool isNormal = false;
     private int type;
     public int[] damages = {1, 3, 8, 2};
-    public float[] moveSpeeds = {2, 0.8f, 0.4f, 1};
+    [SerializeField]private float[] moveSpeeds = {2, 0.8f, 0.4f, 1};
     private int damage;
     float mouseAng;
     private float baseScale;
@@ -51,7 +51,11 @@ public class AntMove : NetworkBehaviour
         if (!IsAnt()) {
             return;
         }
-        Debug.Log(offEdge + ", " + offNode);
+        string s = "";
+        for (int i = 0; i < moveSpeeds.Length; i++) {
+            s += ", " + moveSpeeds[i];
+        }
+        Debug.Log(s);
         GameObject eggs = GameObject.FindWithTag("egg");
         if (eggs == null) {
             return;
@@ -61,7 +65,10 @@ public class AntMove : NetworkBehaviour
             speed = moveSpeeds[type];
         }
         float mag = transform.position.x -  eggs.transform.position.x;
-        float xdif = mag / Mathf.Abs(mag);
+        float xdif = 1;
+        if (mag != 0) {
+            xdif = mag / Mathf.Abs(mag);
+        }
 
         transform.localScale = new Vector3(baseScale * xdif, transform.localScale.y, transform.localScale.z);
     }
@@ -105,10 +112,10 @@ public class AntMove : NetworkBehaviour
     }
 
     IEnumerator Stuck() {
-        moveSpeed = 0;
+        speed = 0;
         transform.GetChild(3).gameObject.SetActive(true);
         yield return new WaitForSeconds(2f);
-        moveSpeed = 1;
+        speed = moveSpeeds[type];
         transform.GetChild(3).gameObject.SetActive(false);
     }
 
@@ -120,7 +127,7 @@ public class AntMove : NetworkBehaviour
             offNode = true;
         }
 
-        if (isFire && (other.tag == "web_edge" || other.tag == "web_node")) {
+        if (isFire && (other.tag == "slime" || other.tag == "spike")) {
             Destroy(other.gameObject);
         }
     }

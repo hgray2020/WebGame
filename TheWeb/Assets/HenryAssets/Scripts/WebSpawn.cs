@@ -233,6 +233,7 @@ public class WebSpawn : MonoBehaviour
     private bool buildFromEdge = true;
     private GameInventory spiderInv;
     private bool initInv = false;
+    [SerializeField]private GameObject[] buildables;
     void Start()
     {
         webGraph = new Graph();
@@ -258,91 +259,105 @@ public class WebSpawn : MonoBehaviour
         if (Input.GetKey(KeyCode.B) && cooldown == 0 && spiderInv.coins > 0) {
             
             cooldown = cooldownMax;
-            if (webGraph.IsEmpty()) {
-                spiderInv.CoinChange(-1);
-                Debug.Log(spiderInv.coins);
-                GameObject newNode = (GameObject)Instantiate(node, spider.transform.position, Quaternion.identity);
-                newNode.GetComponent<NetworkObject>().Spawn(true);
-                webGraph.AddVertex(newNode);
-                newNode.transform.parent = transform;
-            } else {
-                if (!building) {
-                    if (sm.isOnWebNode() || sm.isOnWebEdge()) {
-                        
-                        building = true;
-                        if (sm.isOnWebNode()) {
-                            buildFrom = sm.currWebNode();
+            Debug.Log(spiderInv.GetSelected());
+            if (spiderInv.GetSelected() == 0) {
+                Debug.Log("starting web");
+                if (webGraph.IsEmpty()) {
+                    spiderInv.CoinChange(-1);
+                    Debug.Log(spiderInv.coins);
+                    GameObject newNode = (GameObject)Instantiate(node, spider.transform.position, Quaternion.identity);
+                    newNode.GetComponent<NetworkObject>().Spawn(true);
+                    webGraph.AddVertex(newNode);
+                    newNode.transform.parent = transform;
+                } else {
+                    if (!building) {
+                        Debug.Log("building web" + sm.isOnWebEdge() + ", " + sm.isOnWebNode());
+                        if (sm.isOnWebNode() || sm.isOnWebEdge()) {
+                            
+                            building = true;
+                            if (sm.isOnWebNode()) {
+                                buildFrom = sm.currWebNode();
+                            }
+                            Debug.Log("building");
+                            Debug.Log(buildFrom);
+                            if (sm.isOnWebEdge() && !sm.isOnWebNode()) {
+                                buildFrom = sm.currWebEdge();
+                                buildFromEdge = true;
+                                closestPoint = new Vector3(sm.closestPos().x, sm.closestPos().y, transform.position.z);
+                                GameObject newNode = (GameObject)Instantiate(node, closestPoint, Quaternion.identity);
+                                newNode.GetComponent<NetworkObject>().Spawn(true);
+                                newNode.transform.parent = transform;
+                                webGraph.AddVertex(newNode);
+                                buildFrom = newNode;
+                                (GameObject node1, GameObject node2) = sm.currWebEdge().GetComponent<WebEdge>().nodes();
+                                webGraph.RemoveAnEdge(node1, node2);
+                                webGraph.AddVertex(newNode);
+                                webGraph.AddAnEdge(node1, newNode);
+                                webGraph.AddAnEdge(node2, newNode);
+                            }
                         }
-                        Debug.Log("building");
-                        Debug.Log(buildFrom);
-                        if (sm.isOnWebEdge() && !sm.isOnWebNode()) {
-                            buildFrom = sm.currWebEdge();
-                            buildFromEdge = true;
-                            closestPoint = new Vector3(sm.closestPos().x, sm.closestPos().y, transform.position.z);
-                            GameObject newNode = (GameObject)Instantiate(node, closestPoint, Quaternion.identity);
+                        
+                    } else {
+                        
+                        Debug.Log("hmm");
+                        GameObject newNode = null;
+                        if (!sm.isOnWebNode()) {
+                            newNode = (GameObject)Instantiate(node, webSpawnPoint.position, Quaternion.identity);
                             newNode.GetComponent<NetworkObject>().Spawn(true);
                             newNode.transform.parent = transform;
                             webGraph.AddVertex(newNode);
-                            buildFrom = newNode;
-                            (GameObject node1, GameObject node2) = sm.currWebEdge().GetComponent<WebEdge>().nodes();
-                            webGraph.RemoveAnEdge(node1, node2);
-                            webGraph.AddVertex(newNode);
-                            webGraph.AddAnEdge(node1, newNode);
-                            webGraph.AddAnEdge(node2, newNode);
+                            if (sm.isOnWebEdge()) {
+                                closestPoint = new Vector3(sm.closestPos().x, sm.closestPos().y, transform.position.z);
+                                newNode.transform.position = closestPoint;
+                                (GameObject node1, GameObject node2) = sm.currWebEdge().GetComponent<WebEdge>().nodes();
+                                webGraph.RemoveAnEdge(node1, node2);
+                                webGraph.AddVertex(newNode);
+                                webGraph.AddAnEdge(node1, newNode);
+                                webGraph.AddAnEdge(node2, newNode);
+                            }
+                        } else {
+                            newNode = sm.currWebNode();
                         }
-                    }
-                    
-                } else {
-                    
-                    Debug.Log("hmm");
-                    GameObject newNode = null;
-                    if (!sm.isOnWebNode()) {
-                        newNode = (GameObject)Instantiate(node, webSpawnPoint.position, Quaternion.identity);
-                        newNode.GetComponent<NetworkObject>().Spawn(true);
-                        newNode.transform.parent = transform;
-                        webGraph.AddVertex(newNode);
-                        if (sm.isOnWebEdge()) {
-                            closestPoint = new Vector3(sm.closestPos().x, sm.closestPos().y, transform.position.z);
-                            newNode.transform.position = closestPoint;
-                            (GameObject node1, GameObject node2) = sm.currWebEdge().GetComponent<WebEdge>().nodes();
-                            webGraph.RemoveAnEdge(node1, node2);
-                            webGraph.AddVertex(newNode);
-                            webGraph.AddAnEdge(node1, newNode);
-                            webGraph.AddAnEdge(node2, newNode);
+                        if (newNode == buildFrom) {
+                            Debug.Log("building to same node");
+                            return;
                         }
-                    } else {
-                        newNode = sm.currWebNode();
-                    }
-                    if (newNode == buildFrom) {
-                        Debug.Log("building to same node");
-                        return;
-                    }
+                        
+                        Vector2 n1 = new Vector2(newNode.transform.position.x, newNode.transform.position.y);
+                        Vector2 n2 = new Vector2(buildFrom.transform.position.x, buildFrom.transform.position.y);
+                        float z = newNode.transform.position.z;
+                        Vector2 midpoint = (n1 + n2) / 2;
+                        float length = Vector2.Distance(n1, n2);
                     
-                    Vector2 n1 = new Vector2(newNode.transform.position.x, newNode.transform.position.y);
-                    Vector2 n2 = new Vector2(buildFrom.transform.position.x, buildFrom.transform.position.y);
-                    float z = newNode.transform.position.z;
-                    Vector2 midpoint = (n1 + n2) / 2;
-                    float length = Vector2.Distance(n1, n2);
-                
-                    float angle = Mathf.Atan2(n1.y - n2.y, n1.x - n2.x) * (180 / Mathf.PI) ;
-                    // Debug.Log(length);
-                    // Debug.Log(angle);
-                    Debug.Log(midpoint);
-                    
-                    
-                    GameObject edge = (GameObject)Instantiate(webEdge, new Vector3(midpoint.x, midpoint.y, z), Quaternion.Euler(0, 0, angle));
-                    edge.GetComponent<NetworkObject>().Spawn(true);
-                    edge.transform.localScale = new Vector3(length, 0.1f, 1);
-                    edge.transform.parent = transform;
+                        float angle = Mathf.Atan2(n1.y - n2.y, n1.x - n2.x) * (180 / Mathf.PI) ;
+                        // Debug.Log(length);
+                        // Debug.Log(angle);
+                        Debug.Log(midpoint);
+                        
+                        
+                        GameObject edge = (GameObject)Instantiate(webEdge, new Vector3(midpoint.x, midpoint.y, z), Quaternion.Euler(0, 0, angle));
+                        edge.GetComponent<NetworkObject>().Spawn(true);
+                        edge.transform.localScale = new Vector3(length, 0.1f, 1);
+                        edge.transform.parent = transform;
 
+                        
+                        webGraph.AddAnEdge(newNode, buildFrom);
+                        building = false;
+                        edge.GetComponent<WebEdge>().SetNodes(newNode, buildFrom);
+                        buildFromEdge = false;
+                        spiderInv.CoinChange(-1);
+                    }
                     
-                    webGraph.AddAnEdge(newNode, buildFrom);
-                    building = false;
-                    edge.GetComponent<WebEdge>().SetNodes(newNode, buildFrom);
-                    buildFromEdge = false;
-                    spiderInv.CoinChange(-1);
                 }
-                
+            } else {
+                if (sm.isOnWebNode() || sm.isOnWebEdge()) {
+                    GameObject toSpawn = buildables[spiderInv.GetSelected() - 1];
+                    bool bought = spiderInv.Purchase();
+                    if (bought) {
+                        GameObject spawned = (GameObject)Instantiate(toSpawn, spider.transform.position, Quaternion.identity);
+                        spawned.GetComponent<NetworkObject>().Spawn(true);
+                    }
+                } 
             }
             
         }
