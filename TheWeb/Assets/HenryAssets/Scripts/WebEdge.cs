@@ -8,6 +8,9 @@ public class WebEdge : MonoBehaviour
     private GameObject node1;
     private GameObject node2;
     private bool nodeSet;
+
+    public bool buildable = false;
+    
     void Start()
     {
         // updateTransform();
@@ -28,6 +31,4 @@ public class WebEdge : MonoBehaviour
         }
         return (node1, node2);
     }
-
-    
 }

@@ -112,7 +112,7 @@ public class AntMove : NetworkBehaviour
     }
 
     IEnumerator Stuck() {
-        speed = 0;
+        speed = -1;
         transform.GetChild(3).gameObject.SetActive(true);
         yield return new WaitForSeconds(2f);
         speed = moveSpeeds[type];
@@ -128,7 +128,7 @@ public class AntMove : NetworkBehaviour
         }
 
         if (isFire && (other.tag == "slime" || other.tag == "spike")) {
-            Destroy(other.gameObject);
+            Destroy(other.gameObject.transform.parent.gameObject);
         }
     }
 }

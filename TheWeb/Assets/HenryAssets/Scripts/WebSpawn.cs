@@ -350,12 +350,19 @@ public class WebSpawn : MonoBehaviour
                     
                 }
             } else {
-                if (sm.isOnWebNode() || sm.isOnWebEdge()) {
+                if (sm.isOnWebNode() || sm.isOnWebEdge() && !sm.currWebEdge().GetComponent<WebEdge>().buildable) {
                     GameObject toSpawn = buildables[spiderInv.GetSelected() - 1];
                     bool bought = spiderInv.Purchase();
                     if (bought) {
-                        GameObject spawned = (GameObject)Instantiate(toSpawn, spider.transform.position, Quaternion.identity);
+                        GameObject spawned = (GameObject)Instantiate(toSpawn, sm.currWebEdge().GetComponent<WebEdge>().transform.position, Quaternion.identity);
                         spawned.GetComponent<NetworkObject>().Spawn(true);
+                        spawned.transform.parent = sm.currWebEdge().GetComponent<WebEdge>().transform;
+                        if ((spiderInv.GetSelected() - 1) == 0) {
+                            sm.currWebEdge().GetComponent<SpriteRenderer>().color = Color.green;
+                        } else {
+                            sm.currWebEdge().GetComponent<SpriteRenderer>().color = Color.black;
+                        }
+                        sm.currWebEdge().GetComponent<WebEdge>().buildable = true;
                     }
                 } 
             }
