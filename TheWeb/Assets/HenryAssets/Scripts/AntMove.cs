@@ -99,7 +99,7 @@ public class AntMove : NetworkBehaviour
                 }
             }
             if (other.tag == "spike") {
-                this.gameObject.BroadcastMessage("takeDamage", 2);
+                this.gameObject.BroadcastMessage("takeDamage", 3);
             }
             if (other.tag == "slime") {
                 StartCoroutine("Stuck");
@@ -112,7 +112,7 @@ public class AntMove : NetworkBehaviour
     }
 
     IEnumerator Stuck() {
-        speed = -1;
+        speed = 0;
         transform.GetChild(3).gameObject.SetActive(true);
         yield return new WaitForSeconds(2f);
         speed = moveSpeeds[type];
