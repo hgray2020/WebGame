@@ -197,7 +197,7 @@ public class NetworkManagerUI : NetworkBehaviour
     public void Update() {
         clientCode = joinField.text;
 
-        if (Input.GetKeyDown(KeyCode.Escape) && (pauseActive)){
+        if (Input.GetButtonDown("Pause") && (pauseActive)){
             if (GameisPaused){
                     Resume();
             }

@@ -31,7 +31,7 @@ public class GameInventory : MonoBehaviour {
       public static int item3num = 0;
       public int coins = 50;
 
-      public int[] prices = {1, 2, 3, 5};
+      public int[] prices = {1, 2, 3};
 
       [Header("Add item image objects here")]
       public GameObject item1image;
@@ -65,20 +65,23 @@ public class GameInventory : MonoBehaviour {
       }
 
       void Update(){
-            if (Input.GetKeyDown("1")) { 
+            if (Input.GetButtonDown("WebBuild1")) { 
                   item1bg.GetComponent<Image>().color = new Color (0, 0, 0, 1);
                   selected = 0;
                   ChangeAllColor(selected);
             }
-            if (Input.GetKeyDown("2")) { 
+            if (Input.GetButtonDown("WebBuild2")) { 
                   item2bg.GetComponent<Image>().color = new Color (0, 0, 0, 1);
                   selected = 1;
                   ChangeAllColor(selected);
             }
-            if (Input.GetKeyDown("3")) { 
+            if (Input.GetButtonDown("WebBuild3")) { 
                   item3bg.GetComponent<Image>().color = new Color (0, 0, 0, 1);
                   selected = 2;
                   ChangeAllColor(selected);
+            }
+            if (Input.GetButtonDown("Inventory")) {
+                  OpenCloseInventory();
             }
       }
 
@@ -211,7 +214,7 @@ public class GameInventory : MonoBehaviour {
             if (prices[selected] > coins) {
                   return false;
             }
-            coins -= prices[selected];
+            CoinChange(0 - prices[selected]);
             return true;
       }
 

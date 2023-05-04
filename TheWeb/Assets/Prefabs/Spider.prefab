@@ -216,10 +216,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reloadCD: 30
-  shootKey: 32
   projectile: {fileID: 2366775841513997671, guid: d0907e3618cb6b34db0c97790bbf1114, type: 3}
   projVel: 500
   spawnPos: {fileID: 5637691641404200521}
+  tutorial: 0
 --- !u!114 &3913995390978783460
 MonoBehaviour:
   m_ObjectHideFlags: 0

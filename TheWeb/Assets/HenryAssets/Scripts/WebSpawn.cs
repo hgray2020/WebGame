@@ -256,7 +256,7 @@ public class WebSpawn : MonoBehaviour
             
         }
         
-        if (Input.GetKey(KeyCode.B) && cooldown == 0 && spiderInv.coins > 0) {
+        if (Input.GetButtonDown("WebBuild") && cooldown == 0 && spiderInv.coins > 0) {
             
             cooldown = cooldownMax;
             Debug.Log(spiderInv.GetSelected());
@@ -269,6 +269,8 @@ public class WebSpawn : MonoBehaviour
                     newNode.GetComponent<NetworkObject>().Spawn(true);
                     webGraph.AddVertex(newNode);
                     newNode.transform.parent = transform;
+                    building = true;
+                    buildFrom = newNode;
                 } else {
                     if (!building) {
                         Debug.Log("building web" + sm.isOnWebEdge() + ", " + sm.isOnWebNode());
