@@ -9,6 +9,7 @@ public class HarrisonGameHandler : NetworkBehaviour
 
     public GameObject [] eggs;
     public GameObject [] UIeggs;
+    public GameObject NetworkUI;
 
     // public GameObject CameraShaker;
 
@@ -19,6 +20,7 @@ public class HarrisonGameHandler : NetworkBehaviour
     private int numEggs;
 
     void Start(){
+        NetworkUI = GameObject.FindGameObjectWithTag("NetworkUI");
         numEggs = eggs.Length;
         healthStep = maxHealth / (numEggs);
         eggHealth.Value = maxHealth;
@@ -26,8 +28,6 @@ public class HarrisonGameHandler : NetworkBehaviour
             egg.SetActive(false);
             
         }
-        
-        
         eggs[0].SetActive(true);
     }
 
@@ -46,12 +46,6 @@ public class HarrisonGameHandler : NetworkBehaviour
     public void eggsGetHit(int damage){
         EggHitServerRpc(damage);
        
-        
-        
-        
-
-        
-
         if (damage > 0){
             // CameraShaker.GetComponent<CameraShake>().ShakeCamera(durationTime, magnitude);
         }
@@ -60,10 +54,12 @@ public class HarrisonGameHandler : NetworkBehaviour
     public void FixedUpdate() {
         if (eggHealth.Value <= 0) {
             Debug.Log("rahh");
+            NetworkUI.gameObject.SendMessage("AntWins");
             DespawnServerRpc();
             return;
         }
-        int percentile = (numEggs) - (eggHealth.Value / healthStep);
+        float f_percentile = ((float)numEggs) - ((float)eggHealth.Value / (float)healthStep);
+        int percentile = (int)Mathf.Floor(f_percentile);
         foreach(GameObject egg in eggs) {
             egg.SetActive(false);
         }
@@ -71,7 +67,6 @@ public class HarrisonGameHandler : NetworkBehaviour
         for (int i = numEggs - 1; i > numEggs - percentile - 1; i--) {
             UIeggs[i].SetActive(false);
         }
-        
         
     }
 

@@ -35,6 +35,8 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private Button startAnt;
 
     // Spider UI
+    [SerializeField]private GameObject spider_web;
+    [SerializeField]private GameObject spider_build;
     [SerializeField]private GameObject spider_movementUI;
     [SerializeField]private GameObject spider_rotationUI;
     [SerializeField]private GameObject spider_shootUI;
@@ -44,16 +46,17 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private GameObject spider_AddOnUI;
     [SerializeField]private GameObject spider_inventoryUI;
     [SerializeField]private GameObject spider_inventoryLayoutUI;
+    [SerializeField]private GameObject spider_wins;
+    [SerializeField]private GameObject spider_loses;
+
 
     // Ant UI
-    [SerializeField]private Button nextSpawnerButton;
-    [SerializeField]private Button nextInventoryAntButton;
-    [SerializeField]private Button backInventoryAntButton;
-    [SerializeField]private Button backInventoryAntLayoutButton;
-
     [SerializeField]private GameObject ant_spawnerUI;
     [SerializeField]private GameObject ant_inventoryUI;
     [SerializeField]private GameObject ant_inventoryLayoutUI;
+    [SerializeField]private GameObject ant_typesUI;
+    [SerializeField]private GameObject ant_wins;
+    [SerializeField]private GameObject ant_loses;
 
     [SerializeField]private InputField joinField;
     [SerializeField]private GameObject hostCode;
@@ -75,6 +78,7 @@ public class NetworkManagerUI : NetworkBehaviour
 
     public static bool GameisPaused = false;
     public static bool pauseActive = false;
+    public bool tutorial = false;
 
     private Vector3 mainMenu_startScale;
     private Vector3 credits_startScale;
@@ -116,12 +120,6 @@ public class NetworkManagerUI : NetworkBehaviour
         joinButton.onClick.AddListener(Client);
         joinBackButton.onClick.AddListener(StartGame);
 
-        // Ant Control Scenes
-        nextSpawnerButton.onClick.AddListener(Inventory_Ant);
-        nextInventoryAntButton.onClick.AddListener(InventoryLayout_Ant);
-        backInventoryAntButton.onClick.AddListener(Spawner);
-        backInventoryAntLayoutButton.onClick.AddListener(Inventory_Ant);
-
         networkMenu.gameObject.SetActive(false);
         hostCode.gameObject.SetActive(false);
         pauseButton.gameObject.SetActive(false);
@@ -131,6 +129,8 @@ public class NetworkManagerUI : NetworkBehaviour
         antUI.gameObject.SetActive(false);
 
         // Spider UI
+        spider_web.gameObject.SetActive(false);
+        spider_build.gameObject.SetActive(false);
         spider_movementUI.gameObject.SetActive(false);
         spider_rotationUI.gameObject.SetActive(false);
         spider_shootUI.gameObject.SetActive(false);
@@ -140,11 +140,16 @@ public class NetworkManagerUI : NetworkBehaviour
         spider_AddOnUI.gameObject.SetActive(false);
         spider_inventoryUI.gameObject.SetActive(false);
         spider_inventoryLayoutUI.gameObject.SetActive(false);
+        spider_wins.gameObject.SetActive(false);
+        spider_loses.gameObject.SetActive(false);
 
         // Ant UI
         ant_spawnerUI.gameObject.SetActive(false);
         ant_inventoryUI.gameObject.SetActive(false);
         ant_inventoryLayoutUI.gameObject.SetActive(false);
+        ant_typesUI.gameObject.SetActive(false);
+        ant_wins.gameObject.SetActive(false);
+        ant_loses.SetActive(false);
 
         controlsMenu.gameObject.SetActive(false);
         exitMainControlsButton.gameObject.SetActive(false);
@@ -152,6 +157,7 @@ public class NetworkManagerUI : NetworkBehaviour
         mainMenu.gameObject.SetActive(true);
 
         GameisPaused = false;
+        tutorial = true;
 
         mainMenu_startScale = mainMenu.transform.localScale;
         credits_startScale = creditsMenu.transform.localScale;
@@ -177,7 +183,15 @@ public class NetworkManagerUI : NetworkBehaviour
                     Pause();
             }
         }
-        
+
+        if (Input.GetButton("Shoot") && tutorial) {
+            spider_build.gameObject.SetActive(true);
+            spider_web.gameObject.SetActive(false);
+        }
+        if (Input.GetButton("WebBuild") && tutorial) {
+            spider_build.gameObject.SetActive(false);
+            tutorial = false;
+        }
     }
 
     public void MainMenu() {
@@ -194,6 +208,8 @@ public class NetworkManagerUI : NetworkBehaviour
         controlsMenu.gameObject.SetActive(false);
 
         // Spider UI
+        spider_build.gameObject.SetActive(false);
+        spider_web.gameObject.SetActive(false);
         spider_movementUI.gameObject.SetActive(false);
         spider_rotationUI.gameObject.SetActive(false);
         spider_shootUI.gameObject.SetActive(false);
@@ -205,11 +221,16 @@ public class NetworkManagerUI : NetworkBehaviour
         spider_inventoryLayoutUI.gameObject.SetActive(false);
         exitMainControlsButton.gameObject.SetActive(false);
         clientUI.gameObject.SetActive(false);
+        spider_wins.gameObject.SetActive(false);
+        spider_loses.SetActive(false);
 
         // Ant UI
         ant_spawnerUI.gameObject.SetActive(false);
         ant_inventoryUI.gameObject.SetActive(false);
         ant_inventoryLayoutUI.gameObject.SetActive(false);
+        ant_typesUI.gameObject.SetActive(false);
+        ant_wins.gameObject.SetActive(false);
+        ant_loses.gameObject.SetActive(false);
 
         pauseActive = false;
 
@@ -272,6 +293,8 @@ public class NetworkManagerUI : NetworkBehaviour
         antUI.gameObject.SetActive(false);
 
         // Spider UI
+        spider_web.gameObject.SetActive(false);
+        spider_build.gameObject.SetActive(false);
         spider_movementUI.gameObject.SetActive(false);
         spider_rotationUI.gameObject.SetActive(false);
         spider_shootUI.gameObject.SetActive(false);
@@ -287,6 +310,7 @@ public class NetworkManagerUI : NetworkBehaviour
         ant_spawnerUI.gameObject.SetActive(false);
         ant_inventoryUI.gameObject.SetActive(false);
         ant_inventoryLayoutUI.gameObject.SetActive(false);
+        ant_typesUI.gameObject.SetActive(false);
 
         Time.timeScale = 0f;
         GameisPaused = true;
@@ -337,23 +361,37 @@ public class NetworkManagerUI : NetworkBehaviour
         ant_inventoryUI.gameObject.SetActive(false);
     }
 
-    public void Inventory_Ant() {
-        ant_spawnerUI.gameObject.SetActive(false);
-        ant_inventoryUI.gameObject.SetActive(true);
-        ant_inventoryLayoutUI.gameObject.SetActive(false);
-    }
-
-    public void InventoryLayout_Ant() {
-        ant_inventoryUI.gameObject.SetActive(false);
-        ant_inventoryLayoutUI.gameObject.SetActive(true);
-    }
-
     public void StartSpider() {
         introSpider.gameObject.SetActive(false);
+        spider_web.gameObject.SetActive(true);
     }
 
     public void StartAnt() {
         introAnt.gameObject.SetActive(false);
+    }
+
+    public void SpiderWins() {
+        Time.timeScale = 0f;
+        GameisPaused = true;
+
+        if (IsHost) {
+            spider_wins.gameObject.SetActive(true);
+        } 
+        if (!IsHost) {
+            ant_loses.gameObject.SetActive(true);
+        }
+    }
+
+    public void AntWins() {
+        Time.timeScale = 0f;
+        GameisPaused = true;
+
+        if (IsHost) {
+            spider_loses.gameObject.SetActive(true);
+        } 
+        if (!IsHost) {
+            ant_wins.gameObject.SetActive(true);
+        }
     }
 
     private async void CreateRelay() {

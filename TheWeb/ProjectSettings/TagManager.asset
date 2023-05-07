@@ -11,6 +11,11 @@ TagManager:
   - spider_inv
   - web_node
   - web_edge
+  - ant
+  - projectile
+  - egg
+  - webby
+  - NetworkUI
   layers:
   - Default
   - TransparentFX
