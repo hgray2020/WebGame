@@ -16,6 +16,7 @@ public class AntSpawner : NetworkBehaviour
     private int cooldown = 15;
     private GameObject[] spawnable;
     [SerializeField]private GameObject[] ants;
+    
     void Start()
     {
     }

@@ -1055,7 +1055,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8445977487070642811}
   - component: {fileID: 8445977487070642810}
-  - component: {fileID: 8445977487070642813}
   - component: {fileID: 2974902578307485317}
   - component: {fileID: 4213723467633070587}
   - component: {fileID: 6300813738351079838}
@@ -1098,24 +1097,12 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.56, y: 0}
   m_Size: {x: 3.7, y: 6.34}
   m_Direction: 0
---- !u!114 &8445977487070642813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8445977487070642808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28d2aa90a2bcd40438d3317e791e30d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2974902578307485317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1225,7 +1212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aee7bee9547e4d14a2e00d2f9b4fc79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 6
   currHealth: 0
 --- !u!1 &8577632371286654146
 GameObject:

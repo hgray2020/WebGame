@@ -23,14 +23,9 @@ public class Projectile : NetworkBehaviour
     }
 
      private void OnColliderEnter2D(Collider2D collision) {
-        if (collision.gameObject.tag != "projectile") {
-            gameObject.transform.parent = collision.gameObject.transform;
-            Destroy(this.gameObject);
-            gameObject.GetComponent<NetworkObject>().Despawn();
-        }
-
         if (collision.gameObject.tag == "ant") {
-           collision.gameObject.BroadcastMessage("TakeDamage", 1);
+            Destroy(gameObject);
+            collision.gameObject.BroadcastMessage("TakeDamage", 2);
         }
     }
 }

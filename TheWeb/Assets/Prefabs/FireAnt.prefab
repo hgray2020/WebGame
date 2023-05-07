@@ -346,7 +346,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6416348411949659389}
   - component: {fileID: 6416348411949659388}
-  - component: {fileID: 6416348411949659391}
   - component: {fileID: 6416348411949659390}
   - component: {fileID: 6416348411949659361}
   - component: {fileID: 6416348411949659360}
@@ -389,24 +388,12 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.62000275, y: -0.07261574}
   m_Size: {x: 2.792308, y: 5.1781516}
   m_Direction: 0
---- !u!114 &6416348411949659391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6416348411949659364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28d2aa90a2bcd40438d3317e791e30d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6416348411949659390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,9 +422,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d060d58001de64f43b33ccb46b349ae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.75
   isFlying: 0
   isFire: 1
+  isSoldier: 0
+  isNormal: 0
+  damages: 01000000030000000800000002000000
+  moveSpeeds:
+  - 2
+  - 0.8
+  - 0.4
+  - 1
 --- !u!50 &6416348411949659360
 Rigidbody2D:
   serializedVersion: 4
@@ -509,7 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aee7bee9547e4d14a2e00d2f9b4fc79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 4
   currHealth: 0
 --- !u!1 &6416348412012359052
 GameObject:

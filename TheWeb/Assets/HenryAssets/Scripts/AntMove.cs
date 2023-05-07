@@ -21,7 +21,7 @@ public class AntMove : NetworkBehaviour
     public bool isSoldier = false;
     public bool isNormal = false;
     private int type;
-    public int[] damages = {1, 3, 8, 2};
+    public int[] damages = {2, 6, 8, 4};
     [SerializeField]private float[] moveSpeeds = {2, 0.8f, 0.4f, 1};
     private int damage;
     float mouseAng;
@@ -99,7 +99,7 @@ public class AntMove : NetworkBehaviour
                 }
             }
             if (other.tag == "spike") {
-                this.gameObject.BroadcastMessage("takeDamage", 3);
+                this.gameObject.BroadcastMessage("takeDamage", 2);
             }
             if (other.tag == "slime") {
                 StartCoroutine("Stuck");
