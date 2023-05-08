@@ -21,12 +21,8 @@ public class Shooter : NetworkBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!IsHost && !tutorial) {
+        if (!IsHost) {
             return;
-        }
-        if (Input.GetButton("Shoot") && tutorial && reload == 0) {
-            reload = reloadCD;
-            ShootBullet_Tutorial();
         }
         if (Input.GetButton("Shoot") && reload == 0) {
             reload = reloadCD;
