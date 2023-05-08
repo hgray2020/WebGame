@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.Audio;
 
 
 public class Graph
@@ -234,10 +235,15 @@ public class WebSpawn : MonoBehaviour
     private GameInventory spiderInv;
     private bool initInv = false;
     [SerializeField]private GameObject[] buildables;
+    public AudioSource buildSFX;
+
+    private Animator animator;
+
     void Start()
     {
         webGraph = new Graph();
         buildEdge = (GameObject)Instantiate(buildEdgeFab, transform.position, Quaternion.identity);
+        animator = spider.GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -381,6 +387,8 @@ public class WebSpawn : MonoBehaviour
             cooldown--;
         }
         if (building) {
+            buildSFX.Play();
+            animator.SetBool("Build", true);
             buildEdge.SetActive(true);
             Vector2 n1 = new Vector2(webSpawnPoint.position.x, webSpawnPoint.position.y);
             Vector2 n2 = new Vector2(buildFrom.transform.position.x, buildFrom.transform.position.y);
@@ -393,6 +401,8 @@ public class WebSpawn : MonoBehaviour
             buildEdge.transform.localScale = new Vector3(length, 0.1f, 1);
             buildEdge.transform.rotation = Quaternion.Euler(0, 0, angle);
         } else {
+            buildSFX.Stop();
+            animator.SetBool("Build", false);
             buildEdge.SetActive(false);
         }
     }

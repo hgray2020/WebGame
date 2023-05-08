@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.Audio;
 
 public class HarrisonGameHandler : NetworkBehaviour
 {
@@ -18,6 +19,9 @@ public class HarrisonGameHandler : NetworkBehaviour
     public int maxHealth = 120;
     private int healthStep;
     private int numEggs;
+    private int prevpercentile = 6;
+
+    public AudioSource hissSFX;
 
     void Start(){
         NetworkUI = GameObject.FindGameObjectWithTag("NetworkUI");
@@ -67,7 +71,12 @@ public class HarrisonGameHandler : NetworkBehaviour
         for (int i = numEggs - 1; i > numEggs - percentile - 1; i--) {
             UIeggs[i].SetActive(false);
         }
-        
+        if (percentile < prevpercentile) {
+            if (hissSFX.isPlaying == false){
+                    hissSFX.Play();
+            }
+        }
+        prevpercentile = percentile;
     }
 
     

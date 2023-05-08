@@ -27,6 +27,8 @@ public class AntMove : NetworkBehaviour
     float mouseAng;
     private float baseScale;
 
+    public Animator animator;
+
     SpriteRenderer web;
 
     void Start(){
@@ -39,7 +41,8 @@ public class AntMove : NetworkBehaviour
         } else if (isNormal) {
             type = 3;
         }
-        var anim = GetComponentInChildren<Animator>();
+        animator = GetComponentInChildren<Animator>();
+        animator.SetBool("Walk", true);
         rb = GetComponent<Rigidbody2D>();
         speed = moveSpeeds[type];
         damage = damages[type];
@@ -114,9 +117,11 @@ public class AntMove : NetworkBehaviour
     IEnumerator Stuck() {
         speed = 0;
         transform.GetChild(3).gameObject.SetActive(true);
+        animator.SetBool("Walk", false);
         yield return new WaitForSeconds(2f);
         speed = moveSpeeds[type];
         transform.GetChild(3).gameObject.SetActive(false);
+        animator.SetBool("Walk", true);
     }
 
     private void OnTriggerExit2D(Collider2D other) {

@@ -16,6 +16,7 @@ TagManager:
   - egg
   - webby
   - NetworkUI
+  - VolumeSlider
   layers:
   - Default
   - TransparentFX

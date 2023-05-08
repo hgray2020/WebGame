@@ -23,8 +23,10 @@ public class SpiderMove : NetworkBehaviour
     private Vector2 closestPosOnEdge;
     [SerializeField] private float rotSpeed = 100;
 
+    private Animator animator;
+
     void Start(){
-        var anim = GetComponentInChildren<Animator>();
+        animator = gameObject.GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -56,6 +58,11 @@ public class SpiderMove : NetworkBehaviour
         
         if (moveDirection.magnitude > 1) {
             moveDirection = moveDirection.normalized;
+        }
+        if (move != 0) {
+            animator.SetBool("Walk", true);
+        } else {
+            animator.SetBool("Walk", false);
         }
     }
     

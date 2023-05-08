@@ -9,6 +9,7 @@ using Unity.Services.Relay.Models;
 using Unity.Services.Authentication;
 using Unity.Networking.Transport.Relay;
 using Unity.Netcode.Transports.UTP;
+using UnityEngine.Audio;
 
 
 public class NetworkManagerUI : NetworkBehaviour
@@ -72,6 +73,7 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private GameObject ant;
     [SerializeField]private GameObject introSpider;
     [SerializeField]private GameObject introAnt;
+    [SerializeField]private GameObject VolumeSlider;
     [SerializeField]private Text joinCodeText;
     
     private string clientCode;
@@ -86,6 +88,9 @@ public class NetworkManagerUI : NetworkBehaviour
     private Vector3 pauseMenu_startScale;
     public float tweenTime = 1f;
 
+    public AudioMixer mixer;
+    public static float volumeLevel = 1f;
+    private Slider sliderVolumeCtrl;
 
     public async void Start() {
         await UnityServices.InitializeAsync();
@@ -155,6 +160,7 @@ public class NetworkManagerUI : NetworkBehaviour
         exitMainControlsButton.gameObject.SetActive(false);
         introSpider.gameObject.SetActive(false);
         mainMenu.gameObject.SetActive(true);
+        VolumeSlider.gameObject.SetActive(true);
 
         GameisPaused = false;
         tutorial = true;
@@ -170,6 +176,14 @@ public class NetworkManagerUI : NetworkBehaviour
         pauseMenu.transform.localScale = Vector2.zero;
 
         LeanTween.scale(mainMenu, mainMenu_startScale, tweenTime).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
+
+        // Audio
+        SetLevel(volumeLevel);
+        GameObject sliderTemp = GameObject.FindWithTag("VolumeSlider");
+        if (sliderTemp != null){
+            sliderVolumeCtrl = sliderTemp.GetComponent<Slider>();
+            sliderVolumeCtrl.value = volumeLevel;
+        }
     }
 
     public void Update() {
@@ -206,6 +220,7 @@ public class NetworkManagerUI : NetworkBehaviour
         spiderUI.gameObject.SetActive(false);
         antUI.gameObject.SetActive(false);
         controlsMenu.gameObject.SetActive(false);
+        VolumeSlider.gameObject.SetActive(true);
 
         // Spider UI
         spider_build.gameObject.SetActive(false);
@@ -249,6 +264,7 @@ public class NetworkManagerUI : NetworkBehaviour
         mainMenu.gameObject.SetActive(false);
         mainMenu.transform.localScale = Vector2.zero;
         clientUI.gameObject.SetActive(false);
+        VolumeSlider.gameObject.SetActive(false);
 
         hostCode.gameObject.SetActive(true);
         networkMenu.gameObject.SetActive(true);
@@ -291,6 +307,7 @@ public class NetworkManagerUI : NetworkBehaviour
         pauseButton.gameObject.SetActive(false);
         spiderUI.gameObject.SetActive(false);
         antUI.gameObject.SetActive(false);
+        VolumeSlider.gameObject.SetActive(true);
 
         // Spider UI
         spider_web.gameObject.SetActive(false);
@@ -320,6 +337,7 @@ public class NetworkManagerUI : NetworkBehaviour
         pauseMenu.gameObject.SetActive(false);
         pauseMenu.transform.localScale = Vector2.zero;
         pauseButton.gameObject.SetActive(true);
+        VolumeSlider.gameObject.SetActive(false);
         if (IsHost) {
             spiderUI.gameObject.SetActive(true);
         }
@@ -392,6 +410,11 @@ public class NetworkManagerUI : NetworkBehaviour
         if (!IsHost) {
             ant_wins.gameObject.SetActive(true);
         }
+    }
+
+     public void SetLevel (float sliderValue){
+        mixer.SetFloat("MusicVolume", Mathf.Log10 (sliderValue) * 20);
+        volumeLevel = sliderValue;
     }
 
     private async void CreateRelay() {

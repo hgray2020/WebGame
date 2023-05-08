@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.Audio;
 
 public class Shooter : NetworkBehaviour
 {
@@ -11,11 +12,13 @@ public class Shooter : NetworkBehaviour
     public GameObject projectile;
     public float projVel = 10f;
     public Transform spawnPos;
-    public bool tutorial = false;
+    public AudioSource shootSFX;
+
+    private Animator animator; 
 
     void Start()
     {
-        
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -26,27 +29,27 @@ public class Shooter : NetworkBehaviour
         }
         if (Input.GetButton("Shoot") && reload == 0) {
             reload = reloadCD;
-            Debug.Log("SHOOTING");
             ShootBullet();
         }
         if (reload > 0) {
             reload--;
         }
-        if (Input.GetButton("Shoot")) {
-            Debug.Log("Trying to Shoot");
-        }
     }
 
     void ShootBullet() {
+        if (shootSFX.isPlaying == false){
+            shootSFX.Play();
+        }
         GameObject bullet = (GameObject)Instantiate(projectile, spawnPos.position, transform.rotation);
         bullet.GetComponent<NetworkObject>().Spawn(true);
         bullet.GetComponent<Rigidbody2D>().AddForce(transform.up * projVel);
+        StartCoroutine("Shoot");
         // Debug.Log(transform.up);
     }
 
-    void ShootBullet_Tutorial() {
-        GameObject bullet = (GameObject)Instantiate(projectile, spawnPos.position, transform.rotation);
-        bullet.GetComponent<Rigidbody2D>().AddForce(transform.up * projVel);
-        // Debug.Log(transform.up);
-    }
+    IEnumerator Shoot() {
+        animator.SetBool("Shoot", true);
+        yield return new WaitForSeconds(0.15f);
+        animator.SetBool("Shoot", false);
+    } 
 }

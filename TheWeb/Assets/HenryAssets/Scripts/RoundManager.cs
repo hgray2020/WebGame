@@ -32,9 +32,9 @@ public class RoundManager : NetworkBehaviour
             connected = true;
         }
         if (IsHost) {
-            timer -= time.deltaTime;
+            timer -= Time.deltaTime;
         }
-        timerText.GetComponent<Text>().text = "" + (int)Mathf.Round(timer)
+        timerText.GetComponent<Text>().text = "" + (int)Mathf.Round(timer);
 
 
     }
