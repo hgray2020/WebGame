@@ -54,11 +54,7 @@ public class AntMove : NetworkBehaviour
         if (!IsAnt()) {
             return;
         }
-        string s = "";
-        for (int i = 0; i < moveSpeeds.Length; i++) {
-            s += ", " + moveSpeeds[i];
-        }
-        Debug.Log(s);
+        
         GameObject eggs = GameObject.FindWithTag("egg");
         if (eggs == null) {
             return;

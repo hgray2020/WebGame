@@ -16,13 +16,16 @@ public class RoundManager : NetworkBehaviour
     private bool connected = false;
     private bool buildable;
     private GameInventory antInv;
-    private int antsPerRound = 100;
+    private int antsPerRound = 5;
     private int numRounds = 0;
     private bool buildTime = false;
+    private int maxRounds = 3;
+    private bool gameStarted = false;
     void Start()
     {
         GameObject tmp = GameObject.FindWithTag("ant_inv");
         antInv = tmp.GetComponent<GameInventory>();
+
     }
 
     // Update is called once per frame
@@ -44,13 +47,26 @@ public class RoundManager : NetworkBehaviour
         if (GameObject.FindWithTag("egg") != null) {
             timerText.gameObject.SetActive(true);
             counterText.gameObject.SetActive(true);
+        } else {
+            if (gameStarted) {
+                GameObject tmp = GameObject.FindWithTag("NetworkUI");
+                tmp.BroadcastMessage("AntWins");
+            }
+            
         }
         if (IsHost) {
             if (timer > 0) {
                 timer -= Time.deltaTime;
             }
             roundTimer.Value = (int)Mathf.Round(timer);
+        } else {
+            if (roundTimer.Value != 0) {
+                gameStarted = true;
+            }
         }
+        
+
+        
         if (roundTimer.Value > 0) {
             timerText.GetComponent<Text>().text = "Build: " + roundTimer.Value;
         } else {
@@ -68,8 +84,11 @@ public class RoundManager : NetworkBehaviour
                 NewRoundServerRpc();
             }
         }
-        Debug.Log(roundTimer.Value);
         
+        if (rounds.Value == maxRounds) {
+            GameObject networkUI = GameObject.FindWithTag("NetworkUI");
+            networkUI.BroadcastMessage("SpiderWins");
+        } 
 
     }
 

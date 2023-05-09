@@ -1209,7 +1209,8 @@ MonoBehaviour:
   NetworkUI: {fileID: 0}
   durationTime: 0.15
   magnitude: 0.3
-  maxHealth: 120
+  maxHealth: 30
+  hissSFX: {fileID: 0}
 --- !u!82 &8471057688097804644
 AudioSource:
   m_ObjectHideFlags: 0
