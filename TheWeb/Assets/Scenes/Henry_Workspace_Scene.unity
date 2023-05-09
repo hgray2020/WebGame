@@ -22652,7 +22652,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryMenu: {fileID: 453814025}
   InvIsOpen: 0
-  coins: 5
+  coins: 50
   prices: 01000000020000000300000005000000
   item1image: {fileID: 2094763324}
   item2image: {fileID: 179274951}

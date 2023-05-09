@@ -12,14 +12,14 @@ public class RoundManager : NetworkBehaviour
     private float timer;
     public Text timerText;
     public Text counterText;
-    private int maxTime = 10;
+    private int maxTime = 25;
     private bool connected = false;
     private bool buildable;
     private GameInventory antInv;
-    private int antsPerRound = 5;
+    private int antsPerRound = 50;
     private int numRounds = 0;
     private bool buildTime = false;
-    private int maxRounds = 3;
+    private int maxRounds = 6;
     private bool gameStarted = false;
     void Start()
     {
