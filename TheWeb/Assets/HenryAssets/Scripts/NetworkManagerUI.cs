@@ -80,7 +80,7 @@ public class NetworkManagerUI : NetworkBehaviour
 
     public static bool GameisPaused = false;
     public static bool pauseActive = false;
-    public bool tutorial = false;
+    public int tutorial = 0;
 
     private Vector3 mainMenu_startScale;
     private Vector3 credits_startScale;
@@ -163,7 +163,7 @@ public class NetworkManagerUI : NetworkBehaviour
         VolumeSlider.gameObject.SetActive(true);
 
         GameisPaused = false;
-        tutorial = true;
+        tutorial = 0;
 
         mainMenu_startScale = mainMenu.transform.localScale;
         credits_startScale = creditsMenu.transform.localScale;
@@ -198,13 +198,14 @@ public class NetworkManagerUI : NetworkBehaviour
             }
         }
 
-        if (Input.GetButton("Shoot") && tutorial) {
+        if (Input.GetButton("Shoot") && tutorial < 1) {
             spider_build.gameObject.SetActive(true);
             spider_web.gameObject.SetActive(false);
+            tutorial += 1;
         }
-        if (Input.GetButton("WebBuild") && tutorial) {
+        if (Input.GetButton("WebBuild") && tutorial == 1) {
             spider_build.gameObject.SetActive(false);
-            tutorial = false;
+            tutorial += 1;
         }
     }
 
