@@ -239,9 +239,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b83364f4bd1a24e8933d29cb700d1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reloadCD: 25
+  reloadCD: 22
   projectile: {fileID: 2366775841513997671, guid: d0907e3618cb6b34db0c97790bbf1114, type: 3}
-  projVel: 500
+  projVel: 700
   spawnPos: {fileID: 5637691641404200521}
   shootSFX: {fileID: -7022252536891108005}
 --- !u!114 &3913995390978783460
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   onNetwork: 1
-  rotSpeed: 210
+  rotSpeed: 300
 --- !u!114 &1708970165401725238
 MonoBehaviour:
   m_ObjectHideFlags: 0

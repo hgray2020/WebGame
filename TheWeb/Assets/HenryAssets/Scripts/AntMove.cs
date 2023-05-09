@@ -87,7 +87,6 @@ public class AntMove : NetworkBehaviour
             other.gameObject.BroadcastMessage("eggsGetHit", damage);
             DespawnServerRpc();
         }
-        if (!isFlying) {
             if (other.tag == "web_edge" || other.tag == "web_node") {
                 if (other.tag == "web_edge") {
                     offEdge = false;
@@ -96,9 +95,9 @@ public class AntMove : NetworkBehaviour
                     offNode = false;
                 }
             }
-            if (other.tag == "spike") {
+            if (other.tag == "spike" && !isFlying) {
                 this.gameObject.BroadcastMessage("takeDamage", 4);
-            } else if (other.tag == "slime") {
+            } else if (other.tag == "slime" && !isFlying) {
                 this.gameObject.BroadcastMessage("takeDamage", 2);
                 StartCoroutine("Stuck");
             } else if (other.tag == "web_edge") {
@@ -108,7 +107,6 @@ public class AntMove : NetworkBehaviour
                 web = other.gameObject.GetComponent<SpriteRenderer>();
                 web.color = Color.red;
             }
-        }
     }
 
     IEnumerator Stuck() {

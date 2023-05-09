@@ -16,7 +16,7 @@ public class RoundManager : NetworkBehaviour
     private bool connected = false;
     private bool buildable;
     private GameInventory antInv;
-    private int antsPerRound = 30;
+    private int antsPerRound = 20;
     private int numRounds = 0;
     private bool buildTime = false;
     private int maxRounds = 6;
