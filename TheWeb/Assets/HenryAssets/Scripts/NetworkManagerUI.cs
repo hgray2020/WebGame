@@ -10,6 +10,7 @@ using Unity.Services.Authentication;
 using Unity.Networking.Transport.Relay;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 
 public class NetworkManagerUI : NetworkBehaviour
@@ -29,7 +30,6 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private Button joinButton;
     [SerializeField]private Button joinBackButton;
     [SerializeField]private Button resumeButton;
-    [SerializeField]private Button exitPauseButton;
     [SerializeField]private Button controlsButton;
     [SerializeField]private Button exitControlsButton;
     [SerializeField]private Button startSpider;
@@ -109,7 +109,7 @@ public class NetworkManagerUI : NetworkBehaviour
     public void Awake() {
         hostButton.onClick.AddListener(CreateRelay);
         clientButton.onClick.AddListener(JoinRelay);
-        backButton.onClick.AddListener(MainMenu);
+        backButton.onClick.AddListener(PlayScene);
         playButton.onClick.AddListener(StartGame);
         mainControlsButton.onClick.AddListener(Controls);
         spiderControlsButton.onClick.AddListener(Movement);
@@ -120,7 +120,6 @@ public class NetworkManagerUI : NetworkBehaviour
         exitButton.onClick.AddListener(QuitGame);
         pauseButton.onClick.AddListener(Pause);
         resumeButton.onClick.AddListener(Resume);
-        exitPauseButton.onClick.AddListener(MainMenu);
         controlsButton.onClick.AddListener(Controls);
         exitControlsButton.onClick.AddListener(Pause);
         startSpider.onClick.AddListener(StartSpider);
@@ -129,7 +128,7 @@ public class NetworkManagerUI : NetworkBehaviour
         joinButton.onClick.AddListener(Client);
         joinBackButton.onClick.AddListener(StartGame);
 
-        networkMenu.gameObject.SetActive(false);
+        networkMenu.gameObject.SetActive(true);
         hostCode.gameObject.SetActive(false);
         pauseButton.gameObject.SetActive(false);
         pauseMenu.gameObject.SetActive(false);
@@ -166,23 +165,11 @@ public class NetworkManagerUI : NetworkBehaviour
         controlsMenu.gameObject.SetActive(false);
         exitMainControlsButton.gameObject.SetActive(false);
         introSpider.gameObject.SetActive(false);
-        mainMenu.gameObject.SetActive(true);
-        VolumeSlider.gameObject.SetActive(true);
+        mainMenu.gameObject.SetActive(false);
+        VolumeSlider.gameObject.SetActive(false);
 
         GameisPaused = false;
         tutorial = 0;
-
-        mainMenu_startScale = mainMenu.transform.localScale;
-        credits_startScale = creditsMenu.transform.localScale;
-        networkMenu_startScale = networkMenu.transform.localScale;
-        pauseMenu_startScale = pauseMenu.transform.localScale;
-
-        creditsMenu.transform.localScale = Vector2.zero;
-        mainMenu.transform.localScale = Vector2.zero;
-        networkMenu.transform.localScale = Vector2.zero;
-        pauseMenu.transform.localScale = Vector2.zero;
-
-        LeanTween.scale(mainMenu, mainMenu_startScale, tweenTime).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
 
         // Audio
         SetLevel(volumeLevel);
@@ -261,7 +248,6 @@ public class NetworkManagerUI : NetworkBehaviour
         pauseActive = false;
 
         mainMenu.gameObject.SetActive(true);
-        LeanTween.scale(mainMenu, mainMenu_startScale, tweenTime).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
         Time.timeScale = 1f;
         GameisPaused = false;
 
@@ -279,7 +265,6 @@ public class NetworkManagerUI : NetworkBehaviour
 
         hostCode.gameObject.SetActive(true);
         networkMenu.gameObject.SetActive(true);
-        LeanTween.scale(networkMenu, networkMenu_startScale, tweenTime).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
     }
 
     public void Client() {
@@ -300,8 +285,6 @@ public class NetworkManagerUI : NetworkBehaviour
         mainMenu.gameObject.SetActive(false);
         mainMenu.transform.localScale = Vector2.zero;
         creditsMenu.gameObject.SetActive(true);
-
-        LeanTween.scale(creditsMenu, credits_startScale, tweenTime).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
     }
 
     public void QuitGame() {
@@ -314,7 +297,6 @@ public class NetworkManagerUI : NetworkBehaviour
 
     void Pause(){
         pauseMenu.gameObject.SetActive(true);
-        LeanTween.scale(pauseMenu, pauseMenu_startScale, tweenTime).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
         pauseButton.gameObject.SetActive(false);
         spiderUI.gameObject.SetActive(false);
         antUI.gameObject.SetActive(false);
@@ -476,8 +458,13 @@ public class NetworkManagerUI : NetworkBehaviour
         }
     }
 
+    public void PlayScene() {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     [ClientRpc]
-    void ServerShutdownClientRpc(){
-        MainMenu();
+    public void ServerShutdownClientRpc(){
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu");
     }
 }
