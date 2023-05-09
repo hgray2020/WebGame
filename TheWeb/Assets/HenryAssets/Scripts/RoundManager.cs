@@ -12,11 +12,11 @@ public class RoundManager : NetworkBehaviour
     private float timer;
     public Text timerText;
     public Text counterText;
-    private int maxTime = 40;
+    private int maxTime = 50;
     private bool connected = false;
     private bool buildable;
     private GameInventory antInv;
-    private int antsPerRound = 50;
+    private int antsPerRound = 30;
     private int numRounds = 0;
     private bool buildTime = false;
     private int maxRounds = 6;
@@ -79,7 +79,7 @@ public class RoundManager : NetworkBehaviour
         counterText.GetComponent<Text>().text = "Round: " + (rounds.Value + 1);
         if (roundTimer.Value <= 0) {
             
-            if (!IsHost && antInv.coins <= 0 && GameObject.FindWithTag("ant") == null) {
+            if (!IsHost && antInv.coins <= 0) {
                 antInv.CoinChange((rounds.Value + 1) * antsPerRound);
                 NewRoundServerRpc();
             }

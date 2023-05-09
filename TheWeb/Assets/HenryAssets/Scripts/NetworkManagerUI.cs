@@ -347,7 +347,7 @@ public class NetworkManagerUI : NetworkBehaviour
 
     public void Controls() {
         pauseMenu.gameObject.SetActive(false);
-        pauseMenu.transform.localScale = Vector2.zero;
+        // pauseMenu.transform.localScale = Vector2.zero;
 
         if (IsHost) {
             Movement();
