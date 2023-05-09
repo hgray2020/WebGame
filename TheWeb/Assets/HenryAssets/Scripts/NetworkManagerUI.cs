@@ -460,11 +460,14 @@ public class NetworkManagerUI : NetworkBehaviour
 
     public void PlayScene() {
         SceneManager.LoadScene("MainMenu");
+        AuthenticationService.Instance.SignOut();
     }
 
     [ClientRpc]
     public void ServerShutdownClientRpc(){
         Time.timeScale = 1;
+        AuthenticationService.Instance.SignOut();
+
         SceneManager.LoadScene("MainMenu");
     }
 }

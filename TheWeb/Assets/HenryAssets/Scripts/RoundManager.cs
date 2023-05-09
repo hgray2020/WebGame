@@ -79,7 +79,7 @@ public class RoundManager : NetworkBehaviour
         counterText.GetComponent<Text>().text = "Round: " + (rounds.Value + 1);
         if (roundTimer.Value <= 0) {
             
-            if (!IsHost && antInv.coins <= 0) {
+            if (!IsHost && antInv.coins <= 0 && GameObject.FindWithTag("ant") == null) {
                 antInv.coins = (rounds.Value + 1) * antsPerRound;
                 NewRoundServerRpc();
             }
