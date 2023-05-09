@@ -360,8 +360,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3805481988571104926}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7254, y: 0.7786, z: 1}
+  m_LocalPosition: {x: 1.1952, y: 0.091596, z: 0}
+  m_LocalScale: {x: 0.84081113, y: 0.9024753, z: 1.1591}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2227710514324008546}
@@ -400,7 +400,7 @@ Transform:
   m_GameObject: {fileID: 4221097394315563430}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7254, y: 0.7786, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8445977487070642811}
@@ -447,7 +447,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 21300000, guid: 038cb503500af4bab8379f7c075dfbef, type: 3}
+  m_Sprite: {fileID: -429025498, guid: 0e9a9a5b6972e46cdbbc9114b9b74b84, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -468,7 +468,7 @@ Animator:
   m_GameObject: {fileID: 4221097394315563430}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ac6942b15dce946e88a6957ae2bb08dc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -551,7 +551,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 21300000, guid: 038cb503500af4bab8379f7c075dfbef, type: 3}
+  m_Sprite: {fileID: -429025498, guid: 0e9a9a5b6972e46cdbbc9114b9b74b84, type: 3}
   m_Color: {r: 1, g: 0.10849059, b: 0.10849059, a: 0.6156863}
   m_FlipX: 0
   m_FlipY: 0
@@ -1121,8 +1121,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.56, y: 0}
-  m_Size: {x: 3.7, y: 6.34}
+  m_Offset: {x: -0.073624104, y: -0.06484985}
+  m_Size: {x: 4.672752, y: 8.285504}
   m_Direction: 0
 --- !u!114 &2974902578307485317
 MonoBehaviour:
@@ -1162,6 +1162,7 @@ MonoBehaviour:
   - 0.8
   - 0.4
   - 1
+  animator: {fileID: 0}
 --- !u!50 &6300813738351079838
 Rigidbody2D:
   serializedVersion: 4

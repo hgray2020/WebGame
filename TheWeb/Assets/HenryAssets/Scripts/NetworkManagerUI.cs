@@ -75,12 +75,12 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private GameObject introAnt;
     [SerializeField]private GameObject VolumeSlider;
     [SerializeField]private Text joinCodeText;
-    
+
     private string clientCode;
 
     public static bool GameisPaused = false;
     public static bool pauseActive = false;
-    public bool tutorial = false;
+    public int tutorial = 0;
 
     private Vector3 mainMenu_startScale;
     private Vector3 credits_startScale;
@@ -163,7 +163,7 @@ public class NetworkManagerUI : NetworkBehaviour
         VolumeSlider.gameObject.SetActive(true);
 
         GameisPaused = false;
-        tutorial = true;
+        tutorial = 0;
 
         mainMenu_startScale = mainMenu.transform.localScale;
         credits_startScale = creditsMenu.transform.localScale;
@@ -198,14 +198,14 @@ public class NetworkManagerUI : NetworkBehaviour
             }
         }
 
-        if (Input.GetButton("Shoot") && tutorial) {
+        if (Input.GetButton("Shoot") && tutorial < 1) {
             spider_build.gameObject.SetActive(true);
             spider_web.gameObject.SetActive(false);
-            Debug.Log("WWWWWW");
+            tutorial += 1;
         }
-        if (Input.GetButton("WebBuild") && tutorial) {
+        if (Input.GetButton("WebBuild") && tutorial == 1) {
             spider_build.gameObject.SetActive(false);
-            tutorial = false;
+            tutorial += 1;
         }
     }
 
@@ -254,13 +254,13 @@ public class NetworkManagerUI : NetworkBehaviour
         LeanTween.scale(mainMenu, mainMenu_startScale, tweenTime).setEase(LeanTweenType.easeOutElastic).setIgnoreTimeScale(true);
         Time.timeScale = 1f;
         GameisPaused = false;
-        
+
         NetworkManager.Singleton.Shutdown();
         if (IsHost) {
             ServerShutdownClientRpc();
         }
     }
-    
+
     public void StartGame() {
         mainMenu.gameObject.SetActive(false);
         mainMenu.transform.localScale = Vector2.zero;
@@ -395,7 +395,7 @@ public class NetworkManagerUI : NetworkBehaviour
 
         if (IsHost) {
             spider_wins.gameObject.SetActive(true);
-        } 
+        }
         if (!IsHost) {
             ant_loses.gameObject.SetActive(true);
         }
@@ -407,7 +407,7 @@ public class NetworkManagerUI : NetworkBehaviour
 
         if (IsHost) {
             spider_loses.gameObject.SetActive(true);
-        } 
+        }
         if (!IsHost) {
             ant_wins.gameObject.SetActive(true);
         }

@@ -93,7 +93,6 @@ public class AntMove : NetworkBehaviour
         }
         if (!isFlying) {
             if (other.tag == "web_edge" || other.tag == "web_node") {
-                speed = moveSpeeds[type] * 0.5f;
                 if (other.tag == "web_edge") {
                     offEdge = false;
                 }
@@ -102,12 +101,14 @@ public class AntMove : NetworkBehaviour
                 }
             }
             if (other.tag == "spike") {
+                this.gameObject.BroadcastMessage("takeDamage", 4);
+            } else if (other.tag == "slime") {
                 this.gameObject.BroadcastMessage("takeDamage", 2);
-            }
-            if (other.tag == "slime") {
                 StartCoroutine("Stuck");
+            } else if (other.tag == "web_edge") {
+                StartCoroutine("Slowed");
             }
-            if (isFire) {
+            if (isFire && other.tag == "web_edge") {
                 web = other.gameObject.GetComponent<SpriteRenderer>();
                 web.color = Color.red;
             }
@@ -115,13 +116,21 @@ public class AntMove : NetworkBehaviour
     }
 
     IEnumerator Stuck() {
-        speed = 0;
+        speed = 0f;
         transform.GetChild(3).gameObject.SetActive(true);
         animator.SetBool("Walk", false);
         yield return new WaitForSeconds(2f);
         speed = moveSpeeds[type];
         transform.GetChild(3).gameObject.SetActive(false);
         animator.SetBool("Walk", true);
+    }
+
+    IEnumerator Slowed() {
+        speed = moveSpeeds[type] * 0.5f;
+        transform.GetChild(1).gameObject.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        speed = moveSpeeds[type];
+        transform.GetChild(1).gameObject.SetActive(false);
     }
 
     private void OnTriggerExit2D(Collider2D other) {
