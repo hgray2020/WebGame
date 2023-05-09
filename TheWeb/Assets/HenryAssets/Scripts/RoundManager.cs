@@ -12,7 +12,7 @@ public class RoundManager : NetworkBehaviour
     private float timer;
     public Text timerText;
     public Text counterText;
-    private int maxTime = 25;
+    private int maxTime = 40;
     private bool connected = false;
     private bool buildable;
     private GameInventory antInv;
