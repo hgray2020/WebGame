@@ -3041,7 +3041,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1937736731}
         m_TargetAssemblyTypeName: NetworkManagerUI, Assembly-CSharp
-        m_MethodName: MainMenu
+        m_MethodName: ServerShutdownClientRpc
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4502,7 +4502,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1937736731}
         m_TargetAssemblyTypeName: NetworkManagerUI, Assembly-CSharp
-        m_MethodName: MainMenu
+        m_MethodName: ServerShutdownClientRpc
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15468,7 +15468,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1937736731}
         m_TargetAssemblyTypeName: NetworkManagerUI, Assembly-CSharp
-        m_MethodName: MainMenu
+        m_MethodName: ServerShutdownClientRpc
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22869,7 +22869,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1937736731}
         m_TargetAssemblyTypeName: NetworkManagerUI, Assembly-CSharp
-        m_MethodName: MainMenu
+        m_MethodName: ServerShutdownClientRpc
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

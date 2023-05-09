@@ -178,6 +178,8 @@ public class NetworkManagerUI : NetworkBehaviour
             sliderVolumeCtrl = sliderTemp.GetComponent<Slider>();
             sliderVolumeCtrl.value = volumeLevel;
         }
+
+        StartGame();
     }
 
     public void Update() {
@@ -331,7 +333,6 @@ public class NetworkManagerUI : NetworkBehaviour
 
     public void Resume(){
         pauseMenu.gameObject.SetActive(false);
-        pauseMenu.transform.localScale = Vector2.zero;
         pauseButton.gameObject.SetActive(true);
         VolumeSlider.gameObject.SetActive(false);
         if (IsHost) {
@@ -459,15 +460,25 @@ public class NetworkManagerUI : NetworkBehaviour
     }
 
     public void PlayScene() {
-        SceneManager.LoadScene("MainMenu");
         AuthenticationService.Instance.SignOut();
+        NetworkManager.Singleton.Shutdown();
+        Cleanup();
+        SceneManager.LoadScene("MainMenu");
     }
 
     [ClientRpc]
     public void ServerShutdownClientRpc(){
         Time.timeScale = 1;
         AuthenticationService.Instance.SignOut();
+        NetworkManager.Singleton.Shutdown();
+        Cleanup();
 
         SceneManager.LoadScene("MainMenu");
+    }
+
+    void Cleanup() {
+        if (NetworkManager.Singleton != null) {
+            Destroy(NetworkManager.Singleton.gameObject);
+        }
     }
 }
