@@ -19,7 +19,8 @@ public class AntHealth : NetworkBehaviour
         StartCoroutine("Hurt");
         Debug.Log("health decremented");
         if (currHealth <= 0) {
-
+            Debug.Log("cOINS " + GameObject.FindWithTag("spider_inv").GetComponent<GameInventory>().coins);
+            GameObject.FindWithTag("spider_inv").GetComponent<GameInventory>().CoinChange(1);
             gameObject.GetComponent<NetworkObject>().Despawn();
         }
     }
