@@ -28,6 +28,7 @@ public class HarrisonGameHandler : NetworkBehaviour
         numEggs = eggs.Length;
         healthStep = maxHealth / (numEggs);
         eggHealth.Value = maxHealth;
+        hissSFX = GetComponent<AudioSource>();
         foreach(GameObject egg in eggs) {
             egg.SetActive(false);
             

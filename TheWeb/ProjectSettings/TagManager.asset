@@ -17,6 +17,7 @@ TagManager:
   - webby
   - NetworkUI
   - VolumeSlider
+  - round_manager
   layers:
   - Default
   - TransparentFX

@@ -29,7 +29,7 @@ public class GameInventory : MonoBehaviour {
       public static int item1num = 0;
       public static int item2num = 0;
       public static int item3num = 0;
-      public int coins = 50;
+      public int coins = 5;
 
       public int[] prices = {1, 2, 3};
 

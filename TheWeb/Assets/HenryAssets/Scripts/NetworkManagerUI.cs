@@ -201,6 +201,7 @@ public class NetworkManagerUI : NetworkBehaviour
         if (Input.GetButton("Shoot") && tutorial) {
             spider_build.gameObject.SetActive(true);
             spider_web.gameObject.SetActive(false);
+            Debug.Log("WWWWWW");
         }
         if (Input.GetButton("WebBuild") && tutorial) {
             spider_build.gameObject.SetActive(false);

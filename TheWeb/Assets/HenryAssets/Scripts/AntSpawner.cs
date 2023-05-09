@@ -11,11 +11,13 @@ public class AntSpawner : NetworkBehaviour
     private Vector2 mouseCoords;
     private bool canSpawn = false;
     public GameInventory gameInventory;
+    private RoundManager rm;
     private int cd;
     public bool init = false;
     private int cooldown = 15;
     private GameObject[] spawnable;
     [SerializeField]private GameObject[] ants;
+
     
     void Start()
     {
@@ -26,7 +28,6 @@ public class AntSpawner : NetworkBehaviour
     {
         
         if (IsHost) {
-            // Debug.Log(init);
             return;
         }
         if (!init) {
@@ -34,8 +35,17 @@ public class AntSpawner : NetworkBehaviour
             if (tmp == null) {
                 return;
             }
-            init = true;
             gameInventory = tmp.GetComponent<GameInventory>();
+            tmp = GameObject.FindWithTag("round_manager");
+            if (tmp == null) {
+                return;
+            }
+            rm = tmp.GetComponent<RoundManager>();
+            
+            init = true;
+        }
+        if (!rm.canBuild()) {
+            return;
         }
         
         mouseScreenPos = Input.mousePosition;
