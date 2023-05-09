@@ -35156,7 +35156,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1813409709}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1937736731}
+        m_TargetAssemblyTypeName: NetworkManagerUI, Assembly-CSharp
+        m_MethodName: ServerShutdownClientRpc
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1813409709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37568,7 +37580,6 @@ MonoBehaviour:
   joinButton: {fileID: 1083438138}
   joinBackButton: {fileID: 1710403745}
   resumeButton: {fileID: 1510818123}
-  exitPauseButton: {fileID: 1813409708}
   controlsButton: {fileID: 1993408199}
   exitControlsButton: {fileID: 1614750869}
   startSpider: {fileID: 747735216}
