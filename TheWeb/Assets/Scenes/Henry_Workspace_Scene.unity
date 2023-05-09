@@ -147,8 +147,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5632125}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.014673017}
+  m_LocalScale: {x: 0.46640626, y: 0.46640626, z: 0.46640626}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 36969335}
@@ -156,12 +156,12 @@ RectTransform:
   - {fileID: 1463062917}
   - {fileID: 199303238}
   - {fileID: 230891885}
-  m_Father: {fileID: 1799584581}
-  m_RootOrder: 11
+  m_Father: {fileID: 640996429}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0.000015258789}
+  m_AnchoredPosition: {x: 297.96942, y: 168.40619}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &13107430
@@ -434,7 +434,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: The scouts of the colony have found a new clutch of spider eggs (     ).
-    You have 6rounds to attack the spider and bring the nutrient eggs back to the
+    You have 6 rounds to attack the spider and bring the nutrient eggs back to the
     Queen.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9284584caad264d19acbe09bfa07e6fe, type: 2}
@@ -3874,8 +3874,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168579603}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.014673017}
+  m_LocalScale: {x: 0.46640626, y: 0.46640626, z: 0.46640626}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 750883542}
@@ -3883,12 +3883,12 @@ RectTransform:
   - {fileID: 598274142}
   - {fileID: 1134345953}
   - {fileID: 180656669}
-  m_Father: {fileID: 1799584581}
-  m_RootOrder: 10
+  m_Father: {fileID: 640996429}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0.000015258789}
+  m_AnchoredPosition: {x: 297.96942, y: 168.40619}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &168984015
@@ -6196,7 +6196,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 60 seconds
+  m_text: 25 seconds
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bdef2d5318ea94ddd97f6d9613cfd41c, type: 2}
   m_sharedMaterial: {fileID: -6102284582795134672, guid: bdef2d5318ea94ddd97f6d9613cfd41c, type: 2}
@@ -6644,17 +6644,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288509979}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.014673017}
+  m_LocalScale: {x: 0.46640626, y: 0.46640626, z: 0.46640626}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1799584581}
-  m_RootOrder: 15
+  m_Father: {fileID: 640996429}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 250, y: -50}
+  m_AnchoredPosition: {x: 414.57098, y: 313.08585}
   m_SizeDelta: {x: 300, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &288509981
@@ -7397,7 +7397,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.64000005}
-  m_AnchoredPosition: {x: 195, y: -22}
+  m_AnchoredPosition: {x: 171.66, y: -44.955}
   m_SizeDelta: {x: 247.681, y: 72.09}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &344312569
@@ -11214,17 +11214,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 537814917}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.014673017}
+  m_LocalScale: {x: 0.46640626, y: 0.46640626, z: 0.46640626}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1799584581}
-  m_RootOrder: 14
+  m_Father: {fileID: 640996429}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -50}
+  m_AnchoredPosition: {x: 297.96942, y: 313.08585}
   m_SizeDelta: {x: 300, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &537814919
@@ -13168,13 +13168,19 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 640996426}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.530551, y: -0.4062031, z: 0.014673017}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -638.8625, y: -361.07193, z: 0.031459738}
+  m_LocalScale: {x: 2.1440537, y: 2.1440537, z: 2.1440537}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Children:
+  - {fileID: 1577580193}
+  - {fileID: 168579604}
+  - {fileID: 5632126}
+  - {fileID: 1566852824}
+  - {fileID: 537814918}
+  - {fileID: 288509980}
+  m_Father: {fileID: 1799584581}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &642097886
 GameObject:
@@ -13325,7 +13331,7 @@ RectTransform:
   - {fileID: 2055696734}
   - {fileID: 1981174917}
   m_Father: {fileID: 1799584581}
-  m_RootOrder: 13
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -22461,8 +22467,8 @@ MonoBehaviour:
     Ants can be spawned once the timer gets to 0 and a new round
     starts when the ants are used up.
 
-    The spider has to protect the eggs for                 
-    to exhaust all the ants'
+    The spider will exhaust all the ants if
+    they can protect the eggs  for '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9284584caad264d19acbe09bfa07e6fe, type: 2}
   m_sharedMaterial: {fileID: -2716649843554030996, guid: 9284584caad264d19acbe09bfa07e6fe, type: 2}
@@ -26891,7 +26897,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.64000005}
-  m_AnchoredPosition: {x: 195, y: -22}
+  m_AnchoredPosition: {x: 171.66, y: -45.955}
   m_SizeDelta: {x: 247.681, y: 72.09}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1331033659
@@ -30859,8 +30865,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1566852823}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.014673017}
+  m_LocalScale: {x: 0.46640626, y: 0.46640626, z: 0.46640626}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 434459546}
@@ -30868,12 +30874,12 @@ RectTransform:
   - {fileID: 280233610}
   - {fileID: 110644146}
   - {fileID: 1526982277}
-  m_Father: {fileID: 1799584581}
-  m_RootOrder: 12
+  m_Father: {fileID: 640996429}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0.000015258789}
+  m_AnchoredPosition: {x: 297.96942, y: 168.40619}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1571709521
@@ -31113,8 +31119,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577580192}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.014673017}
+  m_LocalScale: {x: 0.46640626, y: 0.46640626, z: 0.46640626}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1572412050}
@@ -31128,12 +31134,12 @@ RectTransform:
   - {fileID: 440901394}
   - {fileID: 230247898}
   - {fileID: 778202557}
-  m_Father: {fileID: 1799584581}
-  m_RootOrder: 9
+  m_Father: {fileID: 640996429}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0.000015258789}
+  m_AnchoredPosition: {x: 297.96942, y: 168.40619}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1583336273
@@ -32192,7 +32198,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1631302992
 AudioSource:
@@ -33761,8 +33767,8 @@ MonoBehaviour:
     Ants can be spawned once the timer gets to 0 and a new round
     starts when the ants are used up.
 
-    The spider has to protect the eggs for                 
-    to exhaust all the ants'
+    The spider will exhaust all the ants if
+    they can protect the eggs for                '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9284584caad264d19acbe09bfa07e6fe, type: 2}
   m_sharedMaterial: {fileID: -2716649843554030996, guid: 9284584caad264d19acbe09bfa07e6fe, type: 2}
@@ -34837,13 +34843,8 @@ RectTransform:
   - {fileID: 1746006345}
   - {fileID: 1214443204}
   - {fileID: 970558012}
-  - {fileID: 1577580193}
-  - {fileID: 168579604}
-  - {fileID: 5632126}
-  - {fileID: 1566852824}
+  - {fileID: 640996429}
   - {fileID: 646184886}
-  - {fileID: 537814918}
-  - {fileID: 288509980}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -37609,6 +37610,7 @@ MonoBehaviour:
   introSpider: {fileID: 807538572}
   introAnt: {fileID: 1746006344}
   VolumeSlider: {fileID: 646184885}
+  RoundManager: {fileID: 640996426}
   joinCodeText: {fileID: 586669090}
   tutorial: 0
   tweenTime: 2

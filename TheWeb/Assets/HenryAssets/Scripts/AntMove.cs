@@ -26,7 +26,7 @@ public class AntMove : NetworkBehaviour
     private int damage;
     float mouseAng;
     private float baseScale;
-
+    
     public Animator animator;
 
     SpriteRenderer web;

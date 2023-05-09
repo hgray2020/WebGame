@@ -77,6 +77,7 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private GameObject introSpider;
     [SerializeField]private GameObject introAnt;
     [SerializeField]private GameObject VolumeSlider;
+    [SerializeField]private GameObject RoundManager;
     [SerializeField]private Text joinCodeText;
 
     private string clientCode;
@@ -135,6 +136,7 @@ public class NetworkManagerUI : NetworkBehaviour
         creditsMenu.gameObject.SetActive(false);
         spiderUI.gameObject.SetActive(false);
         antUI.gameObject.SetActive(false);
+        RoundManager.gameObject.SetActive(false);
 
         // Spider UI
         spider_web.gameObject.SetActive(false);
@@ -228,6 +230,7 @@ public class NetworkManagerUI : NetworkBehaviour
         antUI.gameObject.SetActive(false);
         controlsMenu.gameObject.SetActive(false);
         VolumeSlider.gameObject.SetActive(true);
+        RoundManager.gameObject.SetActive(false);
 
         // Spider UI
         spider_build.gameObject.SetActive(false);
@@ -446,6 +449,7 @@ public class NetworkManagerUI : NetworkBehaviour
             pauseButton.gameObject.SetActive(true);
             spiderUI.gameObject.SetActive(true);
             introSpider.gameObject.SetActive(true);
+            RoundManager.gameObject.SetActive(true);
             pauseActive = true;
 
             joinCodeText.GetComponent<Text>().text = joinCode;
@@ -470,6 +474,7 @@ public class NetworkManagerUI : NetworkBehaviour
             pauseButton.gameObject.SetActive(true);
             introAnt.gameObject.SetActive(true);
             antUI.gameObject.SetActive(true);
+            RoundManager.gameObject.SetActive(true);
         } catch (RelayServiceException e) {
             Debug.Log(e);
         }

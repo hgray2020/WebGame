@@ -88,8 +88,7 @@ public class RoundManager : NetworkBehaviour
         if (rounds.Value == maxRounds) {
             GameObject networkUI = GameObject.FindWithTag("NetworkUI");
             networkUI.BroadcastMessage("SpiderWins");
-        } 
-
+        }
     }
 
     [ServerRpc(RequireOwnership=false)]
