@@ -156,7 +156,6 @@ GameObject:
   - component: {fileID: 2674469583292820734}
   - component: {fileID: 9058437947810930855}
   - component: {fileID: 6535231503800727561}
-  - component: {fileID: 4696198558153631603}
   m_Layer: 0
   m_Name: Spider
   m_TagString: Untagged
@@ -241,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b83364f4bd1a24e8933d29cb700d1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reloadCD: 18
+  reloadCD: 25
   projectile: {fileID: 2366775841513997671, guid: d0907e3618cb6b34db0c97790bbf1114, type: 3}
   projVel: 500
   spawnPos: {fileID: 5637691641404200521}
@@ -579,20 +578,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4696198558153631603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4098215359170885199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TransitionStateInfoList: []
-  m_Animator: {fileID: 4567774434192377563}
 --- !u!1 &6737083773827849393
 GameObject:
   m_ObjectHideFlags: 0

@@ -80,7 +80,7 @@ public class RoundManager : NetworkBehaviour
         if (roundTimer.Value <= 0) {
             
             if (!IsHost && antInv.coins <= 0 && GameObject.FindWithTag("ant") == null) {
-                antInv.coins = (rounds.Value + 1) * antsPerRound;
+                antInv.CoinChange((rounds.Value + 1) * antsPerRound);
                 NewRoundServerRpc();
             }
         }
