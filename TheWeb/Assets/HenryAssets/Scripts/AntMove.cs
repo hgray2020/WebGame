@@ -103,10 +103,6 @@ public class AntMove : NetworkBehaviour
             } else if (other.tag == "web_edge") {
                 StartCoroutine("Slowed");
             }
-            if (isFire && other.tag == "web_edge") {
-                web = other.gameObject.GetComponent<SpriteRenderer>();
-                web.color = Color.red;
-            }
     }
 
     IEnumerator Stuck() {

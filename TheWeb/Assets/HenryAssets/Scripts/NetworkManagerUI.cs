@@ -77,6 +77,7 @@ public class NetworkManagerUI : NetworkBehaviour
     [SerializeField]private GameObject introSpider;
     [SerializeField]private GameObject introAnt;
     [SerializeField]private GameObject VolumeSlider;
+    [SerializeField]private GameObject ObjectMusic;
     [SerializeField]private GameObject RoundManager;
     [SerializeField]private Text joinCodeText;
 
@@ -91,10 +92,6 @@ public class NetworkManagerUI : NetworkBehaviour
     private Vector3 networkMenu_startScale;
     private Vector3 pauseMenu_startScale;
     public float tweenTime = 1f;
-
-    public AudioMixer mixer;
-    public static float volumeLevel = 1f;
-    private Slider sliderVolumeCtrl;
 
     public async void Start() {
         await UnityServices.InitializeAsync();
@@ -170,14 +167,6 @@ public class NetworkManagerUI : NetworkBehaviour
 
         GameisPaused = false;
         tutorial = 0;
-
-        // Audio
-        SetLevel(volumeLevel);
-        GameObject sliderTemp = GameObject.FindWithTag("VolumeSlider");
-        if (sliderTemp != null){
-            sliderVolumeCtrl = sliderTemp.GetComponent<Slider>();
-            sliderVolumeCtrl.value = volumeLevel;
-        }
 
         StartGame();
     }
@@ -267,6 +256,7 @@ public class NetworkManagerUI : NetworkBehaviour
 
         hostCode.gameObject.SetActive(true);
         networkMenu.gameObject.SetActive(true);
+        VolumeSlider.gameObject.SetActive(true);
     }
 
     public void Client() {
@@ -409,11 +399,6 @@ public class NetworkManagerUI : NetworkBehaviour
         }
     }
 
-     public void SetLevel (float sliderValue){
-        mixer.SetFloat("MusicVolume", Mathf.Log10 (sliderValue) * 20);
-        volumeLevel = sliderValue;
-    }
-
     private async void CreateRelay() {
         try {
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(1);
@@ -426,7 +411,7 @@ public class NetworkManagerUI : NetworkBehaviour
             NetworkManager.Singleton.StartHost();
 
             networkMenu.gameObject.SetActive(false);
-            networkMenu.transform.localScale = Vector2.zero;
+            VolumeSlider.gameObject.SetActive(false);
             pauseButton.gameObject.SetActive(true);
             spiderUI.gameObject.SetActive(true);
             introSpider.gameObject.SetActive(true);
@@ -449,7 +434,7 @@ public class NetworkManagerUI : NetworkBehaviour
             NetworkManager.Singleton.StartClient();
 
             networkMenu.gameObject.SetActive(false);
-            networkMenu.transform.localScale = Vector2.zero;
+            VolumeSlider.gameObject.SetActive(false);
             clientUI.gameObject.SetActive(false);
             pauseButton.gameObject.SetActive(true);
             introAnt.gameObject.SetActive(true);

@@ -18,6 +18,7 @@ TagManager:
   - NetworkUI
   - VolumeSlider
   - round_manager
+  - GameMusic
   layers:
   - Default
   - TransparentFX
